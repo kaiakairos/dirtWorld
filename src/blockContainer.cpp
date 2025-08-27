@@ -24,6 +24,11 @@ void BLOCKCONTAINER::addObjectToDictionary(String key){
 
 Ref<BLOCKOBJECT> BLOCKCONTAINER::getObjectFromDictionary(String key){
     std::string newkey = key.ascii().get_data();
-    Variant g = blockDictionary[newkey];
+    Ref<BLOCKOBJECT> g = blockDictionary[newkey];
     return g;
+}
+
+Ref<Image> BLOCKCONTAINER::getBlockImage(std::string blockTag){
+    Ref<BLOCKOBJECT> g = blockDictionary[blockTag];
+    return g->getTextureImage();
 }

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgoscy6mf6lsi"]
+
+[ext_resource type="Script" uid="uid://bb1kn2q0cql7a" path="res://world_scenes/world/world.gd" id="1_rskwr"]
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("worldContainer")]
+script = ExtResource("1_rskwr")
+worldContainer = NodePath("WORLDCONTAINER")
+
+[node name="WORLDCONTAINER" type="WORLDCONTAINER" parent="."]

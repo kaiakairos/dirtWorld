@@ -23,8 +23,13 @@ public:
 
     //Dictionary blockDictionary;
 
-    void addObjectToDictionary(String key);
+    void addObjectToDictionary(String key); // for interacting with gdscript
     Ref<BLOCKOBJECT> getObjectFromDictionary(String key);
+
+    // the rest will take std::strings and are meant to be used exclusively inside c++
+
+    Ref<Image> getBlockImage(std::string blockTag);
+
 
 };
 

@@ -3,6 +3,8 @@
 #include "testScript.h" // add #include for each class here
 #include "blockObject.h"
 #include "blockContainer.h"
+#include "worldContainer.h"
+#include "chunk.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -18,6 +20,8 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(TestScript); // initialize for each class here
 	GDREGISTER_RUNTIME_CLASS(BLOCKOBJECT);
 	GDREGISTER_RUNTIME_CLASS(BLOCKCONTAINER);
+	GDREGISTER_RUNTIME_CLASS(WORLDCONTAINER);
+	GDREGISTER_RUNTIME_CLASS(CHUNK);
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {
