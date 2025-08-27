@@ -1,15 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dy2uuoj8j1j1m"]
+[gd_scene load_steps=2 format=3 uid="uid://dy2uuoj8j1j1m"]
 
 [ext_resource type="Script" uid="uid://d3rw1gjv3j15h" path="res://test.gd" id="1_8uh7m"]
-[ext_resource type="Texture2D" uid="uid://t85kinfb10uw" path="res://icon.svg" id="1_37kl0"]
 
 [node name="Test" type="Node2D"]
 script = ExtResource("1_8uh7m")
 
-[node name="TestScript" type="TestScript" parent="."]
-strength = 52.12
-texture = ExtResource("1_37kl0")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[connection signal="position_changed" from="TestScript" to="." method="_on_test_script_position_changed"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(161, 9)
