@@ -4,6 +4,7 @@
 #include <godot_cpp/classes/node.hpp>
 #include <algorithm>
 #include <memory>
+#include <godot_cpp/variant/utility_functions.hpp>
 
 namespace godot {
 
@@ -37,6 +38,7 @@ public:
 
     void createNewChunk(int chunkX, int chunkY);
 
+    void debugWorldGen();
 
 };
 

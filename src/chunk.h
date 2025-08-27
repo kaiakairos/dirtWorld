@@ -6,8 +6,10 @@
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <utility>
 #include <godot_cpp/classes/image.hpp>
+#include <godot_cpp/classes/image_texture.hpp>
 #include <godot_cpp/variant/rect2i.hpp>
 #include <godot_cpp/variant/vector2i.hpp>
+#include <godot_cpp/variant/utility_functions.hpp>
 
 namespace godot {
 
@@ -32,10 +34,14 @@ public:
     int positionX; // chunks BIG position
     int positionY;
     void setPosition(int x, int y);
+    Vector2i getPosition();
     
     std::pair<int, int> localCoordToWorld(int x, int y);
 
     void drawTiles(WORLDCONTAINER *worldContainer);
+
+    // sprites
+    Sprite2D *tileSprite;
 
 };
 

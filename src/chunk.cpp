@@ -10,7 +10,13 @@ void CHUNK::_bind_methods() {
 }
 
 CHUNK::CHUNK() {
-    tileSize = 12;
+    tileSize = 12; // dont change
+
+    // create sprites
+    tileSprite = memnew(Sprite2D);
+    tileSprite->set_centered(false);
+    add_child(tileSprite);
+
 }
 
 CHUNK::~CHUNK() {
@@ -26,6 +32,10 @@ void CHUNK::setBlockContainer(BLOCKCONTAINER *container){ // Allows the chunk to
 void CHUNK::setPosition(int x, int y){ // sets large chunk coordinate
     positionX = x;
     positionY = y;
+}
+
+Vector2i CHUNK::getPosition(){ // gets large chunk coordinate
+    return Vector2i(positionX,positionY);
 }
 
 // DRAWING //
@@ -47,9 +57,10 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer){
             Vector2i imgPos = Vector2i(x * tileSize,y * tileSize);
             img->blend_rect(blockImg, Rect2i(0,0,tileSize,tileSize), imgPos); 
    
-   
         }
     }
+
+    tileSprite->set_texture(ImageTexture::create_from_image(img));
 
 }
 

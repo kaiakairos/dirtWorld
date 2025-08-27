@@ -7,6 +7,9 @@ using namespace godot;
 
 void WORLDCONTAINER::_bind_methods() {
     ClassDB::bind_method(D_METHOD("setBlockContainer","container"), &WORLDCONTAINER::setBlockContainer);
+    ClassDB::bind_method(D_METHOD("initializeArray","width","height"), &WORLDCONTAINER::initializeArray);
+
+    ClassDB::bind_method(D_METHOD("debugWorldGen"), &WORLDCONTAINER::debugWorldGen);
 }
 
 WORLDCONTAINER::WORLDCONTAINER() {
@@ -28,10 +31,24 @@ void WORLDCONTAINER::initializeArray(int width, int height){
     for(int x = 0; x < worldWidth; x++){
         for(int y = 0; y < worldHeight; y++){
             setTileData(x,y,"stone");
-   
-   
         }
     }
+
+}
+
+void WORLDCONTAINER::debugWorldGen(){
+
+    for(int x = 0; x < worldWidth; x++){
+        for(int y = 0; y < worldHeight; y++){
+            if(x < y){
+                setTileData(x,y,"dirt");
+            }
+            
+        }
+    }
+
+    createNewChunk(0,0); // debug
+
 }
 
 int WORLDCONTAINER::convertCoord(int x, int y){
@@ -50,6 +67,12 @@ std::string WORLDCONTAINER::getTileData(int x, int y){
 }
 
 void WORLDCONTAINER::createNewChunk(int chunkX, int chunkY){
+    CHUNK *newChunk = memnew(CHUNK);
     
+    newChunk->setBlockContainer(blockContainer);
+    newChunk->setPosition(chunkX,chunkY);
+    newChunk->drawTiles(this);
+    
+    add_child(newChunk);
 
 }
