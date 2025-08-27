@@ -11,5 +11,12 @@ config_version=5
 [application]
 
 config/name="dirtWorld"
+run/main_scene="uid://dy2uuoj8j1j1m"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[file_customization]
+
+folder_colors={
+"res://bin/": "gray"
+}
