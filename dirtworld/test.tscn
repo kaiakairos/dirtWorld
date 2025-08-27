@@ -5,9 +5,8 @@
 [node name="Test" type="Node2D"]
 script = ExtResource("1_8uh7m")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(293, 259)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(161, 9)
+position = Vector2(596, 257)

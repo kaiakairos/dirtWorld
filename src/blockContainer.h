@@ -19,7 +19,7 @@ public:
     BLOCKCONTAINER();
     ~BLOCKCONTAINER();
 
-    std::unordered_map<String, Ref<BLOCKOBJECT>> blockDictionary;
+    std::unordered_map<std::string, Ref<BLOCKOBJECT>> blockDictionary;
 
     //Dictionary blockDictionary;
 
