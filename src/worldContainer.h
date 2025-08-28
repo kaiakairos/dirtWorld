@@ -5,6 +5,9 @@
 #include <algorithm>
 #include <memory>
 #include <godot_cpp/variant/utility_functions.hpp>
+#include <godot_cpp/variant/dictionary.hpp>
+#include <godot_cpp/variant/array.hpp>
+#include <godot_cpp/classes/bit_map.hpp>
 
 namespace godot {
 
@@ -22,12 +25,17 @@ protected:
 public:
     WORLDCONTAINER();
     ~WORLDCONTAINER();
+
+    Ref<BitMap> bitmap;
     
     BLOCKCONTAINER *blockContainer;
     void setBlockContainer(BLOCKCONTAINER *container);
     
     int worldWidth; // make sure these are always divisable by 8 
     int worldHeight;
+
+    int widthInChunks;
+    int heighInChunks;
     
     void initializeArray(int width, int height);
    
@@ -39,6 +47,10 @@ public:
     void createNewChunk(int chunkX, int chunkY);
 
     void debugWorldGen();
+
+    Dictionary loadedChunks;
+    void chunkLoadArea(int centerChunkX, int centerChunkY, int loadWidth, int loadHeight);
+    Dictionary getLoadedChunks();
 
 };
 

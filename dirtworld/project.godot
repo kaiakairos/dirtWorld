@@ -13,17 +13,25 @@ config_version=5
 config/name="dirtWorld"
 run/main_scene="uid://bgoscy6mf6lsi"
 config/features=PackedStringArray("4.4", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
 
 BlockManager="*res://autoload/BlockManager.gd"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
-window/size/viewport_width=800
-window/size/viewport_height=600
-window/stretch/mode="viewport"
+window/size/viewport_width=400
+window/size/viewport_height=300
+window/size/window_width_override=800
+window/size/window_height_override=600
+window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [file_customization]
 
@@ -37,3 +45,7 @@ folder_colors={
 "res://world_scenes/": "pink",
 "res://zeeg/": "gray"
 }
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

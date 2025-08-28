@@ -4,13 +4,13 @@ extends Node
 
 func _ready() -> void:
 	# get all blocks in folder
-	var directory = ResourceLoader.list_directory("res://data/blocks/")
+	var directory = ResourceLoader.list_directory("res://data/blocks/resources")
 	for filename in directory:
 		if !filename.ends_with(".tres"):
 			continue # skip non-resources
 		
 		
-		var resource :Block = load("res://data/blocks/" + filename)
+		var resource :Block = load("res://data/blocks/resources/" + filename)
 		blockContainer.addObjectToDictionary(resource.blockID)
 		var blockObject = BlockManager.blockContainer.getObjectFromDictionary(resource.blockID)
 		var textureImage = resource.texture.get_image()

@@ -7,3 +7,5 @@ script = ExtResource("1_rskwr")
 worldContainer = NodePath("WORLDCONTAINER")
 
 [node name="WORLDCONTAINER" type="WORLDCONTAINER" parent="."]
+
+[node name="EntityContainer" type="Node2D" parent="."]

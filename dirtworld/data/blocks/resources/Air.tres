@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://ce84bxkxlb3oc"]
+
+[ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_4xauc"]
+[ext_resource type="Texture2D" uid="uid://bmjjf4aonhn2y" path="res://data/blocks/textures/air.png" id="2_yguku"]
+
+[resource]
+script = ExtResource("1_4xauc")
+blockID = "air"
+texture = ExtResource("2_yguku")
+randomInt = 0
+metadata/_custom_type_script = "uid://bd7107brdous1"
