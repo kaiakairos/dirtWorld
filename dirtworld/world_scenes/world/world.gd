@@ -12,9 +12,19 @@ func _ready() -> void:
 	worldContainer.debugWorldGen()
 
 func _process(delta: float) -> void:
-
-	var mousePos = Vector2i(get_global_mouse_position())
-	mousePos = mousePos/64
-	if positionLastFrame != mousePos:
-		worldContainer.chunkLoadArea(mousePos.x,mousePos.y,5,4)
-		positionLastFrame = mousePos
+	
+	
+	# all debug shit
+	var dir :Vector2 = Vector2.ZERO
+	dir.x =Input.get_axis("ui_left","ui_right")
+	dir.y = Input.get_axis("ui_up","ui_down")
+	$testCamera.position += dir * 2
+	
+	$testCamera/Label.text = "fps: " + str( int( 1.0 / delta ) )
+	
+	
+	var trackingPosition = Vector2i($testCamera.global_position)
+	trackingPosition = trackingPosition/64
+	if positionLastFrame != trackingPosition:
+		worldContainer.chunkLoadArea(trackingPosition.x,trackingPosition.y,6,4)
+		positionLastFrame = trackingPosition

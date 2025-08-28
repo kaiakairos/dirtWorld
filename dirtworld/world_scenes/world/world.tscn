@@ -9,3 +9,13 @@ worldContainer = NodePath("WORLDCONTAINER")
 [node name="WORLDCONTAINER" type="WORLDCONTAINER" parent="."]
 
 [node name="EntityContainer" type="Node2D" parent="."]
+
+[node name="testCamera" type="Camera2D" parent="."]
+
+[node name="Label" type="Label" parent="testCamera"]
+z_index = 655
+offset_left = -192.0
+offset_top = -144.0
+offset_right = -152.0
+offset_bottom = -121.0
+text = "fps: 0"
