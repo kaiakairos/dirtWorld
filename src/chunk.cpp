@@ -102,29 +102,57 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
         
     }
 
-    for( int i = 0; i < polygons.size(); i++ ){
+    if(true){ // test disable collision
+        clearColliders();
+        for( int i = 0; i < polygons.size(); i++ ){
+            CollisionPolygon2D *collider;
+            collider = memnew(CollisionPolygon2D);
 
+            PackedVector2Array polygonShape = polygons[i];
+            collider->set_polygon( polygonShape );
 
-        CollisionPolygon2D *collider;
-        collider = memnew(CollisionPolygon2D);
+            int sect = sects[i];
 
-        PackedVector2Array polygonShape = polygons[i];
-        collider->set_polygon( polygonShape );
+            collider->set_position( Vector2i(0,2 * tileSize * sect) );
 
-        int sect = sects[i];
-
-        collider->set_position( Vector2i(0,2 * tileSize * sect) );
-
-        staticBody->add_child(collider);
-
-
+            staticBody->add_child(collider);
+        }
     }
-
 
 
     tileSprite->set_texture(ImageTexture::create_from_image(img));
 
 }
+
+void CHUNK::clearColliders(){
+    Array children = staticBody->get_children();
+    for( int i = 0; i < children.size(); i++ ){
+        //CollisionPolygon2D *shape = children[i];
+        CollisionPolygon2D *shape = Object::cast_to<CollisionPolygon2D>( children[i] );
+        shape->queue_free();
+    }
+}
+
+// SIMULATE //
+void CHUNK::simulateTick(WORLDCONTAINER *worldContainer){
+    
+    for(int x = 0; x < 8; x++){
+        for(int y = 0; y < 8; y++){
+
+            std::pair<int,int> worldCoord = localCoordToWorld(x,y);
+            int worldX = worldCoord.first;
+            int worldY = worldCoord.second;
+
+            std::string blockString = worldContainer->getTileData(worldX,worldY);
+            Ref<BLOCKOBJECT> blockObj = blockContainer->getObjectFromString(blockString);
+            blockObj->simulateTickComponents(worldX,worldY,blockString,blockContainer,worldContainer);
+
+
+        }
+    }
+
+}
+
 
 // MATH //
 

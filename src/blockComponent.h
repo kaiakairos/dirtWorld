@@ -6,6 +6,8 @@
 
 namespace godot {
 
+class BLOCKCONTAINER;
+class WORLDCONTAINER;
 class BLOCKCOMPONENT : public Resource {
     GDCLASS(BLOCKCOMPONENT, Resource)
 
@@ -18,10 +20,13 @@ public:
     BLOCKCOMPONENT(); // initialize function
     ~BLOCKCOMPONENT();
 
-    String id;
+    std::string id; // used to check if components of type exist
 
-    void setID(String newID);
-    String getID();
+    virtual void onSimulationTick(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);
+    virtual void onRandomTick(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);
+    virtual void onBreak(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);
+    virtual void onPlace(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);
+    virtual void onBlockUpdate(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);
 
 };
 

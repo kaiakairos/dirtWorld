@@ -72,6 +72,15 @@ int WORLDCONTAINER::convertCoord(int x, int y){
     return xyToLarge;
 }
 
+Vector2i WORLDCONTAINER::reverseCoordCoversion(int index){
+    int arraySize = worldWidth * worldHeight;
+    
+    int x = index / worldHeight;
+    int y = index % worldHeight;
+
+    return Vector2i(x,y); // maybe change to pair ?
+}
+
 void WORLDCONTAINER::setTileData(int x, int y, std::string newTile){
     tileData[convertCoord(x,y)] = newTile;
 }
@@ -159,8 +168,52 @@ void WORLDCONTAINER::simulateLoadedChunks(int gameTick){
         int chunkID4 = chunkObj->getID4();
 
         if(chunkID4 == sector){
-            chunkObj->set_rotation(chunkObj->get_rotation() + 0.04); // put block sim here
+            //chunkObj->set_rotation(chunkObj->get_rotation() + 0.04); // put block sim here
+
+            chunkObj->simulateTick(this);
+
         }
 
     }
+
+    std::unordered_map<int, bool> changedTiles;
+    changedTiles = parseAndApplyQueuedChanges();
+
+    Array chunksToUpdate;
+
+    for(auto i : changedTiles){ // parse through changed tiles so we redraw chunks
+        Vector2i coords = reverseCoordCoversion(i.first);
+        int x = coords.x / 8; // gets chunk position
+        int y = coords.y / 8;
+
+        if( loadedChunks.has( Vector2i(x,y) ) ){
+            CHUNK *chunkObj = Object::cast_to<CHUNK>( loadedChunks[Vector2i(x,y)] );
+            if(!chunksToUpdate.has(chunkObj)){
+                chunksToUpdate.append(chunkObj); // collect chunks
+            }
+        }
+    }
+
+    for( int i = 0; i < chunksToUpdate.size(); i++ ){
+        CHUNK *chunkObj = Object::cast_to<CHUNK>( chunksToUpdate[i] );
+        chunkObj->drawTiles(this,bitmap);
+    }
+
+
+
+    blockChangeQueue.clear();
+}
+
+void WORLDCONTAINER::addBlockChangeToQueue(int changeX, int changeY, std::string blockID){
+    // we could decide here whether or not to override existing changes
+    blockChangeQueue[convertCoord(changeX,changeY)] = blockID;
+}
+
+std::unordered_map<int, bool> WORLDCONTAINER::parseAndApplyQueuedChanges(){
+    std::unordered_map<int, bool> changedIndexes;
+    for (auto i : blockChangeQueue){
+        tileData[i.first] = i.second;
+        changedIndexes[i.first] = true;
+    }   
+    return changedIndexes;
 }

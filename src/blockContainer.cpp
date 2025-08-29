@@ -32,3 +32,8 @@ Ref<Image> BLOCKCONTAINER::getBlockImage(std::string blockTag){
     Ref<BLOCKOBJECT> g = blockDictionary[blockTag];
     return g->getTextureImage();
 }
+
+Ref<BLOCKOBJECT> BLOCKCONTAINER::getObjectFromString(std::string key){
+    Ref<BLOCKOBJECT> g = blockDictionary[key];
+    return g;
+}

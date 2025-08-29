@@ -11,6 +11,7 @@ worldContainer = NodePath("WORLDCONTAINER")
 [node name="EntityContainer" type="Node2D" parent="."]
 
 [node name="testCamera" type="Camera2D" parent="."]
+position = Vector2(272, 256)
 
 [node name="Label" type="Label" parent="testCamera"]
 z_index = 655

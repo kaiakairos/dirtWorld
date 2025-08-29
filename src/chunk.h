@@ -59,6 +59,9 @@ public:
     // collider
     StaticBody2D *staticBody;
 
+    void simulateTick(WORLDCONTAINER *worldContainer);
+    void clearColliders();
+
 };
 
 }

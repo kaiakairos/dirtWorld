@@ -4,8 +4,12 @@
 #include <godot_cpp/classes/resource.hpp>
 #include <godot_cpp/classes/image.hpp>
 
+
 namespace godot {
 
+class BLOCKCONTAINER;
+class BLOCKCOMPONENT;
+class WORLDCONTAINER;
 class BLOCKOBJECT : public Resource {
     GDCLASS(BLOCKOBJECT, Resource)
 
@@ -20,13 +24,21 @@ public:
 
     // define block specific variables in here
     Ref<Image> textureImage;
-    int randomInt;
+    
+
+    Array components;
+    int componentCount;
+    void initializeComponentArray(int size);
+    void addComponent(BLOCKCOMPONENT *newComponent,int index);
 
     void setTextureImage(Ref<Image> newImage);
     Ref<Image> getTextureImage();
 
-    void setRandomInt(int newInt); // for testing
-    int getRandomInt();
+
+    void printComponentArray();
+
+    // component sim
+    void simulateTickComponents(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);
 
 };
 

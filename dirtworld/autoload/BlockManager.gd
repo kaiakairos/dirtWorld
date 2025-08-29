@@ -13,7 +13,18 @@ func _ready() -> void:
 		var resource :Block = load("res://data/blocks/resources/" + filename)
 		blockContainer.addObjectToDictionary(resource.blockID)
 		var blockObject = BlockManager.blockContainer.getObjectFromDictionary(resource.blockID)
+		
+		print(resource.blockID)
+		
 		var textureImage = resource.texture.get_image()
 		textureImage.convert(Image.FORMAT_RGBA8)
 		blockObject.setTextureImage( textureImage )
-		blockObject.setRandomInt(resource.randomInt)
+		
+		# add components
+		blockObject.initializeComponentArray( resource.components.size() )
+		var i:int = 0
+		for component in resource.components:
+			blockObject.addComponent(component,i)
+			i += 1
+			
+		blockObject.printComponentArray()

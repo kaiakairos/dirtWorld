@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://bpf4x1d5vimpr"]
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://bpf4x1d5vimpr"]
 
 [ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_r0kdp"]
 [ext_resource type="Texture2D" uid="uid://dyjks4ja85dyu" path="res://data/blocks/textures/stone.png" id="2_htsls"]
+
+[sub_resource type="COMPONENTCHANGE" id="COMPONENTCHANGE_bxa34"]
+chance = 5
+blockToChangeInto = "air"
 
 [resource]
 script = ExtResource("1_r0kdp")
 blockID = "stone"
 texture = ExtResource("2_htsls")
-randomInt = 6
+components = Array[BLOCKCOMPONENT]([SubResource("COMPONENTCHANGE_bxa34")])
 metadata/_custom_type_script = "uid://bd7107brdous1"

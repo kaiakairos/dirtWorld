@@ -40,6 +40,7 @@ public:
     void initializeArray(int width, int height);
    
     int convertCoord(int x, int y);
+    Vector2i reverseCoordCoversion(int index);
 
     void setTileData(int x, int y, std::string newTile);
     std::string getTileData(int x, int y);
@@ -53,7 +54,15 @@ public:
     void unloadChunks(int centerChunkX, int centerChunkY, int loadWidth, int loadHeight);
     Dictionary getLoadedChunks();
 
+    //simulation
+
+    std::unordered_map<int, std::string> blockChangeQueue;
+    void addBlockChangeToQueue(int changeX, int changeY, std::string blockID);
+    std::unordered_map<int, bool> parseAndApplyQueuedChanges();
+
     void simulateLoadedChunks(int gameTick);
+    
+
 
 };
 

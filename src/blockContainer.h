@@ -29,7 +29,7 @@ public:
     // the rest will take std::strings and are meant to be used exclusively inside c++
 
     Ref<Image> getBlockImage(std::string blockTag);
-
+    Ref<BLOCKOBJECT> getObjectFromString(std::string key);
 
 };
 

@@ -1,32 +1,38 @@
 #include "blockComponent.h"
 #include <godot_cpp/core/class_db.hpp>
 
+#include "worldContainer.h"
+#include "blockContainer.h"
+
 using namespace godot;
 
 void BLOCKCOMPONENT::_bind_methods() {
-
-    ClassDB::bind_method(D_METHOD("setID","newID"), &BLOCKCOMPONENT::setID);
-    ClassDB::bind_method(D_METHOD("getID"), &BLOCKCOMPONENT::getID);
-
-    ADD_PROPERTY(PropertyInfo(Variant::STRING, "ID"), "setID", "getID");
-
 }
 
 BLOCKCOMPONENT::BLOCKCOMPONENT() {
-	// Initialize any variables here.
+    id = "blank";
 }
 
 BLOCKCOMPONENT::~BLOCKCOMPONENT() {
 	// Add your cleanup here.
 }
 
-void BLOCKCOMPONENT::setID(String newID){
+void BLOCKCOMPONENT::onSimulationTick(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
 
-    id = newID;
 }
 
-String BLOCKCOMPONENT::getID() {
-    return id;
+void BLOCKCOMPONENT::onRandomTick(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    
 }
 
+void BLOCKCOMPONENT::onBreak(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    
+}
 
+void BLOCKCOMPONENT::onPlace(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    
+}
+
+void BLOCKCOMPONENT::onBlockUpdate(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    
+}

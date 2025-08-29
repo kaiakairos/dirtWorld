@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_4xauc"]
 [ext_resource type="Texture2D" uid="uid://bmjjf4aonhn2y" path="res://data/blocks/textures/air.png" id="2_yguku"]
 
-[sub_resource type="BLOCKCOMPONENT" id="BLOCKCOMPONENT_1j4ob"]
+[sub_resource type="COMPONENTCHANGE" id="COMPONENTCHANGE_1j4ob"]
+chance = 5
+blockToChangeInto = "dirt"
 
 [resource]
 script = ExtResource("1_4xauc")
 blockID = "air"
 texture = ExtResource("2_yguku")
-randomInt = 0
-components = Array[BLOCKCOMPONENT]([SubResource("BLOCKCOMPONENT_1j4ob")])
+components = Array[BLOCKCOMPONENT]([SubResource("COMPONENTCHANGE_1j4ob")])
 metadata/_custom_type_script = "uid://bd7107brdous1"
