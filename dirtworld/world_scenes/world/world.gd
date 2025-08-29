@@ -1,10 +1,11 @@
 extends Node2D
 
 @export var worldContainer :WORLDCONTAINER
-var ticks :float = 0.0
-var flip :int = 4
+var tickTimer :float = 0.0
+var tick :int = 0 # the game loop tick
+const TICKRATE :int = 10
 
-var positionLastFrame :Vector2i = Vector2i.ZERO
+var positionLastFrame :Vector2i = Vector2i.ZERO # debug
 
 func _ready() -> void:
 	worldContainer.setBlockContainer(BlockManager.blockContainer)
@@ -27,4 +28,17 @@ func _process(delta: float) -> void:
 	trackingPosition = trackingPosition/64
 	if positionLastFrame != trackingPosition:
 		worldContainer.chunkLoadArea(trackingPosition.x,trackingPosition.y,6,4)
+		worldContainer.unloadChunks(trackingPosition.x,trackingPosition.y,6,4)
 		positionLastFrame = trackingPosition
+		
+	# advance game tick
+	tickTimer += delta
+	if tickTimer > 1.0 / float(TICKRATE):
+		tickTimer -= 1.0 / float(TICKRATE)
+		gameTick(delta)
+
+func gameTick(delta:float) -> void:
+	tick += 1
+	worldContainer.simulateLoadedChunks(tick)
+	
+	

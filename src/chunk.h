@@ -41,6 +41,9 @@ public:
     BLOCKCONTAINER *blockContainer;
     void setBlockContainer(BLOCKCONTAINER *container);
 
+    int id4; // used for simulation
+    int getID4();
+
     int positionX; // chunks BIG position
     int positionY;
     void setPosition(int x, int y);

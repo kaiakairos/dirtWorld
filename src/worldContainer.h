@@ -50,7 +50,10 @@ public:
 
     Dictionary loadedChunks;
     void chunkLoadArea(int centerChunkX, int centerChunkY, int loadWidth, int loadHeight);
+    void unloadChunks(int centerChunkX, int centerChunkY, int loadWidth, int loadHeight);
     Dictionary getLoadedChunks();
+
+    void simulateLoadedChunks(int gameTick);
 
 };
 

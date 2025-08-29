@@ -21,6 +21,8 @@ CHUNK::CHUNK() {
     staticBody = memnew(StaticBody2D);
     add_child(staticBody);
 
+    id4 = 0;
+
 }
 
 CHUNK::~CHUNK() {
@@ -38,11 +40,18 @@ void CHUNK::setBlockContainer(BLOCKCONTAINER *container){ // Allows the chunk to
 void CHUNK::setPosition(int x, int y){ // sets large chunk coordinate
     positionX = x;
     positionY = y;
+
+    id4 = (x % 2)+((y % 2) * 2 );
+
     set_position(Vector2i(x * 8 * tileSize,y * 8 * tileSize));
 }
 
 Vector2i CHUNK::getPosition(){ // gets large chunk coordinate
     return Vector2i(positionX,positionY);
+}
+
+int CHUNK::getID4(){
+    return id4;
 }
 
 // DRAWING //
