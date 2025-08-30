@@ -6,6 +6,7 @@ var tick :int = 0 # the game loop tick
 const TICKRATE :int = 10
 
 var positionLastFrame :Vector2i = Vector2i.ZERO # debug
+var renderDistance :Vector2i = Vector2i(6,4)
 
 func _ready() -> void:
 	worldContainer.setBlockContainer(BlockManager.blockContainer)
@@ -27,8 +28,8 @@ func _process(delta: float) -> void:
 	var trackingPosition = Vector2i($testCamera.global_position)
 	trackingPosition = trackingPosition/64
 	if positionLastFrame != trackingPosition:
-		worldContainer.chunkLoadArea(trackingPosition.x,trackingPosition.y,6,4)
-		worldContainer.unloadChunks(trackingPosition.x,trackingPosition.y,6,4)
+		worldContainer.chunkLoadArea(trackingPosition.x,trackingPosition.y,renderDistance.x,renderDistance.y)
+		worldContainer.unloadChunks(trackingPosition.x,trackingPosition.y,renderDistance.x,renderDistance.y)
 		positionLastFrame = trackingPosition
 		
 	# advance game tick

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://bahua8ds3dx40"]
+
+[ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_fsis3"]
+[ext_resource type="Texture2D" uid="uid://dta0km8maquwk" path="res://data/blocks/textures/grass.png" id="2_74hme"]
+
+[resource]
+script = ExtResource("1_fsis3")
+blockID = "grass"
+texture = ExtResource("2_74hme")
+components = Array[BLOCKCOMPONENT]([])
+metadata/_custom_type_script = "uid://bd7107brdous1"

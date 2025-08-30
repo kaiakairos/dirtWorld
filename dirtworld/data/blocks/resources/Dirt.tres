@@ -4,12 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/textures/dirt.png" id="2_akly5"]
 
 [sub_resource type="COMPONENTCHANGE" id="COMPONENTCHANGE_5ir27"]
-chance = 5
-blockToChangeInto = "stone"
+chance = 100
+blockToChangeInto = "grass"
 
 [resource]
 script = ExtResource("1_aibwi")
 blockID = "dirt"
 texture = ExtResource("2_akly5")
+toughness = 0
 components = Array[BLOCKCOMPONENT]([SubResource("COMPONENTCHANGE_5ir27")])
 metadata/_custom_type_script = "uid://bd7107brdous1"

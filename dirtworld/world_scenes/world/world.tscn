@@ -11,7 +11,6 @@ worldContainer = NodePath("WORLDCONTAINER")
 [node name="EntityContainer" type="Node2D" parent="."]
 
 [node name="testCamera" type="Camera2D" parent="."]
-position = Vector2(272, 256)
 
 [node name="Label" type="Label" parent="testCamera"]
 z_index = 655
@@ -20,3 +19,9 @@ offset_top = -144.0
 offset_right = -152.0
 offset_bottom = -121.0
 text = "fps: 0"
+
+[node name="Line2D" type="Line2D" parent="testCamera"]
+z_index = 350
+points = PackedVector2Array(-200, -150, 200, -150, 200, 150, -200, 150)
+closed = true
+width = 4.0

@@ -52,7 +52,7 @@ void WORLDCONTAINER::debugWorldGen(){
 
     for(int x = 0; x < worldWidth; x++){
         for(int y = 0; y < worldHeight; y++){
-            if(std::rand() % 2 == 0){
+            if(y < 38){
                 setTileData(x,y,"dirt");
             }
 
