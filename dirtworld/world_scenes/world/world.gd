@@ -6,7 +6,7 @@ var tick :int = 0 # the game loop tick
 const TICKRATE :int = 10
 
 var positionLastFrame :Vector2i = Vector2i.ZERO # debug
-var renderDistance :Vector2i = Vector2i(6,4)
+var renderDistance :Vector2i = Vector2i(8,5)
 
 func _ready() -> void:
 	worldContainer.setBlockContainer(BlockManager.blockContainer)
