@@ -7,3 +7,7 @@ class_name Block
 @export var toughness:int
 
 @export var components :Array[BLOCKCOMPONENT]
+
+@export var lightEmission : Color = Color.BLACK
+@export var isTransparent : bool
+@export var lightPassThrough : float = 0.86

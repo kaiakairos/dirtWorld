@@ -1,0 +1,5 @@
+[gd_resource type="COMPONENTCHANGE" format=3 uid="uid://b888qoauivdnf"]
+
+[resource]
+chance = 2000
+blockToChangeInto = "ugly"

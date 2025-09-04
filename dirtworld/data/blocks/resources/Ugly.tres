@@ -1,11 +1,17 @@
-[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://booc5202h1ejw"]
+[gd_resource type="Resource" script_class="Block" load_steps=4 format=3 uid="uid://booc5202h1ejw"]
 
 [ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_ua7st"]
 [ext_resource type="Texture2D" uid="uid://c3utmir8465ry" path="res://data/blocks/textures/ugly.pmh.png" id="2_6c66o"]
+
+[sub_resource type="COMPONENTCHANGE" id="COMPONENTCHANGE_6c66o"]
 
 [resource]
 script = ExtResource("1_ua7st")
 blockID = "ugly"
 texture = ExtResource("2_6c66o")
-components = Array[BLOCKCOMPONENT]([])
+toughness = 0
+components = Array[BLOCKCOMPONENT]([SubResource("COMPONENTCHANGE_6c66o")])
+lightEmission = Color(2, 0, 0, 1)
+isTransparent = false
+lightPassThrough = 0.96
 metadata/_custom_type_script = "uid://bd7107brdous1"

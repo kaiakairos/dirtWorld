@@ -7,5 +7,9 @@
 script = ExtResource("1_4xauc")
 blockID = "air"
 texture = ExtResource("2_yguku")
+toughness = 0
 components = Array[BLOCKCOMPONENT]([])
+lightEmission = Color(2, 2, 2, 1)
+isTransparent = false
+lightPassThrough = 0.96
 metadata/_custom_type_script = "uid://bd7107brdous1"

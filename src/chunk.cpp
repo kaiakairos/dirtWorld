@@ -153,6 +153,52 @@ void CHUNK::simulateTick(WORLDCONTAINER *worldContainer){
 
 }
 
+void CHUNK::simulateLight(WORLDCONTAINER *worldContainer){
+    for(int x = 0; x < 8; x++){
+        for(int y = 0; y < 8; y++){
+            std::pair<int,int> worldCoord = localCoordToWorld(x,y);
+            int worldX = worldCoord.first;
+            int worldY = worldCoord.second;
+
+            std::string blockString = worldContainer->getTileData(worldX,worldY);
+            Ref<BLOCKOBJECT> blockObj = blockContainer->getObjectFromString(blockString);
+
+            std::tuple<float,float,float> lightEmission = blockObj->lightEmission;
+            //std::tuple<float,float,float> currentLight = worldContainer->getLightData(worldX,worldY);
+
+            float r = 0.0;
+            float g = 0.0;
+            float b = 0.0;
+
+            for(int i = 0; i < 4; i++){
+
+                Vector2i pos = Vector2i( Vector2( 1,0 ).rotated(i * acos(0.0) ));
+
+                std::tuple<float,float,float> thisLight = worldContainer->getLightData(worldX + pos.x,worldY + pos.y);
+
+                r = r + std::get<0>(thisLight);
+                g = g + std::get<1>(thisLight);
+                b = b + std::get<2>(thisLight);
+            }
+
+            r = r/4.0;
+            g = g/4.0;
+            b = b/4.0;
+
+            float passthrough = blockObj->getLightPassThrough();
+            r = r*passthrough;
+            g = g*passthrough;
+            b = b*passthrough;
+
+            r = std::max(r, std::get<0>(lightEmission));
+            g = std::max(g, std::get<1>(lightEmission));
+            b = std::max(b, std::get<2>(lightEmission));
+
+            worldContainer->setLightDataTuple(worldX, worldY, std::make_tuple(r,g,b));
+
+        }
+    }
+}
 
 // MATH //
 

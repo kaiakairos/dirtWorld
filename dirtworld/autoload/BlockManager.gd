@@ -28,3 +28,9 @@ func _ready() -> void:
 			i += 1
 			
 		blockObject.printComponentArray()
+		
+		# light
+		blockObject.setIsTransparent(resource.isTransparent)
+		blockObject.setLightPassThrough(resource.lightPassThrough)
+		var c :Color= resource.lightEmission
+		blockObject.setLightEmission(c.r,c.g,c.b)

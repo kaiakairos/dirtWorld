@@ -40,9 +40,11 @@ void WORLDCONTAINER::initializeArray(int width, int height){
     heighInChunks = height;
 
     tileData = new std::string[worldWidth * worldHeight];
+    lightData = new std::tuple<float,float,float>[worldWidth * worldHeight];
     for(int x = 0; x < worldWidth; x++){
         for(int y = 0; y < worldHeight; y++){
             setTileData(x,y,"stone");
+            setLightData(x,y,0.0,0.0,0.0);
         }
     }
 
@@ -52,7 +54,7 @@ void WORLDCONTAINER::debugWorldGen(){
 
     for(int x = 0; x < worldWidth; x++){
         for(int y = 0; y < worldHeight; y++){
-            if(y < 38){
+            if (y < 38 + (sin(x * 0.1) * 2)){
                 setTileData(x,y,"dirt");
             }
 
@@ -87,6 +89,18 @@ void WORLDCONTAINER::setTileData(int x, int y, std::string newTile){
 
 std::string WORLDCONTAINER::getTileData(int x, int y){
     return tileData[convertCoord(x,y)];
+}
+
+void WORLDCONTAINER::setLightData(int x, int y, float r, float g, float b){
+    lightData[convertCoord(x,y)] = std::make_tuple(r,g,b);
+}
+
+std::tuple<float, float, float> WORLDCONTAINER::getLightData(int x, int y){
+    return lightData[convertCoord(x,y)];
+}
+
+void WORLDCONTAINER::setLightDataTuple(int x, int y, std::tuple<float, float, float> newValue){
+    lightData[convertCoord(x,y)] = newValue;
 }
 
 // CHUNK LOADING //
@@ -168,11 +182,12 @@ void WORLDCONTAINER::simulateLoadedChunks(int gameTick){
         int chunkID4 = chunkObj->getID4();
 
         if(chunkID4 == sector){
-            //chunkObj->set_rotation(chunkObj->get_rotation() + 0.04); // put block sim here
 
             chunkObj->simulateTick(this);
+             // probably inefficient to have these seperate since thats 2 whole loops of the object when it could be one. change later
 
         }
+        chunkObj->simulateLight(this);
 
     }
 

@@ -7,5 +7,9 @@
 script = ExtResource("1_fsis3")
 blockID = "grass"
 texture = ExtResource("2_74hme")
+toughness = 0
 components = Array[BLOCKCOMPONENT]([])
+lightEmission = Color(0, 0, 0, 1)
+isTransparent = false
+lightPassThrough = 0.96
 metadata/_custom_type_script = "uid://bd7107brdous1"

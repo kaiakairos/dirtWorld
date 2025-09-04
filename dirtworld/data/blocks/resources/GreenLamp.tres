@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://c0kat3vbqhgco"]
+
+[ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_08a2m"]
+[ext_resource type="Texture2D" uid="uid://t85kinfb10uw" path="res://icon.svg" id="2_nv3my"]
+
+[resource]
+script = ExtResource("1_08a2m")
+blockID = "green"
+texture = ExtResource("2_nv3my")
+toughness = 0
+components = Array[BLOCKCOMPONENT]([])
+lightEmission = Color(0, 2, 0, 1)
+isTransparent = false
+lightPassThrough = 0.86
+metadata/_custom_type_script = "uid://bd7107brdous1"

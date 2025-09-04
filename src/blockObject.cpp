@@ -17,6 +17,10 @@ void BLOCKOBJECT::_bind_methods() {
     ClassDB::bind_method(D_METHOD("addComponent","component","index"), &BLOCKOBJECT::addComponent);
 
     ClassDB::bind_method(D_METHOD("printComponentArray"), &BLOCKOBJECT::printComponentArray);
+
+    ClassDB::bind_method(D_METHOD("setIsTransparent","isItIdk"), &BLOCKOBJECT::setIsTransparent);
+    ClassDB::bind_method(D_METHOD("setLightPassThrough","newValue"), &BLOCKOBJECT::setLightPassThrough);
+    ClassDB::bind_method(D_METHOD("setLightEmission","r","g","b"), &BLOCKOBJECT::setLightEmission);
 }
 
 BLOCKOBJECT::BLOCKOBJECT() {
@@ -54,6 +58,31 @@ void BLOCKOBJECT::simulateTickComponents(int x, int y, std::string blockID, BLOC
     for(int i = 0; i < componentCount; i ++){
         Ref<BLOCKCOMPONENT> g = components[i];
         //godot::UtilityFunctions::print(g);
-        g->onSimulationTick(x,y,blockID,container,worldContainer); // calling this causes crash
+        g->onSimulationTick(x,y,blockID,container,worldContainer);
     }
+}
+
+///////// LIGHT STUFF //////////////
+void BLOCKOBJECT::setIsTransparent(bool yeah){
+    isTransparent = yeah;
+}
+
+bool BLOCKOBJECT::getIsTransparent(){
+    return isTransparent;
+}
+
+void BLOCKOBJECT::setLightPassThrough(float newValue){
+    lightPassThrough = newValue;
+}
+
+float BLOCKOBJECT::getLightPassThrough(){
+    return lightPassThrough;
+}
+
+void BLOCKOBJECT::setLightEmission(float r, float g, float b){
+    lightEmission = std::make_tuple(r,g,b);
+}
+
+std::tuple<float,float,float> BLOCKOBJECT::getLightEmission(){
+    return lightEmission;
 }

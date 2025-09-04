@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/textures/dirt.png" id="2_akly5"]
 
 [sub_resource type="COMPONENTCHANGE" id="COMPONENTCHANGE_5ir27"]
-chance = 100
+chance = 3000
 blockToChangeInto = "grass"
 
 [resource]
@@ -13,4 +13,7 @@ blockID = "dirt"
 texture = ExtResource("2_akly5")
 toughness = 0
 components = Array[BLOCKCOMPONENT]([SubResource("COMPONENTCHANGE_5ir27")])
+lightEmission = Color(0, 0, 0, 1)
+isTransparent = false
+lightPassThrough = 0.96
 metadata/_custom_type_script = "uid://bd7107brdous1"

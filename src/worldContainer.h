@@ -17,6 +17,7 @@ class WORLDCONTAINER : public Node {
 
 private:
     std::string *tileData;
+    std::tuple<float, float, float> *lightData;
 
 
 protected:
@@ -44,6 +45,10 @@ public:
 
     void setTileData(int x, int y, std::string newTile);
     std::string getTileData(int x, int y);
+
+    void setLightData(int x, int y, float r, float g, float b);
+    std::tuple<float, float, float> getLightData(int x, int y);
+    void setLightDataTuple(int x, int y, std::tuple<float, float, float> newValue);
 
     void createNewChunk(int chunkX, int chunkY);
 

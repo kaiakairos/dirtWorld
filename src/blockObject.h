@@ -40,6 +40,19 @@ public:
     // component sim
     void simulateTickComponents(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);
 
+    // light stuff
+    bool isTransparent;
+    void setIsTransparent(bool yeah);
+    bool getIsTransparent();
+
+    float lightPassThrough;
+    void setLightPassThrough(float newValue);
+    float getLightPassThrough();
+
+    std::tuple<float,float,float> lightEmission;
+    void setLightEmission(float r, float g, float b);
+    std::tuple<float,float,float> getLightEmission();
+
 };
 
 }

@@ -1,12 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgoscy6mf6lsi"]
+[gd_scene load_steps=4 format=3 uid="uid://bgoscy6mf6lsi"]
 
 [ext_resource type="Script" uid="uid://bb1kn2q0cql7a" path="res://world_scenes/world/world.gd" id="1_rskwr"]
+[ext_resource type="Shader" uid="uid://1lha1gkep40f" path="res://world_scenes/world/lighting/lightShader.gdshader" id="2_ltntx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qoanb"]
+shader = ExtResource("2_ltntx")
+shader_parameter/line_scale = 10.0
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("worldContainer")]
 script = ExtResource("1_rskwr")
 worldContainer = NodePath("WORLDCONTAINER")
 
 [node name="WORLDCONTAINER" type="WORLDCONTAINER" parent="."]
+
+[node name="LIGHTDRAWER" type="LIGHTDRAWER" parent="."]
+z_index = 5
+texture_filter = 2
+material = SubResource("ShaderMaterial_qoanb")
+scale = Vector2(8, 8)
+centered = false
 
 [node name="EntityContainer" type="Node2D" parent="."]
 

@@ -62,6 +62,8 @@ public:
     void simulateTick(WORLDCONTAINER *worldContainer);
     void clearColliders();
 
+    void simulateLight(WORLDCONTAINER *worldContainer);
+
 };
 
 }

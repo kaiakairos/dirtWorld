@@ -3,7 +3,7 @@ extends Node2D
 @export var worldContainer :WORLDCONTAINER
 var tickTimer :float = 0.0
 var tick :int = 0 # the game loop tick
-const TICKRATE :int = 10
+const TICKRATE :int = 15
 
 var positionLastFrame :Vector2i = Vector2i.ZERO # debug
 var renderDistance :Vector2i = Vector2i(8,5) # test commit :)
@@ -30,6 +30,11 @@ func _process(delta: float) -> void:
 	if positionLastFrame != trackingPosition:
 		worldContainer.chunkLoadArea(trackingPosition.x,trackingPosition.y,renderDistance.x,renderDistance.y)
 		worldContainer.unloadChunks(trackingPosition.x,trackingPosition.y,renderDistance.x,renderDistance.y)
+		print(trackingPosition)
+		# debug light update
+		#$LIGHTDRAWER.position = trackingPosition * 64
+		
+		
 		positionLastFrame = trackingPosition
 		
 	# advance game tick
@@ -37,9 +42,11 @@ func _process(delta: float) -> void:
 	if tickTimer > 1.0 / float(TICKRATE):
 		tickTimer -= 1.0 / float(TICKRATE)
 		gameTick(delta)
+	
+	$LIGHTDRAWER.position = (positionLastFrame - Vector2i(4,4)) * 64
+	$LIGHTDRAWER.drawLight($WORLDCONTAINER,(positionLastFrame - Vector2i(4,4)).x*8,(positionLastFrame - Vector2i(4,4)).y*8)
+	
 
 func gameTick(delta:float) -> void:
 	tick += 1
 	worldContainer.simulateLoadedChunks(tick)
-	
-	

@@ -5,6 +5,7 @@
 #include "blockContainer.h"
 #include "worldContainer.h"
 #include "chunk.h"
+#include "lightDrawer.h"
 
 #include "blockComponent.h" // components
 #include "componentChange.h"
@@ -25,6 +26,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(BLOCKCONTAINER);
 	GDREGISTER_RUNTIME_CLASS(WORLDCONTAINER);
 	GDREGISTER_RUNTIME_CLASS(CHUNK);
+	GDREGISTER_RUNTIME_CLASS(LIGHTDRAWER);
 	
 	GDREGISTER_RUNTIME_CLASS(BLOCKCOMPONENT); // components
 	GDREGISTER_RUNTIME_CLASS(COMPONENTCHANGE);
