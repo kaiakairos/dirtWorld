@@ -15,9 +15,7 @@ LIGHTDRAWER::~LIGHTDRAWER() {
 
 }
 
-void LIGHTDRAWER::drawLight(WORLDCONTAINER *worldContainer, int worldX, int worldY){ // x y positions are from top corner
-    int rangeX = 64; // how big our light sprite is. should be changeable later based on screen ratio
-    int rangeY = 64;
+void LIGHTDRAWER::drawLight(WORLDCONTAINER *worldContainer, int worldX, int worldY, int rangeX, int rangeY){
     img = Image::create(rangeX,rangeY, false, Image::FORMAT_RGBA8);
 
     for(int x = 0; x < rangeX; x++  ){
@@ -34,6 +32,6 @@ void LIGHTDRAWER::drawLight(WORLDCONTAINER *worldContainer, int worldX, int worl
         }
     }
     set_texture(ImageTexture::create_from_image(img));
-
+    set_position(Vector2(worldX,worldY) * 8);
 
 }

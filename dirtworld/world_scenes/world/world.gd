@@ -8,10 +8,15 @@ const TICKRATE :int = 15
 var positionLastFrame :Vector2i = Vector2i.ZERO # debug
 var renderDistance :Vector2i = Vector2i(8,5) # test commit :)
 
+# light 
+var lightRender :int = 64
+
 func _ready() -> void:
 	worldContainer.setBlockContainer(BlockManager.blockContainer)
 	worldContainer.initializeArray(32,32)
 	worldContainer.debugWorldGen()
+	
+	get_viewport().size_changed.connect(changeWindowSize)
 
 func _process(delta: float) -> void:
 	
@@ -43,10 +48,15 @@ func _process(delta: float) -> void:
 		tickTimer -= 1.0 / float(TICKRATE)
 		gameTick(delta)
 	
-	$LIGHTDRAWER.position = (positionLastFrame - Vector2i(4,4)) * 64
-	$LIGHTDRAWER.drawLight($WORLDCONTAINER,(positionLastFrame - Vector2i(4,4)).x*8,(positionLastFrame - Vector2i(4,4)).y*8)
+	var l :Vector2i = (positionLastFrame * 8) - Vector2i(28,20)
+	$LIGHTDRAWER.drawLight($WORLDCONTAINER,l.x + (32 - (lightRender/2)),l.y,lightRender,50)
 	
 
 func gameTick(delta:float) -> void:
 	tick += 1
 	worldContainer.simulateLoadedChunks(tick)
+
+func changeWindowSize():
+	var rect :Rect2 = get_viewport_rect()
+	var width :int= int(rect.size.x)
+	lightRender = (width / 8) + 14

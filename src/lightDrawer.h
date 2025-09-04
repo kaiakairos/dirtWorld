@@ -22,7 +22,7 @@ public:
     LIGHTDRAWER();
     ~LIGHTDRAWER();
 
-    void drawLight(WORLDCONTAINER *worldContainer, int worldX, int worldY);
+    void drawLight(WORLDCONTAINER *worldContainer, int worldX, int worldY, int rangeX, int rangeY);
 
 
 };
