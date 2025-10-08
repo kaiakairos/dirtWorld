@@ -5,6 +5,8 @@
 #include "blockObject.h"
 #include <godot_cpp/variant/string.hpp>
 #include <godot_cpp/variant/typed_dictionary.hpp>
+#include <unordered_map>
+
 namespace godot {
 
 class BLOCKCONTAINER : public Node {

@@ -12,12 +12,16 @@ config_version=5
 
 config/name="dirtWorld"
 run/main_scene="uid://bgoscy6mf6lsi"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 BlockManager="*res://autoload/BlockManager.gd"
+
+[debug]
+
+gdscript/warnings/integer_division=0
 
 [display]
 

@@ -8,6 +8,7 @@
 #include <godot_cpp/variant/dictionary.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/classes/bit_map.hpp>
+#include <unordered_map>
 
 namespace godot {
 

@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 	$LIGHTDRAWER.drawLight($WORLDCONTAINER,l.x + (32 - (lightRender/2)),l.y,lightRender,50)
 	
 
-func gameTick(delta:float) -> void:
+func gameTick(_delta:float) -> void:
 	tick += 1
 	worldContainer.simulateLoadedChunks(tick)
 
