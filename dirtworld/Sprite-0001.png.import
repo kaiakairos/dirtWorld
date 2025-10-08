@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3utmir8465ry"
-path="res://.godot/imported/ugly.pmh.png-d510216427ce1289bef41a87ca28bc4f.ctex"
+uid="uid://kqceg7pacjj4"
+path="res://.godot/imported/Sprite-0001.png-7647bf9f8b536d839277d4b64aee9852.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/blocks/textures/ugly.pmh.png"
-dest_files=["res://.godot/imported/ugly.pmh.png-d510216427ce1289bef41a87ca28bc4f.ctex"]
+source_file="res://Sprite-0001.png"
+dest_files=["res://.godot/imported/Sprite-0001.png-7647bf9f8b536d839277d4b64aee9852.ctex"]
 
 [params]
 

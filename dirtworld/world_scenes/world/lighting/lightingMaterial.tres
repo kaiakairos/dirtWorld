@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dm4pyda5lltqj"]
+
+[ext_resource type="Shader" uid="uid://1lha1gkep40f" path="res://world_scenes/world/lighting/lightShader.gdshader" id="1_ucae4"]
+
+[resource]
+shader = ExtResource("1_ucae4")
+shader_parameter/line_scale = 10.0
+shader_parameter/banding = 5.0

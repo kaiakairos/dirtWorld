@@ -4,6 +4,7 @@ uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_n
 uniform sampler2D lightingMask : repeat_disable, filter_nearest;
 uniform float line_scale : hint_range(0, 20) = 10;
 
+uniform float banding = 16.0;
 
 vec4 multiply(vec4 base, vec4 blend){
 	return base * blend;
@@ -21,7 +22,7 @@ void fragment() {
 		
 	
 	new = clamp(new,vec4(0.0),vec4(1.0));
-	new = floor(new * 16.0)/16.0; // banding
+	new = floor(new * banding)/banding; // banding
 		
 	if(new.r > 0.9){ new.r = 1.0; }
 	if(new.g > 0.9){ new.g = 1.0; }

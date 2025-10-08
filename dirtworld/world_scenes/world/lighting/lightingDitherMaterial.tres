@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://f1rdok6e656p"]
+
+[ext_resource type="Shader" uid="uid://dtivv3bamjhkf" path="res://world_scenes/world/lighting/lightingDither.gdshader" id="1_jyvl5"]
+
+[resource]
+shader = ExtResource("1_jyvl5")
+shader_parameter/dithering = true
+shader_parameter/colors = 8
+shader_parameter/dither_size = 1
+shader_parameter/Pixel_Size = 0.250000011875

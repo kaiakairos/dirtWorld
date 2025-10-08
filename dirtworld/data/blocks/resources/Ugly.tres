@@ -9,9 +9,7 @@
 script = ExtResource("1_ua7st")
 blockID = "ugly"
 texture = ExtResource("2_6c66o")
-toughness = 0
 components = Array[BLOCKCOMPONENT]([SubResource("COMPONENTCHANGE_6c66o")])
-lightEmission = Color(2, 0, 0, 1)
-isTransparent = false
+lightEmission = Color(1.645183e-05, 1.2788185, 0.96727145, 1)
 lightPassThrough = 0.96
 metadata/_custom_type_script = "uid://bd7107brdous1"
