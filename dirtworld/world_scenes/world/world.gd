@@ -2,6 +2,7 @@ extends Node2D
 class_name World
 
 @export var worldContainer :WORLDCONTAINER
+@export var camera : Camera2D
 var tickTimer :float = 0.0
 var tick :int = 0 # the game loop tick
 const TICKRATE :int = 15
@@ -22,9 +23,9 @@ func _process(delta: float) -> void:
 	var dir :Vector2 = Vector2.ZERO
 	dir.x =Input.get_axis("ui_left","ui_right")
 	dir.y = Input.get_axis("ui_up","ui_down")
-	$testCamera.position += dir * 120 * delta
+	camera.position += dir * 120 * delta
 	
-	var trackingPosition = Vector2i($testCamera.global_position)
+	var trackingPosition = Vector2i(camera.global_position)
 	trackingPosition = trackingPosition/64
 	if positionLastFrame != trackingPosition:
 		worldContainer.chunkLoadArea(trackingPosition.x,trackingPosition.y,renderDistance.x,renderDistance.y)
@@ -40,12 +41,19 @@ func _process(delta: float) -> void:
 		gameTick(delta)
 	
 	drawLighting()
+	
 
 func drawLighting() -> void:
 	var l :Vector2i = (positionLastFrame * 8) - Vector2i(28,20)
 	var size :int = gameContainer.lightRenderSize
 	var worldCoords :Vector2i = Vector2i(l.x + (32 - (size/2)), l.y )
 	gameContainer.lightDrawer.drawLight(worldContainer,worldCoords.x,worldCoords.y,size,50)
+	#setLightPosition()
+
+func setLightPosition() -> void:
+	var l :Vector2i = (positionLastFrame * 8) - Vector2i(28,20)
+	var size :int = gameContainer.lightRenderSize
+	var worldCoords :Vector2i = Vector2i(l.x + (32 - (size/2)), l.y )
 	var pos :Vector2 = worldCoords * 8
 	var rect :Rect2 = get_viewport_rect()
 	var width :int= int(rect.size.x)
@@ -59,4 +67,4 @@ func gameTick(_delta:float) -> void:
 	worldContainer.simulateLoadedChunks(tick)
 
 func getTargetPosition() -> Vector2:
-	return $testCamera.position
+	return camera.position

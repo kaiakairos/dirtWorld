@@ -4,7 +4,6 @@ class_name GameContainer
 ## Objects ##
 @onready var world :World = $ViewportContainer/Viewport/World
 @onready var viewport :SubViewport = $ViewportContainer/Viewport
-@onready var lightViewport :SubViewport = $LightViewportContainer/LightViewport
 @onready var lightDrawer :LIGHTDRAWER = $LIGHTDRAWER
 	# Debug
 @onready var fpsLabel :Label = $fpsLabel
@@ -31,6 +30,5 @@ func _process(delta: float) -> void:
 func changeWindowSize():
 	var rect :Rect2 = get_viewport_rect()
 	var width :int= int(rect.size.x)
-	viewport.size.x = width
-	lightViewport.size.x = width
+	viewport.size.x = width + (width % 4) # viewport must always be divisible by 4
 	lightRenderSize = (width / 8) + 14

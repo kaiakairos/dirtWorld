@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://be6glqa4qwqj6"]
+
+[ext_resource type="Shader" uid="uid://cs5177sbpgo1j" path="res://zeeg/material/rotSprite/rotSpriteMaterial.gdshader" id="1_0wx1u"]
+
+[resource]
+shader = ExtResource("1_0wx1u")
