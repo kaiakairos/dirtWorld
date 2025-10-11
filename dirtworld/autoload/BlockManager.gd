@@ -9,12 +9,9 @@ func _ready() -> void:
 		if !filename.ends_with(".tres"):
 			continue # skip non-resources
 		
-		
 		var resource :Block = load("res://data/blocks/resources/" + filename)
 		blockContainer.addObjectToDictionary(resource.blockID)
 		var blockObject = BlockManager.blockContainer.getObjectFromDictionary(resource.blockID)
-		
-		print(resource.blockID)
 		
 		var textureImage = resource.texture.get_image()
 		textureImage.convert(Image.FORMAT_RGBA8)

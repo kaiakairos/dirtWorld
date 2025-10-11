@@ -1,6 +1,11 @@
 extends Entity
 
 @export var playerInputComponent :PlayerInputComponent
+@export var usingItemComponent :UsingItemComponent
+
+var focusPosition :Vector2 = Vector2.ZERO
+
+var camOffset :Vector2 = Vector2.ZERO
 
 func onReady() -> void:
 	addState("normalMovement")
@@ -15,9 +20,36 @@ func onProcess(delta:float) -> void:
 		states.normalMovement:
 			normalMovement(delta)
 	
-	world.camera.global_position = global_position + Vector2(0,-12)
+	# all debug shit
+	var dir :Vector2 = Vector2.ZERO
+	dir.x =Input.get_axis("ui_left","ui_right")
+	dir.y = Input.get_axis("ui_up","ui_down")
+	camOffset += dir * 120 * delta
+	
+	world.camera.global_position = global_position + Vector2(0,-12) + camOffset
 	world.setLightPosition()
+	focusPosition = get_local_mouse_position() # change later for controller support
 	normalAnimation(delta)
+	
+	## hardcoded piece of shit, will change soon.
+	if Input.is_action_just_pressed("selectItem1"):
+		usingItemComponent.setItem(InventoryManager.inventory[0])
+	elif Input.is_action_just_pressed("selectItem2"):
+		usingItemComponent.setItem(InventoryManager.inventory[1])
+	elif Input.is_action_just_pressed("selectItem3"):
+		usingItemComponent.setItem(InventoryManager.inventory[2])
+	elif Input.is_action_just_pressed("selectItem4"):
+		usingItemComponent.setItem(InventoryManager.inventory[3])
+	elif Input.is_action_just_pressed("selectItem5"):
+		usingItemComponent.setItem(InventoryManager.inventory[4])
+	
+	usingItemComponent.usingItem = Input.is_action_pressed("useItem")
+	
+	
+	usingItemComponent.tick(delta)
+
+func _on_using_item_component_item_changed() -> void:
+	$Sprite/Torso/Arms/ArmTop.show() # make arm visible again when we change items
 
 #######################################################
 ################### MOVEMENT TYPES ####################
@@ -72,21 +104,18 @@ func normalAnimation(delta:float)->void: # absolute awful hack job of a script
 	
 	var floorStates :Dictionary[String,Variant] = getOnFloor(delta)
 	
-	animTick += delta
+	animTick += delta # animation tick ( framerate )
 	if animTick > animTickInterval:
 		$AnimationPlayer.advance(animTick)
 		animTick -= animTickInterval
 	
-	var mousePos :Vector2 = get_local_mouse_position()
-	
-	var dirX :int = playerInputComponent.getDirX()
-	
-	$Sprite/Torso/Head/Eye/Pupil.position = (mousePos/200.0) * 3.0
-	
+	var dirX :int = playerInputComponent.getDirX() # flipping character
 	if dirX != 0:
 		$Sprite.scale.x = dirX
 	
-	$Sprite/Torso/Head/Eye/Pupil.position.x *= $Sprite.scale.x
+	var mousePos :Vector2 = focusPosition
+	eyeballAnimation(delta,mousePos)
+	
 	mousePos.x = abs(mousePos.x)
 	mousePos.y *= 0.4
 	var targetAngle :float = mousePos.angle()
@@ -124,8 +153,8 @@ func playAnimation(anim:String) -> void:
 		$AnimationPlayer.play(anim)
 		$AnimationPlayer.advance(animTick)
 
-func setPlayerColor(color:Color):
-	# do self modulate for armor later
+func setPlayerColor(color:Color) -> void:
+	# doing self modulate so armor doesn't get fucked
 	$Sprite/Torso.self_modulate = color
 	$Sprite/Torso/Head.self_modulate = color
 	$Sprite/Legs/LegTop.self_modulate = color
@@ -133,8 +162,22 @@ func setPlayerColor(color:Color):
 	$Sprite/Legs/LegTop2.self_modulate = color
 	$Sprite/Legs/LegTop2/LegBottom.self_modulate = color
 	
+var blinkTick :float = 0.0
+func eyeballAnimation(delta:float,mousePos:Vector2) -> void:
 	
+	var pupilTarget:Vector2 = (mousePos/200.0) * 3.0
+	if pupilTarget.length() > 4.0:
+		pupilTarget = pupilTarget.normalized() * 4.0
+	$Sprite/Torso/Head/Eye/Pupil.position = pupilTarget
+	$Sprite/Torso/Head/Eye/Pupil.position.x *= $Sprite.scale.x
 	
+	blinkTick += delta
+	
+	if blinkTick >= 4.0:
+		$Sprite/Torso/Head/Eye.hide()
+	if blinkTick >= 4.1:
+		$Sprite/Torso/Head/Eye.show()
+		blinkTick = randf_range(-4.0,3.6)
 
 ########################################################
 ################################## STATES ##############

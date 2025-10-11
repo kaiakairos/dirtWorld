@@ -19,12 +19,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	# all debug shit
-	var dir :Vector2 = Vector2.ZERO
-	dir.x =Input.get_axis("ui_left","ui_right")
-	dir.y = Input.get_axis("ui_up","ui_down")
-	camera.position += dir * 120 * delta
-	
 	var trackingPosition = Vector2i(camera.global_position)
 	trackingPosition = trackingPosition/64
 	if positionLastFrame != trackingPosition:
@@ -57,10 +51,9 @@ func setLightPosition() -> void:
 	var pos :Vector2 = worldCoords * 8
 	var rect :Rect2 = get_viewport_rect()
 	var width :int= int(rect.size.x)
-	gameContainer.lightDrawer.position = pos - getTargetPosition() + Vector2(width/2,150)
+	gameContainer.lightDrawer.position = pos - getTargetPosition() + Vector2(width/2.0,150)
 	gameContainer.lightDrawer.position.x = roundi(gameContainer.lightDrawer.position.x)
 	gameContainer.lightDrawer.position.y = roundi(gameContainer.lightDrawer.position.y)
-	print(gameContainer.lightDrawer.position)
 
 func gameTick(_delta:float) -> void:
 	tick += 1

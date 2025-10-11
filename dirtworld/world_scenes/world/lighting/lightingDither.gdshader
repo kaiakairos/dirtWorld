@@ -68,7 +68,7 @@ void fragment() {
 	ivec2 uv = ivec2((textureRes * UV)  / (float(dither_size)/8.0));
 	
 	vec4 screen = texture(screen_texture,SCREEN_UV);
-	vec4 mask = texture(lightingMask,SCREEN_UV);
+	vec4 mask = texture(lightingMask,SCREEN_UV * vec2(1.0,1.0));
 	
 
 	float dithering_value = 1.0;
@@ -81,5 +81,5 @@ void fragment() {
 	COLOR.g = screen.g * reduce_color(raw.g, (dithering_value - 0.5) * dithering_value + 0.5, colors - 1);
 	COLOR.b = screen.b * reduce_color(raw.b, (dithering_value - 0.5) * dithering_value + 0.5, colors - 1);
 	
-	COLOR.a = mask.a;
+	//COLOR.a = mask.a;
 }

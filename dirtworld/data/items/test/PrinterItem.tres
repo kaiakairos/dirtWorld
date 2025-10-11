@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c23q2p78okft1"]
+
+[ext_resource type="Script" uid="uid://c0gvrw1chjm0j" path="res://classes/items/itemComponentClass.gd" id="1_vec3d"]
+[ext_resource type="Script" uid="uid://dofuqynsbtvmf" path="res://classes/items/itemClass.gd" id="2_x30oq"]
+
+[resource]
+script = ExtResource("2_x30oq")
+itemStringID = "printer"
+itemName = "Printing"
+metadata/_custom_type_script = "uid://dofuqynsbtvmf"

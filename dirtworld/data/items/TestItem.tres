@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://ckuwrwniwc5om"]
+
+[ext_resource type="Script" uid="uid://c0gvrw1chjm0j" path="res://classes/items/itemComponentClass.gd" id="1_u1lxd"]
+[ext_resource type="Script" uid="uid://dofuqynsbtvmf" path="res://classes/items/itemClass.gd" id="2_dgc0a"]
+
+[resource]
+script = ExtResource("2_dgc0a")
+itemStringID = "balls"
+itemName = "Test Item"
+metadata/_custom_type_script = "uid://dofuqynsbtvmf"

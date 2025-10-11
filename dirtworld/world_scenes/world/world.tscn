@@ -15,9 +15,15 @@ camera = NodePath("camera")
 
 [node name="EntityContainer" type="Node2D" parent="."]
 
-[node name="Player" parent="EntityContainer" node_paths=PackedStringArray("world") instance=ExtResource("2_ltntx")]
+[node name="Creatures" type="Node2D" parent="EntityContainer"]
+
+[node name="Player" parent="EntityContainer/Creatures" node_paths=PackedStringArray("world") instance=ExtResource("2_ltntx")]
 position = Vector2(301, 182)
-world = NodePath("../..")
+world = NodePath("../../..")
+
+[node name="GroundItems" type="Node2D" parent="EntityContainer"]
+
+[node name="BlockBreak" type="Node2D" parent="EntityContainer"]
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(326, 248)
