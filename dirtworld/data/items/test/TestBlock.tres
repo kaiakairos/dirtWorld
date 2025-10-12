@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://bvl34rp5arukl"]
+
+[ext_resource type="Script" uid="uid://c0gvrw1chjm0j" path="res://classes/items/itemComponentClass.gd" id="1_dygun"]
+[ext_resource type="Script" uid="uid://dofuqynsbtvmf" path="res://classes/items/itemClass.gd" id="2_7i15q"]
+[ext_resource type="Script" uid="uid://cgvdxqd2qhufe" path="res://classes/items/itemComponentClasses/placeBlockComponent.gd" id="2_wve6r"]
+[ext_resource type="Texture2D" uid="uid://c3utmir8465ry" path="res://data/blocks/textures/ugly.pmh.png" id="3_wve6r"]
+
+[sub_resource type="Resource" id="Resource_bk88o"]
+script = ExtResource("2_wve6r")
+blockToPlace = "ugly"
+metadata/_custom_type_script = "uid://cgvdxqd2qhufe"
+
+[resource]
+script = ExtResource("2_7i15q")
+itemStringID = "stone"
+itemName = "Stone"
+itemTexture = ExtResource("3_wve6r")
+components = Array[ExtResource("1_dygun")]([SubResource("Resource_bk88o")])
+metadata/_custom_type_script = "uid://dofuqynsbtvmf"

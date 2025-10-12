@@ -6,6 +6,7 @@ func _ready() -> void:
 	initializeInventory(5)
 	addItemByID("balls")
 	addItemByID("printer")
+	addItemByID("stone")
 
 func initializeInventory(slots:int) -> void:
 	for i in range(slots):

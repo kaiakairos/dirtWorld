@@ -12,6 +12,9 @@ signal itemChanged
 func _ready() -> void:
 	data["world"] = world
 	data["entity"] = entity
+	data["focusPosition"] = Vector2.ZERO
+	data["delta"] = 0.0
+	data["focusedTile"] = Vector2i.ZERO
 
 func setItem(newItem:ItemInstance) -> void:
 	equippedItem = newItem

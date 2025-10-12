@@ -17,6 +17,10 @@ void WORLDCONTAINER::_bind_methods() {
 
     ClassDB::bind_method(D_METHOD("simulateLoadedChunks","gameTick"), &WORLDCONTAINER::simulateLoadedChunks);
 
+    ClassDB::bind_method(D_METHOD("editBlock","changeX","changeY","blockID"), &WORLDCONTAINER::editBlock);
+    ClassDB::bind_method(D_METHOD("applyManualChanges"), &WORLDCONTAINER::applyManualChanges);
+    ClassDB::bind_method(D_METHOD("getBlock","x","y"), &WORLDCONTAINER::getBlock);
+
     ADD_SIGNAL(MethodInfo("queue_delete_chunk", PropertyInfo(Variant::VECTOR2I, "delete_pos"))); // creates a signal for us
 }
 
@@ -194,6 +198,15 @@ void WORLDCONTAINER::simulateLoadedChunks(int gameTick){
     std::unordered_map<int, bool> changedTiles;
     changedTiles = parseAndApplyQueuedChanges();
 
+    updateChunks(changedTiles);
+
+    blockChangeQueue.clear();
+
+}
+
+void WORLDCONTAINER::updateChunks(std::unordered_map<int, bool> changedTiles){
+    
+
     Array chunksToUpdate;
 
     for(auto i : changedTiles){ // parse through changed tiles so we redraw chunks
@@ -213,10 +226,7 @@ void WORLDCONTAINER::simulateLoadedChunks(int gameTick){
         CHUNK *chunkObj = Object::cast_to<CHUNK>( chunksToUpdate[i] );
         chunkObj->drawTiles(this,bitmap);
     }
-
-
-
-    blockChangeQueue.clear();
+    
 }
 
 void WORLDCONTAINER::addBlockChangeToQueue(int changeX, int changeY, std::string blockID){
@@ -231,4 +241,27 @@ std::unordered_map<int, bool> WORLDCONTAINER::parseAndApplyQueuedChanges(){
         changedIndexes[i.first] = true;
     }   
     return changedIndexes;
+}
+
+// GDScript Editing
+
+void WORLDCONTAINER::editBlock(int changeX, int changeY, String blockID){
+    std::string newID = blockID.ascii().get_data();
+    manualBlockQueue[convertCoord(changeX,changeY)] = newID;
+}
+
+String WORLDCONTAINER::getBlock(int x, int y){
+    return getTileData(x,y).c_str();
+}
+
+void WORLDCONTAINER::applyManualChanges(){
+    std::unordered_map<int, bool> changedIndexes;
+    for (auto i : manualBlockQueue){
+        tileData[i.first] = i.second;
+        changedIndexes[i.first] = true;
+    }   
+    updateChunks(changedIndexes);
+
+    manualBlockQueue.clear();
+
 }

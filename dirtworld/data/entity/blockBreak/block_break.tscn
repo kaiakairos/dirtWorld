@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://bu41jqmn7yvsc"]
+
+[ext_resource type="Script" uid="uid://duxbid3qh0c3e" path="res://data/entity/blockBreak/block_break.gd" id="1_2r7ke"]
+[ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/textures/dirt.png" id="2_2r7ke"]
+[ext_resource type="Texture2D" uid="uid://dxoslchfbausi" path="res://data/entity/blockBreak/break.png" id="2_llsq4"]
+
+[sub_resource type="Curve" id="Curve_2r7ke"]
+_data = [Vector2(0, 0), 0.0, 0.86328137, 0, 0, Vector2(1, 0), -1.8799891, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_kuie6"]
+_data = [Vector2(0, 0.25494075), 0.0, 2.232323, 0, 0, Vector2(0.33503836, 0.6210475), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.636365, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_dxhvy"]
+offsets = PackedFloat32Array(0, 0.8821918)
+colors = PackedColorArray(1.365921, 1.365921, 1.365921, 1, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_2r7ke"]
+colors = PackedColorArray(0.8151441, 0.8151441, 0.8151441, 1, 1, 1, 1, 1)
+
+[node name="BlockBreak" type="Node2D"]
+script = ExtResource("1_2r7ke")
+
+[node name="BlockTexture2" type="Sprite2D" parent="."]
+modulate = Color(0.3574912, 0.26006752, 0.39151636, 1)
+texture = ExtResource("2_2r7ke")
+centered = false
+
+[node name="origin" type="Node2D" parent="."]
+position = Vector2(4, 4)
+
+[node name="BlockTexture" type="Sprite2D" parent="origin"]
+position = Vector2(-4, -4)
+texture = ExtResource("2_2r7ke")
+centered = false
+
+[node name="Break" type="Sprite2D" parent="origin"]
+self_modulate = Color(1, 1, 1, 0.55200005)
+texture = ExtResource("2_llsq4")
+hframes = 10
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(4, 4)
+emitting = false
+texture = ExtResource("2_2r7ke")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 2.1
+direction = Vector2(0, -1)
+spread = 70.78
+gravity = Vector2(0, 49.965)
+initial_velocity_min = 11.65
+initial_velocity_max = 30.9
+scale_amount_min = 0.05
+scale_amount_curve = SubResource("Curve_2r7ke")
+
+[node name="BreakParticle" type="CPUParticles2D" parent="."]
+position = Vector2(4, 4)
+emitting = false
+amount = 6
+texture = ExtResource("2_2r7ke")
+lifetime = 0.5
+one_shot = true
+preprocess = 0.1
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 3.5
+direction = Vector2(0, -1)
+spread = 36.7
+gravity = Vector2(0, 61.9)
+initial_velocity_min = 2.75
+initial_velocity_max = 30.8
+angular_velocity_min = -111.84
+angular_velocity_max = 41.94
+damping_max = 3.398
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_kuie6")
+color_ramp = SubResource("Gradient_dxhvy")
+color_initial_ramp = SubResource("Gradient_2r7ke")

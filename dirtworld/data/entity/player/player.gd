@@ -1,4 +1,5 @@
 extends Entity
+class_name Player
 
 @export var playerInputComponent :PlayerInputComponent
 @export var usingItemComponent :UsingItemComponent
@@ -7,13 +8,17 @@ var focusPosition :Vector2 = Vector2.ZERO
 
 var camOffset :Vector2 = Vector2.ZERO
 
+@export_group("Sprite References")
+@export var itemOrigin :Node2D
+@export var itemSprite :Sprite2D
+
 func onReady() -> void:
 	addState("normalMovement")
 	addState("dead")
 	
 	setState(states.normalMovement)
 	
-	setPlayerColor(Color(1.0, 0.886, 0.306))
+	setPlayerColor(Color(1.0, 0.886, 0.306, 1.0))
 
 func onProcess(delta:float) -> void:
 	match state:
@@ -31,6 +36,8 @@ func onProcess(delta:float) -> void:
 	focusPosition = get_local_mouse_position() # change later for controller support
 	normalAnimation(delta)
 	
+	usingItemComponent.data["focusPosition"] = focusPosition
+	usingItemComponent.data["focusedTile"] = Vector2i(to_global(focusPosition)/8.0)
 	## hardcoded piece of shit, will change soon.
 	if Input.is_action_just_pressed("selectItem1"):
 		usingItemComponent.setItem(InventoryManager.inventory[0])
@@ -45,12 +52,15 @@ func onProcess(delta:float) -> void:
 	
 	usingItemComponent.usingItem = Input.is_action_pressed("useItem")
 	
-	
 	usingItemComponent.tick(delta)
 
 func _on_using_item_component_item_changed() -> void:
-	$Sprite/Torso/Arms/ArmTop.show() # make arm visible again when we change items
-
+	toggleHeldItemVisibility(false)
+	setItemAnimAimMode(0)
+	stopItemAnimation()
+	if is_instance_valid(usingItemComponent.equippedItem):
+		itemSprite.texture = ItemManager.getItemTexture(usingItemComponent.equippedItem.itemID)
+		
 #######################################################
 ################### MOVEMENT TYPES ####################
 ########################################################
@@ -134,7 +144,8 @@ func normalAnimation(delta:float)->void: # absolute awful hack job of a script
 		$Sprite/Torso.rotation = lerp_angle($Sprite/Torso.rotation,clamp(targetAngle,0.0,PI/8),0.25)
 		$Sprite/Torso/Head.rotation =  lerp_angle($Sprite/Torso/Head.rotation,clamp(targetAngle,-PI/6,PI/8),0.25)
 	
-	if $rayCasts/floorSlideDetect.is_colliding():
+	var g = $rayCasts/floorSlideDetect2.is_colliding() or $rayCasts/floorSlideDetect3.is_colliding()
+	if g and velocity.y > -1.0:
 		if dirX != 0:
 			$AnimationPlayer.speed_scale = max(0.5,abs(velocity.x) / 120.0)
 			playAnimation("walk")
@@ -142,16 +153,32 @@ func normalAnimation(delta:float)->void: # absolute awful hack job of a script
 			#$AnimationPlayer.speed_scale = 1.0
 			playAnimation("idle")
 	else:
-		$AnimationPlayer.speed_scale = 1.0
-		if velocity.y > 0.0:
+		#$AnimationPlayer.speed_scale = 1.0
+		if velocity.y > 5.0:
 			playAnimation("fall")
 		else:
 			playAnimation("jump")
+	
+	var armTarget :Vector2 = mousePos
+	if armAllowFullRotation:
+		armTarget = focusPosition.normalized() * $Sprite.scale
+	match armAim:
+		armAimMode.BOTH:
+			$Sprite/Torso/Arms/MainArmPivot.rotation = armTarget.angle()
+			$Sprite/Torso/Arms/BackArmPivot.rotation = armTarget.angle()
+		armAimMode.MAIN:
+			$Sprite/Torso/Arms/MainArmPivot.rotation = armTarget.angle()
+			$Sprite/Torso/Arms/BackArmPivot.rotation = lerp_angle($Sprite/Torso/Arms/BackArmPivot.rotation,0.0,0.15)
+		armAimMode.BACK:
+			$Sprite/Torso/Arms/MainArmPivot.rotation = lerp_angle($Sprite/Torso/Arms/MainArmPivot.rotation,0.0,0.15)
+			$Sprite/Torso/Arms/BackArmPivot.rotation = armTarget.angle()
+		armAimMode.NONE:
+			$Sprite/Torso/Arms/MainArmPivot.rotation = lerp_angle($Sprite/Torso/Arms/MainArmPivot.rotation,0.0,0.15)
+			$Sprite/Torso/Arms/BackArmPivot.rotation = lerp_angle($Sprite/Torso/Arms/BackArmPivot.rotation,0.0,0.15)
 
 func playAnimation(anim:String) -> void:
 	if $AnimationPlayer.current_animation != anim:
 		$AnimationPlayer.play(anim)
-		$AnimationPlayer.advance(animTick)
 
 func setPlayerColor(color:Color) -> void:
 	# doing self modulate so armor doesn't get fucked
@@ -161,6 +188,10 @@ func setPlayerColor(color:Color) -> void:
 	$Sprite/Legs/LegTop/LegBottom.self_modulate = color
 	$Sprite/Legs/LegTop2.self_modulate = color
 	$Sprite/Legs/LegTop2/LegBottom.self_modulate = color
+	$Sprite/Torso/Arms/MainArmPivot/ArmTop.self_modulate = color
+	$Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand.self_modulate = color
+	$Sprite/Torso/Arms/BackArmPivot/ArmTop2.self_modulate = color
+	$Sprite/Torso/Arms/BackArmPivot/ArmTop2/Hand2.self_modulate = color
 	
 var blinkTick :float = 0.0
 func eyeballAnimation(delta:float,mousePos:Vector2) -> void:
@@ -168,6 +199,8 @@ func eyeballAnimation(delta:float,mousePos:Vector2) -> void:
 	var pupilTarget:Vector2 = (mousePos/200.0) * 3.0
 	if pupilTarget.length() > 4.0:
 		pupilTarget = pupilTarget.normalized() * 4.0
+	elif pupilTarget.length() < 2.0:
+		pupilTarget = pupilTarget.normalized() * 2.0
 	$Sprite/Torso/Head/Eye/Pupil.position = pupilTarget
 	$Sprite/Torso/Head/Eye/Pupil.position.x *= $Sprite.scale.x
 	
@@ -178,6 +211,38 @@ func eyeballAnimation(delta:float,mousePos:Vector2) -> void:
 	if blinkTick >= 4.1:
 		$Sprite/Torso/Head/Eye.show()
 		blinkTick = randf_range(-4.0,3.6)
+
+func toggleHeldItemVisibility(vis:bool,forceInstant:bool=false) -> void:
+	if vis and !forceInstant:
+		await get_tree().create_timer(0.05).timeout
+	itemOrigin.visible = vis
+
+func playItemAnim(anim:String,force:bool=false) -> void:
+	if $ItemAnimation.current_animation != anim or force:
+		if force:
+			animTick = 0.0
+			stopItemAnimation()
+		$ItemAnimation.play(anim)
+
+func setItemAnimSpeed(animSpeed:float) -> void:
+	$ItemAnimation.speed_scale = animSpeed
+
+func stopItemAnimation() -> void:
+	$ItemAnimation.stop(false)
+	print("stopped")
+
+enum armAimMode {NONE, MAIN, BACK, BOTH}
+var armAim:int = armAimMode.NONE
+var armAllowFullRotation :bool = true
+func setItemAnimAimMode(aiming:int,allowFullRotation:bool=true) -> void:
+	armAim = aiming
+	armAllowFullRotation = allowFullRotation
+
+func setItemSpriteData(itemID:String,pos:Vector2=Vector2.ZERO,size:Vector2=Vector2(1,1),rot:float=0.0) -> void:
+	itemSprite.texture = ItemManager.getItemTexture(itemID)
+	itemSprite.position = pos
+	itemSprite.scale = size
+	itemSprite.rotation = rot
 
 ########################################################
 ################################## STATES ##############

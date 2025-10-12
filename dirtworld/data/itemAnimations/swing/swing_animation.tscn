@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://cytx8rwtaym4c"]
+
+[ext_resource type="Script" uid="uid://dcr2he077jd13" path="res://data/itemAnimations/swing/swing_animation.gd" id="1_gps00"]
+[ext_resource type="Texture2D" uid="uid://bwy35rt0xt53" path="res://data/entity/player/spriteParts/legTop.png" id="2_2krrv"]
+[ext_resource type="Texture2D" uid="uid://bmg2ofov7vyg8" path="res://data/entity/player/spriteParts/hand1.png" id="3_maklv"]
+[ext_resource type="Texture2D" uid="uid://bkh6788shja16" path="res://data/items/test/testPickaxe.png" id="4_gj8ji"]
+
+[sub_resource type="Animation" id="Animation_p6fw5"]
+resource_name = "swing"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arm/Hand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.7893356, 0.0033248663]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.47081, -0.37054658]
+}
+
+[sub_resource type="Animation" id="Animation_f3w42"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arm/Hand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.7893356]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.2185662]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8mteh"]
+_data = {
+&"RESET": SubResource("Animation_f3w42"),
+&"swing": SubResource("Animation_p6fw5")
+}
+
+[node name="SwingAnimation" type="Node2D"]
+script = ExtResource("1_gps00")
+metadata/_custom_type_script = "uid://cgfyr5iimbdc4"
+
+[node name="Arm" type="Sprite2D" parent="."]
+rotation = -2.2185662
+texture = ExtResource("2_2krrv")
+offset = Vector2(0, 3)
+
+[node name="Hand" type="Sprite2D" parent="Arm"]
+position = Vector2(0, 6)
+rotation = -0.7893356
+texture = ExtResource("3_maklv")
+offset = Vector2(0, 2)
+
+[node name="TestPickaxe" type="Sprite2D" parent="Arm/Hand"]
+show_behind_parent = true
+position = Vector2(-4, 4)
+rotation = 0.7853982
+texture = ExtResource("4_gj8ji")
+offset = Vector2(8, -8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8mteh")
+}

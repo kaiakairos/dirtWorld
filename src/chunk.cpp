@@ -170,6 +170,10 @@ void CHUNK::simulateLight(WORLDCONTAINER *worldContainer){
             float g = 0.0;
             float b = 0.0;
 
+            if (blockString == "air" && worldY > 40){ // don't illuminate air under a certain y value
+                lightEmission = std::make_tuple(r,g,b);
+            }
+
             for(int i = 0; i < 4; i++){
 
                 Vector2i pos = Vector2i( Vector2( 1,0 ).rotated(i * acos(0.0) ));

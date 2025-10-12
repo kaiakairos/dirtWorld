@@ -4,6 +4,7 @@
 #include <godot_cpp/classes/node.hpp>
 #include <algorithm>
 #include <memory>
+#include <godot_cpp/variant/string.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/dictionary.hpp>
 #include <godot_cpp/variant/array.hpp>
@@ -67,8 +68,16 @@ public:
     std::unordered_map<int, bool> parseAndApplyQueuedChanges();
 
     void simulateLoadedChunks(int gameTick);
-    
 
+    void updateChunks(std::unordered_map<int, bool> changedTiles);
+    
+    // GDScript Access
+    
+    std::unordered_map<int, std::string> manualBlockQueue;
+    void editBlock(int changeX, int changeY, String blockID);
+    String getBlock(int x, int y);
+
+    void applyManualChanges();
 
 };
 

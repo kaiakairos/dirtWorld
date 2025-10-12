@@ -12,6 +12,8 @@ var renderDistance :Vector2i = Vector2i(8,5)
 
 @onready var gameContainer :GameContainer = get_parent().get_parent().get_parent()
 
+@export var blockBreakContainer :Node2D
+
 func _ready() -> void:
 	worldContainer.setBlockContainer(BlockManager.blockContainer)
 	worldContainer.initializeArray(32,32)
@@ -61,3 +63,21 @@ func gameTick(_delta:float) -> void:
 
 func getTargetPosition() -> Vector2:
 	return camera.position
+
+@onready var blockBreakScene = preload("res://data/entity/blockBreak/block_break.tscn")
+func getBlockBreak(tile:Vector2i) -> BlockBreaker:
+	for child in blockBreakContainer.get_children():
+		if child.tile == tile:
+			return child
+	
+	var block :String= worldContainer.getBlock(tile.x,tile.y)
+	if BlockManager.isBlockIndestructible(block):
+		return null
+	
+	var ins :BlockBreaker= blockBreakScene.instantiate()
+	ins.position = tile * 8
+	ins.tile = tile
+	ins.blockHealth = BlockManager.getBlockHealth(block)
+	ins.worldContainer = worldContainer
+	blockBreakContainer.add_child(ins)
+	return ins

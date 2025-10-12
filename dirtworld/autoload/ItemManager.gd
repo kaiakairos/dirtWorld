@@ -26,3 +26,6 @@ func generateNewItemInstance(itemID:String) -> ItemInstance:
 	instance.itemID = itemID
 	instance.initialize()
 	return instance
+
+func getItemTexture(itemID:String) -> Texture2D:
+	return allItems[itemID].itemTexture

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dvs68a7cxeyit"]
+[gd_scene load_steps=27 format=3 uid="uid://dvs68a7cxeyit"]
 
 [ext_resource type="Script" uid="uid://i37khewc7vr7" path="res://data/entity/player/player.gd" id="1_evlgl"]
 [ext_resource type="Script" uid="uid://bh03wmpqo85hn" path="res://classes/entity/components/PlayerInput.gd" id="2_64mvu"]
@@ -12,10 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://c26ny1ldo3dsl" path="res://data/entity/player/spriteParts/legTopBack.png" id="7_1g3cu"]
 [ext_resource type="Texture2D" uid="uid://bud3opk5s32bb" path="res://data/entity/player/spriteParts/legBack.png" id="8_0sj50"]
 [ext_resource type="Texture2D" uid="uid://bmg2ofov7vyg8" path="res://data/entity/player/spriteParts/hand1.png" id="8_xghcs"]
+[ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/textures/dirt.png" id="10_hj8aa"]
 [ext_resource type="Texture2D" uid="uid://bjg0omy15c8l1" path="res://data/entity/player/spriteParts/hand2.png" id="10_xghcs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64mvu"]
-size = Vector2(6, 14)
+size = Vector2(6, 12)
 
 [sub_resource type="Animation" id="Animation_gxy1g"]
 length = 0.001
@@ -82,7 +83,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Torso/Arms/ArmTop2/Hand2:rotation")
+tracks/5/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2/Hand2:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -94,7 +95,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Torso/Arms/ArmTop2:rotation")
+tracks/6/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -106,7 +107,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Torso/Arms/ArmTop:rotation")
+tracks/7/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -118,7 +119,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Torso/Arms/ArmTop/Hand:rotation")
+tracks/8/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -126,6 +127,18 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-0.20255017]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sprite/Torso:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_umag0"]
@@ -182,7 +195,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/Torso/Arms/ArmTop2/Hand2:rotation")
+tracks/4/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2/Hand2:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -194,7 +207,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Torso/Arms/ArmTop2:rotation")
+tracks/5/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -206,7 +219,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Torso/Arms/ArmTop/Hand:rotation")
+tracks/6/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -218,7 +231,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Torso/Arms/ArmTop:rotation")
+tracks/7/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -294,7 +307,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Torso/Arms/ArmTop2/Hand2:rotation")
+tracks/5/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2/Hand2:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -306,7 +319,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Torso/Arms/ArmTop2:rotation")
+tracks/6/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -318,26 +331,26 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Torso/Arms/ArmTop:rotation")
+tracks/7/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.2615258]
+"values": [0.5279751]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Torso/Arms/ArmTop/Hand:rotation")
+tracks/8/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.20255017]
+"values": [-0.071713194]
 }
 
 [sub_resource type="Animation" id="Animation_j2clm"]
@@ -394,7 +407,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/Torso/Arms/ArmTop2:rotation")
+tracks/4/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -406,7 +419,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Torso/Arms/ArmTop:rotation")
+tracks/5/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -418,7 +431,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Torso/Arms/ArmTop/Hand:rotation")
+tracks/6/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -430,7 +443,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Torso/Arms/ArmTop2/Hand2:rotation")
+tracks/7/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2/Hand2:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -508,7 +521,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Torso/Arms/ArmTop:rotation")
+tracks/5/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -520,7 +533,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Torso/Arms/ArmTop/Hand:rotation")
+tracks/6/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
 tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -532,7 +545,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Torso/Arms/ArmTop2:rotation")
+tracks/7/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2:rotation")
 tracks/7/interp = 2
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -544,7 +557,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Torso/Arms/ArmTop2/Hand2:rotation")
+tracks/8/path = NodePath("Sprite/Torso/Arms/BackArmPivot/ArmTop2/Hand2:rotation")
 tracks/8/interp = 2
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -563,11 +576,132 @@ _data = {
 &"walk": SubResource("Animation_ofwpv")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("playerInputComponent", "usingItemComponent")]
+[sub_resource type="Animation" id="Animation_vd1tf"]
+resource_name = "swingPickaxe"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-2.409917, -0.38817894, -2.409917]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.6299108, 0.086604595, -0.6299108]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/Torso:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.100970805, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.24897332, 0.20908336, -0.24897332]
+}
+
+[sub_resource type="Animation" id="Animation_oq2bp"]
+resource_name = "place"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.72465456, -1.7156586547104262, 0.72465456]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.07581889, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-2.33932, -0.30368728984701293, -2.33932]
+}
+
+[sub_resource type="Animation" id="Animation_hj8aa"]
+resource_name = "placeHold"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.72465456]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.33932]
+}
+
+[sub_resource type="Animation" id="Animation_odf1b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.409917]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_odf1b"]
+_data = {
+&"RESET": SubResource("Animation_odf1b"),
+&"place": SubResource("Animation_oq2bp"),
+&"placeHold": SubResource("Animation_hj8aa"),
+&"swingPickaxe": SubResource("Animation_vd1tf")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("playerInputComponent", "usingItemComponent", "itemOrigin", "itemSprite")]
 collision_layer = 2
 script = ExtResource("1_evlgl")
 playerInputComponent = NodePath("Components/PlayerInputComponent")
 usingItemComponent = NodePath("Components/UsingItemComponent")
+itemOrigin = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand/ItemOrigin")
+itemSprite = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand/ItemOrigin/ItemSprite")
 defaultSpeed = 96
 defaultAcceleration = 600
 defaultDeceleration = 420
@@ -575,7 +709,7 @@ metadata/_custom_type_script = "uid://forevjacaa08"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = -2
-position = Vector2(0, -7)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_64mvu")
 
 [node name="Components" type="Node" parent="."]
@@ -596,12 +730,20 @@ metadata/_custom_type_script = "uid://08hoaa4agbj3"
 position = Vector2(0, -1)
 target_position = Vector2(0, 9.5)
 
+[node name="floorSlideDetect2" type="RayCast2D" parent="rayCasts"]
+position = Vector2(-3, -1)
+target_position = Vector2(0, 9.5)
+
+[node name="floorSlideDetect3" type="RayCast2D" parent="rayCasts"]
+position = Vector2(3, -1)
+target_position = Vector2(0, 9.5)
+
 [node name="Sprite" type="Node2D" parent="."]
 
 [node name="Torso" type="Sprite2D" parent="Sprite"]
 self_modulate = Color(1, 0.8862745, 0.30588236, 1)
 position = Vector2(0, -4)
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_u486h")
 offset = Vector2(0, -6)
 
@@ -618,35 +760,49 @@ texture = ExtResource("5_1g3cu")
 
 [node name="Pupil" type="Sprite2D" parent="Sprite/Torso/Head/Eye"]
 position = Vector2(2, 0)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("6_0sj50")
 
 [node name="Arms" type="Node2D" parent="Sprite/Torso"]
 position = Vector2(0, -5)
 scale = Vector2(0.8333333, 0.8333333)
 
-[node name="ArmTop" type="Sprite2D" parent="Sprite/Torso/Arms"]
-self_modulate = Color(1, 0.8862745, 0.30588236, 1)
+[node name="MainArmPivot" type="Node2D" parent="Sprite/Torso/Arms"]
 position = Vector2(-4, -4)
-rotation = 0.2615258
+
+[node name="ArmTop" type="Sprite2D" parent="Sprite/Torso/Arms/MainArmPivot"]
+self_modulate = Color(1, 0.8862745, 0.30588236, 1)
+rotation = -2.409917
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("5_umag0")
 offset = Vector2(-9.536743e-07, 3.3333335)
 
-[node name="Hand" type="Sprite2D" parent="Sprite/Torso/Arms/ArmTop"]
+[node name="Hand" type="Sprite2D" parent="Sprite/Torso/Arms/MainArmPivot/ArmTop"]
 self_modulate = Color(1, 0.8862745, 0.30588236, 1)
 position = Vector2(0, 6)
 rotation = -0.20255017
 texture = ExtResource("8_xghcs")
 offset = Vector2(0, 2)
 
-[node name="ArmTop2" type="Sprite2D" parent="Sprite/Torso/Arms"]
+[node name="ItemOrigin" type="Node2D" parent="Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand"]
+visible = false
+show_behind_parent = true
+position = Vector2(0, 4)
+
+[node name="ItemSprite" type="Sprite2D" parent="Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand/ItemOrigin"]
+texture = ExtResource("10_hj8aa")
+
+[node name="BackArmPivot" type="Node2D" parent="Sprite/Torso/Arms"]
+position = Vector2(4, -4)
+
+[node name="ArmTop2" type="Sprite2D" parent="Sprite/Torso/Arms/BackArmPivot"]
 self_modulate = Color(1, 0.8862745, 0.30588236, 1)
 z_index = -1
-position = Vector2(4, -4)
 rotation = -0.26551735
 texture = ExtResource("7_1g3cu")
 offset = Vector2(-9.536743e-07, 3.3333335)
 
-[node name="Hand2" type="Sprite2D" parent="Sprite/Torso/Arms/ArmTop2"]
+[node name="Hand2" type="Sprite2D" parent="Sprite/Torso/Arms/BackArmPivot/ArmTop2"]
 self_modulate = Color(1, 0.8862745, 0.30588236, 1)
 position = Vector2(0, 6)
 rotation = -0.063639045
@@ -654,6 +810,7 @@ texture = ExtResource("10_xghcs")
 offset = Vector2(0, 2)
 
 [node name="Legs" type="Node2D" parent="Sprite"]
+z_index = -1
 position = Vector2(0, -4)
 scale = Vector2(0.5, 0.5)
 
@@ -687,12 +844,18 @@ callback_mode_process = 2
 libraries = {
 &"": SubResource("AnimationLibrary_ec8ce")
 }
-playback_auto_capture = false
 speed_scale = 0.5
 blend_times = [&"fall", &"idle", 0.1, &"fall", &"jump", 0.25, &"fall", &"walk", 0.1, &"idle", &"fall", 0.25, &"idle", &"walk", 0.2, &"jump", &"fall", 0.25, &"walk", &"fall", 0.25, &"walk", &"idle", 0.5]
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer"]
 root_node = NodePath("../..")
 anim_player = NodePath("..")
+
+[node name="ItemAnimation" type="AnimationPlayer" parent="."]
+process_priority = 2
+libraries = {
+&"": SubResource("AnimationLibrary_odf1b")
+}
+next/place = &"placeHold"
 
 [connection signal="itemChanged" from="Components/UsingItemComponent" to="." method="_on_using_item_component_item_changed"]

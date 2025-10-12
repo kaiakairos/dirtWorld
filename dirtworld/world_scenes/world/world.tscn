@@ -5,15 +5,18 @@
 
 [sub_resource type="Environment" id="Environment_ltntx"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("worldContainer", "camera")]
-position = Vector2(0, 1)
+[node name="World" type="Node2D" node_paths=PackedStringArray("worldContainer", "camera", "blockBreakContainer")]
 script = ExtResource("1_rskwr")
 worldContainer = NodePath("WORLDCONTAINER")
 camera = NodePath("camera")
+blockBreakContainer = NodePath("EntityContainer/BlockBreak")
 
 [node name="WORLDCONTAINER" type="WORLDCONTAINER" parent="."]
 
 [node name="EntityContainer" type="Node2D" parent="."]
+z_index = 1
+
+[node name="BlockBreak" type="Node2D" parent="EntityContainer"]
 
 [node name="Creatures" type="Node2D" parent="EntityContainer"]
 
@@ -22,8 +25,6 @@ position = Vector2(301, 182)
 world = NodePath("../../..")
 
 [node name="GroundItems" type="Node2D" parent="EntityContainer"]
-
-[node name="BlockBreak" type="Node2D" parent="EntityContainer"]
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(326, 248)
