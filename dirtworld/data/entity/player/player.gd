@@ -219,16 +219,16 @@ func toggleHeldItemVisibility(vis:bool,forceInstant:bool=false) -> void:
 
 func playItemAnim(anim:String,force:bool=false) -> void:
 	if $ItemAnimation.current_animation != anim or force:
-		if force:
-			animTick = 0.0
-			stopItemAnimation()
+		animTick = 0.0
+		stopItemAnimation()
+			
 		$ItemAnimation.play(anim)
 
 func setItemAnimSpeed(animSpeed:float) -> void:
 	$ItemAnimation.speed_scale = animSpeed
 
 func stopItemAnimation() -> void:
-	$ItemAnimation.stop(false)
+	$ItemAnimation.stop(true)
 	print("stopped")
 
 enum armAimMode {NONE, MAIN, BACK, BOTH}

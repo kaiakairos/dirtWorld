@@ -845,7 +845,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_ec8ce")
 }
 speed_scale = 0.5
-blend_times = [&"fall", &"idle", 0.1, &"fall", &"jump", 0.25, &"fall", &"walk", 0.1, &"idle", &"fall", 0.25, &"idle", &"walk", 0.2, &"jump", &"fall", 0.25, &"walk", &"fall", 0.25, &"walk", &"idle", 0.5]
+blend_times = [&"fall", &"idle", 0.1, &"fall", &"jump", 0.25, &"fall", &"walk", 0.1, &"idle", &"fall", 0.25, &"idle", &"walk", 0.1, &"jump", &"fall", 0.25, &"walk", &"fall", 0.25, &"walk", &"idle", 0.5]
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer"]
 root_node = NodePath("../..")
