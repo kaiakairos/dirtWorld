@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c26ny1ldo3dsl" path="res://data/entity/player/spriteParts/legTopBack.png" id="7_1g3cu"]
 [ext_resource type="Texture2D" uid="uid://bud3opk5s32bb" path="res://data/entity/player/spriteParts/legBack.png" id="8_0sj50"]
 [ext_resource type="Texture2D" uid="uid://bmg2ofov7vyg8" path="res://data/entity/player/spriteParts/hand1.png" id="8_xghcs"]
-[ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/textures/dirt.png" id="10_hj8aa"]
+[ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/blockResources/natural/dirt.png" id="10_hj8aa"]
 [ext_resource type="Texture2D" uid="uid://bjg0omy15c8l1" path="res://data/entity/player/spriteParts/hand2.png" id="10_xghcs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64mvu"]
@@ -576,8 +576,8 @@ _data = {
 &"walk": SubResource("Animation_ofwpv")
 }
 
-[sub_resource type="Animation" id="Animation_vd1tf"]
-resource_name = "swingPickaxe"
+[sub_resource type="Animation" id="Animation_odf1b"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -585,34 +585,10 @@ tracks/0/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-2.409917, -0.38817894, -2.409917]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.19999999, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [-0.6299108, 0.086604595, -0.6299108]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Torso:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.100970805, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [-0.24897332, 0.20908336, -0.24897332]
+"values": [-2.409917]
 }
 
 [sub_resource type="Animation" id="Animation_oq2bp"]
@@ -672,8 +648,8 @@ tracks/1/keys = {
 "values": [-2.33932]
 }
 
-[sub_resource type="Animation" id="Animation_odf1b"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_vd1tf"]
+resource_name = "swingPickaxe"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -681,10 +657,34 @@ tracks/0/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.099999994, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [-2.409917]
+"values": [-2.409917, -0.38817894, -2.409917]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Torso/Arms/MainArmPivot/ArmTop/Hand:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.6299108, 0.086604595, -0.6299108]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/Torso:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.100970805, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.24897332, 0.20908336, -0.24897332]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_odf1b"]

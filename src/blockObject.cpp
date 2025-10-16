@@ -62,6 +62,14 @@ void BLOCKOBJECT::simulateTickComponents(int x, int y, std::string blockID, BLOC
     }
 }
 
+void BLOCKOBJECT::simulateBreakComponents(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    for(int i = 0; i < componentCount; i ++){
+        Ref<BLOCKCOMPONENT> g = components[i];
+        //godot::UtilityFunctions::print(g);
+        g->onBreak(x,y,blockID,container,worldContainer);
+    }
+}
+
 ///////// LIGHT STUFF //////////////
 void BLOCKOBJECT::setIsTransparent(bool yeah){
     isTransparent = yeah;

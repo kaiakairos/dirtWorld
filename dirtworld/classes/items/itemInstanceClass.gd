@@ -6,6 +6,9 @@ class_name ItemInstance
 @export var itemID :String = ""
 var item :Item
 
+@export var amount :int = 1
+@export var unstackable :bool = false
+
 @export var components :Array[ItemComponent]
 
 func initialize() -> void:
@@ -13,6 +16,9 @@ func initialize() -> void:
 	
 	if item == null: # install cs source
 		return
+	
+	if item.maxStackSize == 1:
+		unstackable = true
 	
 	appendComponents()
 

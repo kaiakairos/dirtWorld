@@ -21,7 +21,10 @@ void WORLDCONTAINER::_bind_methods() {
     ClassDB::bind_method(D_METHOD("applyManualChanges"), &WORLDCONTAINER::applyManualChanges);
     ClassDB::bind_method(D_METHOD("getBlock","x","y"), &WORLDCONTAINER::getBlock);
 
+    ClassDB::bind_method(D_METHOD("breakBlock","tileX","tileX"), &WORLDCONTAINER::breakBlock);
+
     ADD_SIGNAL(MethodInfo("queue_delete_chunk", PropertyInfo(Variant::VECTOR2I, "delete_pos"))); // creates a signal for us
+    ADD_SIGNAL(MethodInfo("dropGroundItem", PropertyInfo(Variant::STRING, "itemID"),PropertyInfo(Variant::INT, "amount"),PropertyInfo(Variant::INT, "tileX"),PropertyInfo(Variant::INT, "tileY")));
 }
 
 WORLDCONTAINER::WORLDCONTAINER() {
@@ -242,6 +245,20 @@ std::unordered_map<int, bool> WORLDCONTAINER::parseAndApplyQueuedChanges(){
     }   
     return changedIndexes;
 }
+
+// SIM ONE TIMERS
+
+void WORLDCONTAINER::breakBlock(int tileX, int tileY){
+    std::string blockID = getTileData(tileX,tileY);
+    Ref<BLOCKOBJECT> blockObj = blockContainer->getObjectFromString(blockID);
+    blockObj->simulateBreakComponents(tileX,tileY,blockID,blockContainer,this);
+}
+
+
+void WORLDCONTAINER::spawnItem(String itemID, int amount, int x, int y){
+    emit_signal("dropGroundItem", itemID, amount, x, y);
+}
+
 
 // GDScript Editing
 

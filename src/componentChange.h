@@ -34,10 +34,8 @@ public:
     int chance;
 
     void setChance(int newChance);
-    int getChance();
 
     void setBlockToChangeInto(String newBlock);
-    String getBlockToChangeInto();
 
 };
 

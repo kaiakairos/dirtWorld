@@ -27,7 +27,8 @@ world = NodePath("../../..")
 [node name="GroundItems" type="Node2D" parent="EntityContainer"]
 
 [node name="camera" type="Camera2D" parent="."]
-position = Vector2(326, 248)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ltntx")
+
+[connection signal="dropGroundItem" from="WORLDCONTAINER" to="." method="_on_worldcontainer_drop_ground_item"]

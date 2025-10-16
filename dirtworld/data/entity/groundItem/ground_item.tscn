@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0p276npdh45v"]
+
+[ext_resource type="Script" uid="uid://gpypf7x4w27s" path="res://data/entity/groundItem/ground_item.gd" id="1_d3bc4"]
+[ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/blockResources/natural/dirt.png" id="2_2jtsa"]
+[ext_resource type="Script" uid="uid://c0gvrw1chjm0j" path="res://classes/items/itemComponentClass.gd" id="2_f6j4n"]
+[ext_resource type="Script" uid="uid://dwotgnllfqigb" path="res://classes/items/itemInstanceClass.gd" id="3_8h2m4"]
+
+[sub_resource type="Resource" id="Resource_82bki"]
+script = ExtResource("3_8h2m4")
+itemID = "stone"
+amount = 4962
+metadata/_custom_type_script = "uid://dwotgnllfqigb"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipraa"]
+size = Vector2(6, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2jtsa"]
+radius = 11.045361
+
+[node name="GroundItem" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_d3bc4")
+itemInstance = SubResource("Resource_82bki")
+defaultGravity = 215
+metadata/_custom_type_script = "uid://forevjacaa08"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ipraa")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_2jtsa")
+
+[node name="Scanner" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scanner"]
+shape = SubResource("CircleShape2D_2jtsa")
+
+[connection signal="body_entered" from="Scanner" to="." method="_on_scanner_body_entered"]

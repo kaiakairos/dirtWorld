@@ -70,7 +70,13 @@ public:
     void simulateLoadedChunks(int gameTick);
 
     void updateChunks(std::unordered_map<int, bool> changedTiles);
-    
+
+    // simulation one timers
+
+    void breakBlock(int tileX, int tileY);
+
+    void spawnItem(String itemID, int amount, int x, int y);
+
     // GDScript Access
     
     std::unordered_map<int, std::string> manualBlockQueue;

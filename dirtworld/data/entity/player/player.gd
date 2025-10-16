@@ -39,16 +39,15 @@ func onProcess(delta:float) -> void:
 	usingItemComponent.data["focusPosition"] = focusPosition
 	usingItemComponent.data["focusedTile"] = Vector2i(to_global(focusPosition)/8.0)
 	## hardcoded piece of shit, will change soon.
-	if Input.is_action_just_pressed("selectItem1"):
-		usingItemComponent.setItem(InventoryManager.inventory[0])
-	elif Input.is_action_just_pressed("selectItem2"):
-		usingItemComponent.setItem(InventoryManager.inventory[1])
-	elif Input.is_action_just_pressed("selectItem3"):
-		usingItemComponent.setItem(InventoryManager.inventory[2])
-	elif Input.is_action_just_pressed("selectItem4"):
-		usingItemComponent.setItem(InventoryManager.inventory[3])
-	elif Input.is_action_just_pressed("selectItem5"):
-		usingItemComponent.setItem(InventoryManager.inventory[4])
+	for i in range(10):
+		if Input.is_action_just_pressed("selectItem" + str(i + 1)):
+			InventoryManager.updateSelectedSlot(i)
+	
+	if Input.is_action_just_pressed("hotbarNext"):
+		InventoryManager.updateSelectedSlot( (InventoryManager.selectedSlot + 1) % 10 )
+		
+	if Input.is_action_just_pressed("hotbarBack"):
+		InventoryManager.updateSelectedSlot( (InventoryManager.selectedSlot + 9) % 10 )
 	
 	usingItemComponent.usingItem = Input.is_action_pressed("useItem")
 	

@@ -9,7 +9,8 @@ class_name Block
 @export var health :int = 3
 @export var indestructible :bool = false
 
-@export var components :Array[BLOCKCOMPONENT]
+var components :Array[BLOCKCOMPONENT]
+@export var setComponents :Array[BlockComponentSetter]
 
 @export var lightEmission : Color = Color.BLACK # CHANGE LIGHT TO COMPONENT SYSTEM
 @export var isTransparent : bool = false

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Block" load_steps=6 format=3 uid="uid://bpf4x1d5vimpr"]
+
+[ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_g0tfj"]
+[ext_resource type="Script" uid="uid://dn4l5fl4sq57s" path="res://classes/blocks/blockComponentSetter.gd" id="2_gft15"]
+[ext_resource type="Texture2D" uid="uid://dyjks4ja85dyu" path="res://data/blocks/blockResources/natural/stone.png" id="3_v2d66"]
+
+[sub_resource type="COMPONENTDROPITEM" id="COMPONENTDROPITEM_ovnn0"]
+
+[sub_resource type="Resource" id="Resource_028yh"]
+script = ExtResource("2_gft15")
+componentType = SubResource("COMPONENTDROPITEM_ovnn0")
+setValues = Dictionary[StringName, Variant]({
+&"setAmountMax": 2,
+&"setAmountMin": 1,
+&"setItemID": "stone"
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
+[resource]
+script = ExtResource("1_g0tfj")
+blockID = "stone"
+texture = ExtResource("3_v2d66")
+setComponents = Array[ExtResource("2_gft15")]([SubResource("Resource_028yh")])
+metadata/_custom_type_script = "uid://bd7107brdous1"

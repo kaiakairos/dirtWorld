@@ -33,7 +33,7 @@ func whileUsing(data:Dictionary[String,Variant]) -> bool: # While we are pressin
 		if checkIfPlace(data):
 			var player :Player= data.entity
 			player.playItemAnim("place",true)
-			# consume item goes here
+			InventoryManager.consumeSelectedItem()
 			return false
 	return true 
 

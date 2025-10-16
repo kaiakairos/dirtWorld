@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b6fnnsvtrc2af"]
+
+[ext_resource type="Shader" uid="uid://dj0x2m3l17e1r" path="res://zeeg/material/outline/spriteOutline.gdshader" id="1_431km"]
+
+[resource]
+shader = ExtResource("1_431km")
+shader_parameter/color = Color(0, 0, 0, 0.312)
+shader_parameter/width = 1.250000059375
+shader_parameter/pattern = 2
+shader_parameter/inside = true
+shader_parameter/add_margins = false
+shader_parameter/number_of_images = Vector2(1, 1)

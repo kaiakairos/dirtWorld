@@ -55,6 +55,9 @@ func doDamage(amount:int=1):
 	$CPUParticles2D.emitting = true
 	
 	if damage >= blockHealth:
+		
+		worldContainer.breakBlock(tile.x,tile.y)
+		
 		worldContainer.editBlock(tile.x,tile.y,"air")
 		worldContainer.applyManualChanges()
 		#$origin.hide()

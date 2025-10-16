@@ -39,6 +39,7 @@ public:
 
     // component sim
     void simulateTickComponents(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);
+    void simulateBreakComponents(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);
 
     // light stuff
     bool isTransparent;

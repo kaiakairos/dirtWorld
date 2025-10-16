@@ -5,20 +5,32 @@ extends Node
 var allBlocks :Dictionary[String,Block] = {}
 
 func _ready() -> void:
+	loadBlocksFromDirectory("res://data/blocks/blockResources/")
+	print(allBlocks)
+func loadBlocksFromDirectory(dir:String) -> void:
 	# get all blocks in folder
-	var directory = ResourceLoader.list_directory("res://data/blocks/resources")
+	print(dir)
+	var directory = ResourceLoader.list_directory(dir)
 	for filename in directory:
 		if !filename.ends_with(".tres"):
+			if filename.ends_with("/"): # is another directory
+				loadBlocksFromDirectory(dir + filename) # recursively parse other directory
+				continue
 			continue # skip non-resources
 		
-		var resource :Block = load("res://data/blocks/resources/" + filename)
+		print(filename)
+		var resource :Block = load(dir + filename)
 		var blockID :String = resource.blockID
 		blockContainer.addObjectToDictionary(blockID)
 		var blockObject = BlockManager.blockContainer.getObjectFromDictionary(blockID)
 		
 		var textureImage = resource.texture.get_image()
 		textureImage.convert(Image.FORMAT_RGBA8)
-		blockObject.setTextureImage( textureImage )
+		blockObject.setTextureImage( textureImage ) 
+		
+		# initialize component data
+		for i in resource.setComponents:
+			i.createComponent(resource.components)
 		
 		# add components
 		blockObject.initializeComponentArray( resource.components.size() )

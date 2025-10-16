@@ -1,21 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://cotsxh8x7kbl"]
+[gd_scene load_steps=7 format=3 uid="uid://cotsxh8x7kbl"]
 
 [ext_resource type="Script" uid="uid://bc82c14ogih0k" path="res://ui_scenes/gameContainer/game_container.gd" id="1_3qesr"]
 [ext_resource type="PackedScene" uid="uid://bgoscy6mf6lsi" path="res://world_scenes/world/world.tscn" id="1_dxtl2"]
+[ext_resource type="PackedScene" uid="uid://bsqnrlhsi0qe3" path="res://ui_scenes/inventory/inventory.tscn" id="4_ehrtr"]
 [ext_resource type="Material" uid="uid://f1rdok6e656p" path="res://world_scenes/world/lighting/lightingDitherMaterial.tres" id="4_t5smv"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qe56b"]
 viewport_path = NodePath("ViewportContainer/Viewport")
 
+[sub_resource type="LabelSettings" id="LabelSettings_t5smv"]
+font_size = 8
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [node name="GameContainer" type="Node2D"]
 script = ExtResource("1_3qesr")
-
-[node name="fpsLabel" type="Label" parent="."]
-offset_left = 5.0
-offset_top = 1.0
-offset_right = 56.0
-offset_bottom = 24.0
-text = "fps: 60"
 
 [node name="ViewportContainer" type="SubViewportContainer" parent="."]
 clip_children = 2
@@ -41,3 +40,15 @@ texture_filter = 2
 material = ExtResource("4_t5smv")
 scale = Vector2(8, 8)
 centered = false
+
+[node name="fpsLabel" type="Label" parent="."]
+offset_left = 2.0
+offset_top = 287.0
+offset_right = 53.0
+offset_bottom = 310.0
+text = "fps: 60"
+label_settings = SubResource("LabelSettings_t5smv")
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="Inventory" parent="UI" instance=ExtResource("4_ehrtr")]

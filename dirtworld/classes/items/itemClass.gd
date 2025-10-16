@@ -8,5 +8,7 @@ class_name Item
 
 @export var itemTexture :Texture2D
 
+@export var maxStackSize :int = 99
+
 ## Components are duplicated for item instances.
 @export var components :Array[ItemComponent]

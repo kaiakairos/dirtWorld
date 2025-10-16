@@ -81,3 +81,14 @@ func getBlockBreak(tile:Vector2i) -> BlockBreaker:
 	ins.worldContainer = worldContainer
 	blockBreakContainer.add_child(ins)
 	return ins
+
+@onready var groundItemScene :PackedScene = preload("res://data/entity/groundItem/ground_item.tscn")
+func _on_worldcontainer_drop_ground_item(itemID: String, amount: int,tileX:int,tileY:int) -> void:
+	var newItemInstance :ItemInstance = ItemManager.generateNewItemInstance(itemID,amount)
+	var groundItem :GroundItem = groundItemScene.instantiate()
+	groundItem.itemInstance = newItemInstance
+	groundItem.world = self
+	groundItem.position = Vector2(tileX * 8,tileY * 8) + Vector2(4,4)
+	groundItem.velocity = Vector2(randf_range(-20.0,20.0),-20.0)
+	$EntityContainer/GroundItems.add_child(groundItem)
+	
