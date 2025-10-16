@@ -10,7 +10,7 @@
 script = ExtResource("2_gft15")
 componentType = SubResource("COMPONENTDROPITEM_ovnn0")
 setValues = Dictionary[StringName, Variant]({
-&"setAmountMax": 2,
+&"setAmountMax": 1,
 &"setAmountMin": 1,
 &"setItemID": "stone"
 })

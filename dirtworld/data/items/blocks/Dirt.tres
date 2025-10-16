@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://b2rg2o62ckdai"]
+
+[ext_resource type="Script" uid="uid://c0gvrw1chjm0j" path="res://classes/items/itemComponentClass.gd" id="1_bbeeh"]
+[ext_resource type="Script" uid="uid://dofuqynsbtvmf" path="res://classes/items/itemClass.gd" id="2_c8l66"]
+[ext_resource type="Script" uid="uid://cgvdxqd2qhufe" path="res://classes/items/itemComponentClasses/placeBlockComponent.gd" id="2_g4ywt"]
+[ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/blockResources/natural/dirt.png" id="3_05mw7"]
+
+[sub_resource type="Resource" id="Resource_g24ob"]
+script = ExtResource("2_g4ywt")
+blockToPlace = "dirt"
+metadata/_custom_type_script = "uid://cgvdxqd2qhufe"
+
+[resource]
+script = ExtResource("2_c8l66")
+itemStringID = "dirt"
+itemName = "Dirt"
+itemTexture = ExtResource("3_05mw7")
+components = Array[ExtResource("1_bbeeh")]([SubResource("Resource_g24ob")])
+metadata/_custom_type_script = "uid://dofuqynsbtvmf"

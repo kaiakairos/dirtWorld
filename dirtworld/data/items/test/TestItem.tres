@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://csllw6l74tson"
 
 [resource]
 script = ExtResource("2_dgc0a")
-itemStringID = "balls"
+itemStringID = "testPickaxe"
 itemName = "Test Item"
 itemTexture = ExtResource("3_j2tls")
 maxStackSize = 1

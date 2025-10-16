@@ -16,7 +16,7 @@ var renderDistance :Vector2i = Vector2i(8,5)
 
 func _ready() -> void:
 	worldContainer.setBlockContainer(BlockManager.blockContainer)
-	worldContainer.initializeArray(32,32)
+	worldContainer.initializeArray(128,1024)
 	worldContainer.debugWorldGen()
 
 func _process(delta: float) -> void:

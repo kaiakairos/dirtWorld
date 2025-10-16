@@ -236,6 +236,7 @@ var armAllowFullRotation :bool = true
 func setItemAnimAimMode(aiming:int,allowFullRotation:bool=true) -> void:
 	armAim = aiming
 	armAllowFullRotation = allowFullRotation
+	print("set it")
 
 func setItemSpriteData(itemID:String,pos:Vector2=Vector2.ZERO,size:Vector2=Vector2(1,1),rot:float=0.0) -> void:
 	itemSprite.texture = ItemManager.getItemTexture(itemID)

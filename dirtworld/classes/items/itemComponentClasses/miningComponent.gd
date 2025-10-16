@@ -21,26 +21,25 @@ var miningTick :float = 0.5
 func onSelectedItem(data:Dictionary[String,Variant]) -> bool: # When we swap to the item in our hotbar / inventory
 	var player :Player= data.entity
 	player.setItemSpriteData(item.itemStringID,Vector2(8,0),Vector2(1.5,1.5),PI/4)
+	player.setItemAnimAimMode(0)
 	player.toggleHeldItemVisibility(true)
-	player.setItemAnimAimMode(1,false)
 	return true
 
 func onStartUsing(data:Dictionary[String,Variant]) -> bool: # When we press MOUSE 1
 	var player :Player= data.entity
 	player.setItemAnimSpeed(1.0 / miningDelay)
-	
+	player.setItemAnimAimMode(1,false)
 	return true
 
 func whileUsing(data:Dictionary[String,Variant]) -> bool: # While we are pressing MOUSE 1
-	miningTick += data.delta
-	
-	
+	if miningTick < miningDelay:
+		miningTick += data.delta
 	
 	if miningTick >= miningDelay:
 		var blockBreak :BlockBreaker =data.world.getBlockBreak(data["focusedTile"])
 		var player :Player= data.entity
 		player.playItemAnim("swingPickaxe",true)
-		miningTick = 0.0
+		miningTick -= miningDelay
 		if !is_instance_valid(blockBreak):
 			return true
 		blockBreak.doDamage(miningDamage)
@@ -49,10 +48,13 @@ func whileUsing(data:Dictionary[String,Variant]) -> bool: # While we are pressin
 	return true 
 
 func onStopUsing(data:Dictionary[String,Variant]) -> bool: # When we stop pressing MOUSE 1
+	var player :Player= data.entity
+	player.setItemAnimAimMode(0)
 	return true
 
 func whileNotUsing(data:Dictionary[String,Variant]) -> bool: # While we are NOT pressing MOUSE 1
-	miningTick += data.delta
+	if miningTick < miningDelay:
+		miningTick += data.delta
 	return true
 
 func onDrop(data:Dictionary[String,Variant]) -> bool: # When we drop the item on the floor.
