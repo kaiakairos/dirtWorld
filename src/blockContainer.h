@@ -6,6 +6,7 @@
 #include <godot_cpp/variant/string.hpp>
 #include <godot_cpp/variant/typed_dictionary.hpp>
 #include <unordered_map>
+#include <godot_cpp/variant/utility_functions.hpp>
 
 namespace godot {
 
@@ -32,7 +33,7 @@ public:
 
     Ref<Image> getBlockImage(std::string blockTag);
     Ref<BLOCKOBJECT> getObjectFromString(std::string key);
-
+    bool getBlockIsTransparent(std::string blockTag);
 };
 
 }

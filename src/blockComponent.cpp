@@ -36,3 +36,7 @@ void BLOCKCOMPONENT::onPlace(int x, int y, std::string blockID, BLOCKCONTAINER *
 void BLOCKCOMPONENT::onBlockUpdate(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
     
 }
+
+Vector2i BLOCKCOMPONENT::getImageRect(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+   return Vector2i(0,0);
+}

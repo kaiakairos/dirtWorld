@@ -10,7 +10,7 @@ var selectedSlot :int = 0
 func _ready() -> void:
 	initializeInventory(40)
 	addItemByID("testPickaxe")
-	
+	addItemByID("dirt",99)
 
 func getItemInSlot(slot:int) -> ItemInstance:
 	if !inventory.has(slot):

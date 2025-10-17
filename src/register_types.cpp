@@ -10,6 +10,7 @@
 #include "blockComponent.h" // components
 #include "componentChange.h"
 #include "componentDropItem.h"
+#include "componentConnectedTexture.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -32,6 +33,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(BLOCKCOMPONENT); // components
 	GDREGISTER_RUNTIME_CLASS(COMPONENTCHANGE);
 	GDREGISTER_RUNTIME_CLASS(COMPONENTDROPITEM);
+	GDREGISTER_RUNTIME_CLASS(COMPONENTCONNECTEDTEXTURE);
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

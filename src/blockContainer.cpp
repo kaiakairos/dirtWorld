@@ -1,6 +1,8 @@
 #include "blockContainer.h"
 #include <godot_cpp/core/class_db.hpp>
 
+
+
 using namespace godot;
 
 void BLOCKCONTAINER::_bind_methods() {
@@ -36,4 +38,9 @@ Ref<Image> BLOCKCONTAINER::getBlockImage(std::string blockTag){
 Ref<BLOCKOBJECT> BLOCKCONTAINER::getObjectFromString(std::string key){
     Ref<BLOCKOBJECT> g = blockDictionary[key];
     return g;
+}
+
+bool BLOCKCONTAINER::getBlockIsTransparent(std::string blockTag){
+    Ref<BLOCKOBJECT> g = blockDictionary[blockTag];
+    return g->getIsTransparent();
 }

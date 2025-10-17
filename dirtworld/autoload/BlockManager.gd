@@ -6,7 +6,7 @@ var allBlocks :Dictionary[String,Block] = {}
 
 func _ready() -> void:
 	loadBlocksFromDirectory("res://data/blocks/blockResources/")
-	print(allBlocks)
+
 func loadBlocksFromDirectory(dir:String) -> void:
 	# get all blocks in folder
 	print(dir)
@@ -18,11 +18,10 @@ func loadBlocksFromDirectory(dir:String) -> void:
 				continue
 			continue # skip non-resources
 		
-		print(filename)
 		var resource :Block = load(dir + filename)
 		var blockID :String = resource.blockID
 		blockContainer.addObjectToDictionary(blockID)
-		var blockObject = BlockManager.blockContainer.getObjectFromDictionary(blockID)
+		var blockObject = blockContainer.getObjectFromDictionary(blockID)
 		
 		var textureImage = resource.texture.get_image()
 		textureImage.convert(Image.FORMAT_RGBA8)
@@ -62,4 +61,9 @@ func getBlockImageFromWorld(x:int,y:int,world:WORLDCONTAINER) -> Texture2D:
 	# right now just grabs texture from item. In the future this function
 	# should be able to distinguish the data and pick the correct part of the image
 	var blockID:String = world.getBlock(x,y)
-	return allBlocks[blockID].texture
+	var blockOBJ :BLOCKOBJECT = blockContainer.getObjectFromDictionary(blockID)
+	var img :Image= blockOBJ.getTextureImage()
+	var imgPos :Vector2i = blockOBJ.getImageRectGD(x,y,blockID,blockContainer,world)
+	var newImage :Image = img.get_region(Rect2i(imgPos.x * 8,imgPos.y * 8,8,8))
+	var texture :ImageTexture = ImageTexture.create_from_image(newImage)
+	return texture

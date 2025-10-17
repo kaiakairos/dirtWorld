@@ -69,15 +69,18 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
             int worldX = worldCoord.first;
             int worldY = worldCoord.second;
 
-            std::string block = worldContainer->getTileData(worldX,worldY);
+            std::string blockID = worldContainer->getTileData(worldX,worldY);
+            Ref<BLOCKOBJECT> blockOBJ = blockContainer->getObjectFromString(blockID);
 
-            Ref<Image> blockImg = blockContainer->getBlockImage(block); // get block texture
+            Ref<Image> blockImg = blockOBJ->getTextureImage(); // get block texture
+
+            Vector2i rectPos = blockOBJ->getImageRect(worldX,worldY,blockID,blockContainer,worldContainer); // get position to sample from image
 
             Vector2i imgPos = Vector2i(x * tileSize,y * tileSize);
-            img->blend_rect(blockImg, Rect2i(0,0,tileSize,tileSize), imgPos);
+            img->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,rectPos.y * tileSize,tileSize,tileSize), imgPos);
 
-            // debug collisions, remove later
-            if( block != "air" ) {
+            // debug collisions, remove later and replace with something better (collision types mayhaps??)
+            if( blockID != "air" ) {
                 colliderImg->fill_rect(Rect2i(x * tileSize,y * tileSize,tileSize,tileSize),Color::hex(0xFFFFFFFF));
             }
         }

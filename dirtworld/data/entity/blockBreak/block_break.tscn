@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu41jqmn7yvsc"]
+[gd_scene load_steps=9 format=3 uid="uid://bu41jqmn7yvsc"]
 
 [ext_resource type="Script" uid="uid://duxbid3qh0c3e" path="res://data/entity/blockBreak/block_break.gd" id="1_2r7ke"]
 [ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/blockResources/natural/dirt.png" id="2_2r7ke"]
+[ext_resource type="Texture2D" uid="uid://dyjks4ja85dyu" path="res://data/blocks/blockResources/natural/stone.png" id="2_kuie6"]
 [ext_resource type="Texture2D" uid="uid://dxoslchfbausi" path="res://data/entity/blockBreak/break.png" id="2_llsq4"]
 
 [sub_resource type="Curve" id="Curve_2r7ke"]
@@ -24,7 +25,7 @@ script = ExtResource("1_2r7ke")
 
 [node name="BlockTexture2" type="Sprite2D" parent="."]
 modulate = Color(0.3574912, 0.26006752, 0.39151636, 1)
-texture = ExtResource("2_2r7ke")
+texture = ExtResource("2_kuie6")
 centered = false
 
 [node name="origin" type="Node2D" parent="."]
@@ -32,7 +33,7 @@ position = Vector2(4, 4)
 
 [node name="BlockTexture" type="Sprite2D" parent="origin"]
 position = Vector2(-4, -4)
-texture = ExtResource("2_2r7ke")
+texture = ExtResource("2_kuie6")
 centered = false
 
 [node name="Break" type="Sprite2D" parent="origin"]

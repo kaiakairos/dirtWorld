@@ -21,6 +21,8 @@ void BLOCKOBJECT::_bind_methods() {
     ClassDB::bind_method(D_METHOD("setIsTransparent","isItIdk"), &BLOCKOBJECT::setIsTransparent);
     ClassDB::bind_method(D_METHOD("setLightPassThrough","newValue"), &BLOCKOBJECT::setLightPassThrough);
     ClassDB::bind_method(D_METHOD("setLightEmission","r","g","b"), &BLOCKOBJECT::setLightEmission);
+
+    ClassDB::bind_method(D_METHOD("getImageRectGD","x","y","blockID","container","worldContainer"), &BLOCKOBJECT::getImageRectGD);
 }
 
 BLOCKOBJECT::BLOCKOBJECT() {
@@ -68,6 +70,31 @@ void BLOCKOBJECT::simulateBreakComponents(int x, int y, std::string blockID, BLO
         //godot::UtilityFunctions::print(g);
         g->onBreak(x,y,blockID,container,worldContainer);
     }
+}
+
+Vector2i BLOCKOBJECT::getImageRect(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    Vector2i vec = Vector2i(0,0);
+    for(int i = 0; i < componentCount; i ++){
+        Ref<BLOCKCOMPONENT> g = components[i];
+        Vector2i newVec = g->getImageRect(x,y,blockID,container,worldContainer);
+        if (newVec != Vector2i(0,0)){
+            vec = newVec;
+        }
+    }
+    return vec;
+}
+
+Vector2i BLOCKOBJECT::getImageRectGD(int x, int y, String blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    Vector2i vec = Vector2i(0,0);
+    std::string newID = blockID.ascii().get_data();
+    for(int i = 0; i < componentCount; i ++){
+        Ref<BLOCKCOMPONENT> g = components[i];
+        Vector2i newVec = g->getImageRect(x,y,newID,container,worldContainer);
+        if (newVec != Vector2i(0,0)){
+            vec = newVec;
+        }
+    }
+    return vec;
 }
 
 ///////// LIGHT STUFF //////////////

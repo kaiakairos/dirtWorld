@@ -14,6 +14,7 @@ func onReady() -> void:
 	setState(states.idle)
 	
 	$Sprite.texture = ItemManager.getItem(itemInstance.itemID).itemTexture
+	
 	offset = Time.get_ticks_msec()
 
 func onProcess(delta:float) -> void:

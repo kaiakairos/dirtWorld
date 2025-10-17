@@ -15,6 +15,7 @@ func _ready() -> void:
 	data["focusPosition"] = Vector2.ZERO
 	data["delta"] = 0.0
 	data["focusedTile"] = Vector2i.ZERO
+	data["itemInstance"] = equippedItem
 	
 	InventoryManager.connect("selectedItemChanged",selectedSlotChanged)
 

@@ -13,7 +13,10 @@ var tick :float = 0.0
 
 var BROKEN :bool = false
 
-func _ready() -> void:
+#func _ready() -> void:
+#	setTextures()
+
+func setTextures() -> void:
 	$origin/BlockTexture.texture = BlockManager.getBlockImageFromWorld(tile.x,tile.y,worldContainer)
 	$BlockTexture2.texture = $origin/BlockTexture.texture
 	$CPUParticles2D.texture = $origin/BlockTexture.texture
@@ -30,6 +33,11 @@ func _physics_process(delta: float) -> void:
 	$origin.rotation = lerp($origin.rotation,0.0,0.2)
 	$origin.scale = lerp($origin.scale,Vector2(1,1),0.2)
 	$origin/BlockTexture.modulate = lerp($origin/BlockTexture.modulate,Color.WHITE,0.2)
+	
+	if $origin.scale.x <= 1.001:
+		$origin/BlockTexture.hide()
+		$BlockTexture2.hide()
+	
 	if tick > 1.5:
 		damage -= 1
 		$origin/Break.frame = clamp(roundi(( float(damage) / float(blockHealth)) * $origin/Break.hframes ),0,$origin/Break.hframes-1)
@@ -43,6 +51,7 @@ func doDamage(amount:int=1):
 	if BROKEN:
 		return
 	
+	setTextures()
 	damage += amount
 	$origin/Break.frame = clamp(roundi(( float(damage) / float(blockHealth)) * $origin/Break.hframes ),0,$origin/Break.hframes-1)
 	tick = -4.0
@@ -50,6 +59,9 @@ func doDamage(amount:int=1):
 	$origin.position = Vector2(0.0,1.0).rotated(randf_range(-PI,PI)) + Vector2(4.0,4.0)
 	$origin.scale = Vector2(1.1,1.1)
 	$origin/BlockTexture.modulate = Color(1.2,1.2,1.2)
+	
+	$origin/BlockTexture.show()
+	$BlockTexture2.show()
 	
 	$CPUParticles2D.restart(false)
 	$CPUParticles2D.emitting = true

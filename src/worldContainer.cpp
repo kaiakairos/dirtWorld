@@ -223,6 +223,44 @@ void WORLDCONTAINER::updateChunks(std::unordered_map<int, bool> changedTiles){
                 chunksToUpdate.append(chunkObj); // collect chunks
             }
         }
+
+        // check to redraw side chunk if on edge tile. probably better way to do this, so try redoing this later.
+        if (coords.x % 8 == 0){ // left side of chunk
+            if( loadedChunks.has( Vector2i(x-1,y) ) ){
+                CHUNK *chunkObj = Object::cast_to<CHUNK>( loadedChunks[Vector2i(x-1,y)] );
+                if(!chunksToUpdate.has(chunkObj)){
+                    chunksToUpdate.append(chunkObj); // collect chunks
+                }
+            }
+        }
+        if (coords.x % 8 == 7){ // right side of chunk
+            if( loadedChunks.has( Vector2i(x+1,y) ) ){
+                CHUNK *chunkObj = Object::cast_to<CHUNK>( loadedChunks[Vector2i(x+1,y)] );
+                if(!chunksToUpdate.has(chunkObj)){
+                    chunksToUpdate.append(chunkObj); // collect chunks
+                }
+            }
+        }
+
+        if (coords.y % 8 == 0){ // top side of chunk
+            if( loadedChunks.has( Vector2i(x,y-1) ) ){
+                CHUNK *chunkObj = Object::cast_to<CHUNK>( loadedChunks[Vector2i(x,y-1)] );
+                if(!chunksToUpdate.has(chunkObj)){
+                    chunksToUpdate.append(chunkObj); // collect chunks
+                }
+            }
+        }
+        if (coords.y % 8 == 7){ // bottom side of chunk
+            if( loadedChunks.has( Vector2i(x+1,y) ) ){
+                CHUNK *chunkObj = Object::cast_to<CHUNK>( loadedChunks[Vector2i(x,y+1)] );
+                if(!chunksToUpdate.has(chunkObj)){
+                    chunksToUpdate.append(chunkObj); // collect chunks
+                }
+            }
+        }
+
+        // should add checks for corners too eventually
+
     }
 
     for( int i = 0; i < chunksToUpdate.size(); i++ ){

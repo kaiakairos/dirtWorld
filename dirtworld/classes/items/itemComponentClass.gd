@@ -3,6 +3,9 @@ class_name ItemComponent
 
 var item : Item
 
+func onInitialized(data:Dictionary[String,Variant]) -> bool:
+	return true
+
 func onSelectedItem(data:Dictionary[String,Variant]) -> bool: # When we swap to the item in our hotbar / inventory
 	return true
 
