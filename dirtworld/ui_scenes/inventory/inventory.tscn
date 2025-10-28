@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsqnrlhsi0qe3"]
+[gd_scene load_steps=3 format=3 uid="uid://bsqnrlhsi0qe3"]
 
 [ext_resource type="Script" uid="uid://b7t1yeky16o0x" path="res://ui_scenes/inventory/inventory.gd" id="1_oqo48"]
+[ext_resource type="PackedScene" uid="uid://ngv3dviu7due" path="res://ui_scenes/inventory/inventory_slot.tscn" id="2_5bmva"]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource("1_oqo48")
@@ -10,3 +11,8 @@ position = Vector2(14, 14)
 
 [node name="Body" type="Node2D" parent="."]
 position = Vector2(14, 24)
+
+[node name="HeldItemSlot" type="Node2D" parent="."]
+
+[node name="inventorySlot" parent="HeldItemSlot" instance=ExtResource("2_5bmva")]
+heldSlot = true

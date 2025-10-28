@@ -26,21 +26,33 @@ void BLOCKCONTAINER::addObjectToDictionary(String key){
 
 Ref<BLOCKOBJECT> BLOCKCONTAINER::getObjectFromDictionary(String key){
     std::string newkey = key.ascii().get_data();
+    if (!blockDictionary.count(newkey)){
+        newkey = "error";
+    }
     Ref<BLOCKOBJECT> g = blockDictionary[newkey];
     return g;
 }
 
 Ref<Image> BLOCKCONTAINER::getBlockImage(std::string blockTag){
+    if (!blockDictionary.count(blockTag)){
+        blockTag = "error";
+    }
     Ref<BLOCKOBJECT> g = blockDictionary[blockTag];
     return g->getTextureImage();
 }
 
 Ref<BLOCKOBJECT> BLOCKCONTAINER::getObjectFromString(std::string key){
+    if (!blockDictionary.count(key)){
+        key = "error";
+    }
     Ref<BLOCKOBJECT> g = blockDictionary[key];
     return g;
 }
 
 bool BLOCKCONTAINER::getBlockIsTransparent(std::string blockTag){
+    if (!blockDictionary.count(blockTag)){
+        blockTag = "error";
+    }
     Ref<BLOCKOBJECT> g = blockDictionary[blockTag];
     return g->getIsTransparent();
 }

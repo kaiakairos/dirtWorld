@@ -49,14 +49,19 @@ func loadBlocksFromDirectory(dir:String) -> void:
 		allBlocks[blockID] = resource
 
 func isBlockReplaceable(id:String) -> bool:
-	return allBlocks[id].isReplaceable
+	return getBlockOBJ(id).isReplaceable
 
 func isBlockIndestructible(id:String) -> bool:
-	return allBlocks[id].indestructible
+	return getBlockOBJ(id).indestructible
 
 func getBlockHealth(id:String) -> int:
-	return allBlocks[id].health
+	return getBlockOBJ(id).health
 
+func getBlockOBJ(id:String) -> Block:
+	if !allBlocks.has(id):
+		return allBlocks["error"] # return error block if block doesn't exist, prevents crashes
+	return allBlocks[id]
+	
 func getBlockImageFromWorld(x:int,y:int,world:WORLDCONTAINER) -> Texture2D:
 	# right now just grabs texture from item. In the future this function
 	# should be able to distinguish the data and pick the correct part of the image

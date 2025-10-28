@@ -20,7 +20,15 @@ class WORLDCONTAINER : public Node {
 private:
     std::string *tileData;
     std::tuple<float, float, float> *lightData;
+    int *infoData;
+    std::string *bgData;
 
+    int totalTileCount;
+
+    // gulp
+    int connectFindX[256] = {3, 2, 0, 1, 3, 8, 5, 4, 3, 8, 5, 4, 3, 3, 0, 4, 3, 2, 0, 1, 3, 2, 5, 6, 3, 8, 5, 4, 3, 8, 0, 9, 3, 2, 0, 1, 3, 8, 0, 7, 3, 8, 5, 4, 3, 3, 5, 9, 3, 2, 0, 1, 3, 2, 0, 1, 3, 2, 0, 4, 3, 8, 5, 4, 3, 2, 0, 1, 3, 8, 5, 4, 3, 2, 5, 6, 3, 8, 0, 9, 3, 2, 0, 1, 3, 2, 5, 6, 3, 2, 5, 6, 3, 2, 0, 1, 3, 2, 0, 1, 3, 8, 5, 7, 3, 2, 5, 6, 3, 8, 5, 6, 3, 2, 0, 1, 3, 2, 0, 1, 3, 2, 5, 6, 3, 2, 5, 6, 3, 2, 0, 1, 3, 8, 5, 4, 3, 8, 0, 7, 3, 3, 5, 9, 3, 2, 0, 1, 3, 2, 5, 6, 3, 8, 5, 7, 3, 8, 5, 5, 3, 2, 0, 1, 3, 8, 5, 7, 3, 8, 0, 7, 3, 3, 0, 2, 3, 2, 0, 1, 3, 2, 5, 1, 3, 8, 5, 7, 3, 8, 0, 7, 3, 2, 0, 1, 3, 8, 5, 4, 3, 2, 0, 1, 3, 8, 5, 4, 3, 2, 0, 1, 3, 2, 5, 6, 3, 2, 0, 1, 3, 2, 5, 6, 3, 2, 0, 1, 3, 8, 0, 7, 3, 8, 0, 1, 3, 8, 0, 7, 3, 2, 0, 1, 3, 2, 0, 1, 3, 2, 0, 1, 3, 2, 0, 1};
+
+    int connectFindY[256] = {3, 3, 3, 3, 2, 3, 3, 3, 0, 0, 0, 0, 1, 4, 4, 4, 3, 3, 3, 3, 2, 2, 3, 3, 0, 0, 0, 0, 1, 1, 4, 0, 3, 3, 3, 3, 2, 3, 2, 3, 0, 0, 0, 0, 1, 4, 1, 2, 3, 3, 3, 3, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1, 3, 3, 3, 3, 2, 3, 3, 3, 0, 0, 0, 0, 1, 2, 4, 1, 3, 3, 3, 3, 2, 2, 3, 3, 0, 0, 0, 0, 1, 1, 4, 4, 3, 3, 3, 3, 2, 3, 3, 3, 0, 0, 0, 0, 1, 2, 1, 4, 3, 3, 3, 3, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1, 3, 3, 3, 3, 2, 3, 3, 3, 0, 0, 0, 0, 1, 4, 2, 3, 3, 3, 3, 3, 2, 2, 3, 3, 0, 0, 0, 0, 1, 1, 2, 4, 3, 3, 3, 3, 2, 3, 3, 3, 0, 0, 0, 0, 1, 4, 1, 4, 3, 3, 3, 3, 2, 2, 3, 2, 0, 0, 0, 0, 1, 1, 1, 1, 3, 3, 3, 3, 2, 3, 3, 3, 0, 0, 0, 0, 1, 2, 2, 2, 3, 3, 3, 3, 2, 2, 3, 3, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 3, 3, 2, 3, 2, 3, 0, 0, 0, 0, 1, 2, 1, 2, 3, 3, 3, 3, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1};
 
 protected:
     static void _bind_methods();
@@ -30,7 +38,17 @@ public:
     ~WORLDCONTAINER();
 
     Ref<BitMap> bitmap;
-    
+    Ref<Image> BGAmbientOcclusionImage;
+
+    void setBGAmbientOcclusionImage(Ref<Image> newImage);
+    Ref<Image> getBGAmbientOcclusionImage();
+
+    Ref<Image> BGCutOutImage;
+    Ref<Image> BGCutOutEdge;
+    void setBGCutOutImage(Ref<Image> newImage, Ref<Image> otherImage);
+    Ref<Image> getBGCutOutImage();
+    Ref<Image> getBGCutOutEdgeImage();
+
     BLOCKCONTAINER *blockContainer;
     void setBlockContainer(BLOCKCONTAINER *container);
     
@@ -38,7 +56,7 @@ public:
     int worldHeight;
 
     int widthInChunks;
-    int heighInChunks;
+    int heightInChunks;
     
     void initializeArray(int width, int height);
    
@@ -52,9 +70,15 @@ public:
     std::tuple<float, float, float> getLightData(int x, int y);
     void setLightDataTuple(int x, int y, std::tuple<float, float, float> newValue);
 
+    void setInfoData(int x, int y, int newInfo);
+    int getInfoData(int x, int y);
+
+    void setBGData(int x, int y, std::string newBG);
+    std::string getBGData(int x, int y);
+
     void createNewChunk(int chunkX, int chunkY);
 
-    void debugWorldGen();
+    void debugWorldGen(int seed);
 
     Dictionary loadedChunks;
     void chunkLoadArea(int centerChunkX, int centerChunkY, int loadWidth, int loadHeight);
@@ -68,6 +92,7 @@ public:
     std::unordered_map<int, bool> parseAndApplyQueuedChanges();
 
     void simulateLoadedChunks(int gameTick);
+    void simulateRandomTick(int gameTick, int attemptCount);
 
     void updateChunks(std::unordered_map<int, bool> changedTiles);
 
@@ -81,9 +106,17 @@ public:
     
     std::unordered_map<int, std::string> manualBlockQueue;
     void editBlock(int changeX, int changeY, String blockID);
+    void editBlockManually(int changeX, int changeY, std::string blockID);
     String getBlock(int x, int y);
+    String getBG(int x, int y);
 
     void applyManualChanges();
+
+    // math
+
+    Vector2i getBorderPos(int x, int y);
+
+    Vector2i getPoopPass(int x, int y);
 
 };
 

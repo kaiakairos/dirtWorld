@@ -19,6 +19,8 @@ func loadItemResourcesFromDirectory(directory:String) -> void:
 		allItems[itemResource.itemStringID] = itemResource
 
 func getItem(itemID:String) -> Item:
+	if !allItems.has(itemID):
+		itemID = "error"
 	return allItems[itemID]
 
 func generateNewItemInstance(itemID:String,amount:int=1) -> ItemInstance:
@@ -29,4 +31,4 @@ func generateNewItemInstance(itemID:String,amount:int=1) -> ItemInstance:
 	return instance
 
 func getItemTexture(itemID:String) -> Texture2D:
-	return allItems[itemID].itemTexture
+	return getItem(itemID).itemTexture

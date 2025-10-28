@@ -5,6 +5,6 @@
 [resource]
 shader = ExtResource("1_jyvl5")
 shader_parameter/dithering = true
-shader_parameter/colors = 8
+shader_parameter/colors = 6
 shader_parameter/dither_size = 1
 shader_parameter/Pixel_Size = 0.250000011875

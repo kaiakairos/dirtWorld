@@ -6,7 +6,16 @@ class_name InventorySlot
 @onready var sprite :Sprite2D = $ItemSprite
 @onready var amount :Label = $amount
 
+@export var heldSlot :bool = false
+
+signal slotLeftClicked(slotObj:InventorySlot)
+signal slotRightClicked(slotObj:InventorySlot)
+
 func _ready() -> void:
+	if heldSlot:
+		slot = InventoryManager.slotType.HELDITEM
+		$button.hide()
+		$Slot.hide()
 	InventoryManager.connect("inventoryUpdated",updateVisuals)
 	InventoryManager.connect("selectedItemChanged",selectedSlotChanged)
 	
@@ -30,3 +39,14 @@ func updateVisuals() -> void:
 
 func selectedSlotChanged() -> void:
 	$Slot.frame = int( is_instance_valid(InventoryManager.getItemInSlot(slot)) ) + int( slot == InventoryManager.selectedSlot )
+
+
+func _on_button_gui_input(event: InputEvent) -> void:
+	if event is not InputEventMouseButton:
+		return
+	if !event["pressed"]:
+		return
+	if event["button_index"] == 1:
+		emit_signal("slotLeftClicked",self)
+	elif event["button_index"] == 2:
+		emit_signal("slotRightClicked",self)

@@ -55,6 +55,7 @@ public:
 
     // sprites
     Sprite2D *tileSprite;
+    Sprite2D *bgSprite;
 
     // collider
     StaticBody2D *staticBody;

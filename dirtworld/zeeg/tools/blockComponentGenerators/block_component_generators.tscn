@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://xlxd03bplspt"]
+
+[ext_resource type="Script" uid="uid://c6vmlh1r45d2e" path="res://zeeg/tools/blockComponentGenerators/block_component_generators.gd" id="1_0sd8s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0sd8s"]
+font_size = 13
+
+[node name="BlockComponentGenerators" type="Node"]
+script = ExtResource("1_0sd8s")
+componentName = "multi tile texture"
+variables = Dictionary[String, String]({
+"heightInTiles": "int",
+"widthInTiles": "int"
+})
+
+[node name="Label" type="Label" parent="."]
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 382.0
+offset_bottom = 100.0
+text = "files have been generated
+be sure to move them from the /generated/ folder and into the src folder !!
+also be sure to remember to add the file to the register_types.cpp file.
+Also, remember to add the values to the blockComponentSetter.gd or else you won't be able to edit the values properly"
+label_settings = SubResource("LabelSettings_0sd8s")
+autowrap_mode = 2

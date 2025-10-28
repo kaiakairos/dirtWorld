@@ -27,6 +27,13 @@ func _process(delta: float) -> void:
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	
+	## UI STUFF ##
+	
+	if Input.is_action_just_pressed("inventory"):
+		$UI/Inventory.toggleInventory()
+	
+	if Input.is_action_just_pressed("chatbox") and !$UI/ChatBox.showing:
+		$UI/ChatBox.enable()
 	
 func changeWindowSize():
 	var rect :Rect2 = get_viewport_rect()

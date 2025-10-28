@@ -11,6 +11,8 @@
 #include "componentChange.h"
 #include "componentDropItem.h"
 #include "componentConnectedTexture.h"
+#include "componentGrowGrass.h"
+#include "componentMultiTileTexture.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -34,6 +36,8 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(COMPONENTCHANGE);
 	GDREGISTER_RUNTIME_CLASS(COMPONENTDROPITEM);
 	GDREGISTER_RUNTIME_CLASS(COMPONENTCONNECTEDTEXTURE);
+	GDREGISTER_RUNTIME_CLASS(COMPONENTGROWGRASS);
+	GDREGISTER_RUNTIME_CLASS(COMPONENTMULTITILETEXTURE);
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

@@ -20,6 +20,9 @@ func _ready() -> void:
 	InventoryManager.connect("selectedItemChanged",selectedSlotChanged)
 
 func selectedSlotChanged() -> void:
+	if InventoryManager.getHeldItemSlot() != null:
+		setItem(InventoryManager.getHeldItemSlot())
+		return
 	setItem(InventoryManager.inventory[InventoryManager.selectedSlot])
 
 func setItem(newItem:ItemInstance) -> void:
@@ -27,14 +30,16 @@ func setItem(newItem:ItemInstance) -> void:
 	
 	emit_signal("itemChanged")
 	if !is_instance_valid(equippedItem):
-		print("Unequipped item...")
-		return
+		#print("Unequipped item...")
+		equippedItem = InventoryManager.inventory[InventoryManager.slotType.EMPTYHAND]
+		
 	equippedItem.runFunctionOnComponents("onSelectedItem",data)
 	print("Equipped new item: " + equippedItem.item.itemName)
 
 func tick(delta: float) -> void:
 	if !is_instance_valid(equippedItem):
 		return
+	
 	data["delta"] = delta
 	if usingItem:
 		if !lastTickUsing:

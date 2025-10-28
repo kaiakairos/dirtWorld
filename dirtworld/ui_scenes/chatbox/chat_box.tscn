@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d26s06mnacm2"]
+
+[ext_resource type="Script" uid="uid://djsw72ny78nul" path="res://ui_scenes/chatbox/chat_box.gd" id="1_6jgll"]
+
+[node name="ChatBox" type="Node2D"]
+script = ExtResource("1_6jgll")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_right = 211.0
+offset_bottom = 16.0
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 7
+placeholder_text = "enter chat here"

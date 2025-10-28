@@ -33,7 +33,7 @@ Vector2i COMPONENTCONNECTEDTEXTURE::getImageRect(int x, int y, std::string block
     vecPos.x = vecFindX[index];
     vecPos.y = vecFindY[index];
 
-    godot::UtilityFunctions::print(index);
+    //godot::UtilityFunctions::print(index);
 
    return vecPos;
 }

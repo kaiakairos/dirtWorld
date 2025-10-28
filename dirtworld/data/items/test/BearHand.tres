@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://bsdvjq8gppiwd"]
+
+[ext_resource type="Script" uid="uid://c0gvrw1chjm0j" path="res://classes/items/itemComponentClass.gd" id="1_dbcpw"]
+[ext_resource type="Script" uid="uid://csllw6l74tson" path="res://classes/items/itemComponentClasses/miningComponent.gd" id="2_lpelh"]
+[ext_resource type="Script" uid="uid://dofuqynsbtvmf" path="res://classes/items/itemClass.gd" id="3_k3gqk"]
+
+[sub_resource type="Resource" id="Resource_geu1d"]
+script = ExtResource("2_lpelh")
+miningDamage = 0
+metadata/_custom_type_script = "uid://csllw6l74tson"
+
+[resource]
+script = ExtResource("3_k3gqk")
+itemStringID = "hand"
+maxStackSize = 1
+components = Array[ExtResource("1_dbcpw")]([SubResource("Resource_geu1d")])
+metadata/_custom_type_script = "uid://dofuqynsbtvmf"

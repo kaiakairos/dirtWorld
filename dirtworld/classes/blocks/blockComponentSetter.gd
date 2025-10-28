@@ -22,3 +22,7 @@ func componentChanged(newComponent:BLOCKCOMPONENT) -> void:
 			setValues = {"setBlockToChangeInto":"stone","setChance":100}
 		"COMPONENTDROPITEM":
 			setValues = {"setItemID":"stone","setAmountMin":1,"setAmountMax":1}
+		"COMPONENTGROWGRASS":
+			setValues = {"setBlockToGrowOn":"dirt","setSpreadchance":1000,"setNeedsAir":true}
+		"COMPONENTMULTITILETEXTURE":
+			setValues = {"setHeightInTiles":2,"setWidthInTiles":2,"setShouldBreakItself":true}

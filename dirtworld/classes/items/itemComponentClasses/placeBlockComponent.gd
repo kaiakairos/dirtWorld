@@ -21,6 +21,7 @@ func onSelectedItem(data:Dictionary[String,Variant]) -> bool: # When we swap to 
 	player.setItemAnimAimMode(1,false)
 	player.playItemAnim("placeHold",true)
 	player.toggleHeldItemVisibility(true)
+	player.setItemAnimSpeed(2.0)
 	return true
 
 func onStartUsing(data:Dictionary[String,Variant]) -> bool: # When we press MOUSE 1
@@ -59,14 +60,18 @@ func checkIfPlace(data:Dictionary[String,Variant]) -> bool:
 	if !BlockManager.isBlockReplaceable(existingTile):
 		return false
 	
+	if worldContainer.getBG(tile.x,tile.y) != "air":
+		placeForReal(tile,worldContainer)
+		return true # placed on wall successfully
+	
 	var checks :Array[Vector2i] = [Vector2i.RIGHT,Vector2i.LEFT,Vector2i.DOWN,Vector2i.UP]
 	for vec in checks:
 		var sideTile :String = worldContainer.getBlock(tile.x + vec.x,tile.y + vec.y)
 		if !BlockManager.isBlockReplaceable(sideTile):
 			placeForReal(tile,worldContainer)
 			return true # placed successfully
-		
 	
+
 	
 	return false
 

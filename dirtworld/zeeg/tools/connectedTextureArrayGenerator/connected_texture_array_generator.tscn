@@ -1,0 +1,92 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0isqylg3hhk"]
+
+[ext_resource type="Texture2D" uid="uid://c8gpnvjcoathd" path="res://world_scenes/world/chunk/backgroundAmbientOcclusion.png" id="1_3rnen"]
+[ext_resource type="Script" uid="uid://c40nadtuwb5w2" path="res://zeeg/tools/connectedTextureArrayGenerator/connected_texture_array_generator.gd" id="1_bevb0"]
+[ext_resource type="Texture2D" uid="uid://yk7uadvt8vfy" path="res://zeeg/tools/connectedTextureArrayGenerator/whatever.png" id="1_rrlod"]
+
+[node name="ConnectedTextureArrayGenerator" type="Node"]
+script = ExtResource("1_bevb0")
+
+[node name="Whatever" type="Sprite2D" parent="."]
+position = Vector2(80, 40)
+scale = Vector2(2, 2)
+texture = ExtResource("1_rrlod")
+
+[node name="BackgroundAmbientOcclusion" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.643)
+scale = Vector2(2, 2)
+texture = ExtResource("1_3rnen")
+centered = false
+
+[node name="ColorRect10" type="ColorRect" parent="."]
+offset_left = 257.0
+offset_top = 18.0
+offset_right = 377.0
+offset_bottom = 138.0
+
+[node name="rects" type="Node2D" parent="."]
+position = Vector2(89, -10)
+
+[node name="ColorRect" type="ColorRect" parent="rects"]
+offset_left = 168.0
+offset_top = 28.0
+offset_right = 208.0
+offset_bottom = 68.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="rects"]
+offset_left = 208.0
+offset_top = 28.0
+offset_right = 248.0
+offset_bottom = 68.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="rects"]
+visible = false
+offset_left = 248.0
+offset_top = 28.0
+offset_right = 288.0
+offset_bottom = 68.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="rects"]
+offset_left = 168.0
+offset_top = 68.0
+offset_right = 208.0
+offset_bottom = 108.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="rects"]
+offset_left = 208.0
+offset_top = 68.0
+offset_right = 248.0
+offset_bottom = 108.0
+color = Color(0.008481622, 0.15151796, 0, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="rects"]
+offset_left = 248.0
+offset_top = 68.0
+offset_right = 288.0
+offset_bottom = 108.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="rects"]
+offset_left = 168.0
+offset_top = 108.0
+offset_right = 208.0
+offset_bottom = 148.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="rects"]
+offset_left = 208.0
+offset_top = 108.0
+offset_right = 248.0
+offset_bottom = 148.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect9" type="ColorRect" parent="rects"]
+offset_left = 248.0
+offset_top = 108.0
+offset_right = 288.0
+offset_bottom = 148.0
+color = Color(0, 0, 0, 1)

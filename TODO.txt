@@ -3,8 +3,6 @@
 // each element in a category is listed by priority, most to least going down
 
 # UI
-- add ability to move items around in inventory
-- add ability to open and close inventory body
 - display player health
 
 # GAMEPLAY
@@ -15,13 +13,7 @@
 - add ability for player to be damaged
 
 # WORLD
-- add background walls
-- add a basic amount of blocks, and components to match (grass, dirt, stone, sand?)
-- add basic world gen, caves and surface
-- add information layer
-- add multitile blocks
 - add foliage and trees
-- add random ticking
 - add block updates
 - add "onPlace" functionality (not being used for anything but should still be in there I think)
 - add ores
@@ -32,11 +24,9 @@
 - add block component for randomizing texture (needs to use a seed so that randomized textures are always the same in a specific position)
 - sound effects ( block material sound system )
 - animated tiles
-- add the ability for moving light entities
 - background system
 
 # POLISH (NOT ENTIRELY NECESSARY)
-- create script capable of making block component c++ scripts for me
 - add more GDScript templates for custom classes (Entity for example)
 - main menu
 - world creation screen

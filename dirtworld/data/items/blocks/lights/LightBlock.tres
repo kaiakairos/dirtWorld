@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Item" load_steps=8 format=3 uid="uid://bxduig03tf4sj"]
+
+[ext_resource type="Script" uid="uid://c0gvrw1chjm0j" path="res://classes/items/itemComponentClass.gd" id="1_b82cm"]
+[ext_resource type="Script" uid="uid://dofuqynsbtvmf" path="res://classes/items/itemClass.gd" id="2_5xscd"]
+[ext_resource type="Script" uid="uid://cgvdxqd2qhufe" path="res://classes/items/itemComponentClasses/placeBlockComponent.gd" id="2_fvcdh"]
+[ext_resource type="Texture2D" uid="uid://bvrx3ghuge0j7" path="res://data/blocks/blockResources/natural/light.png" id="2_m3vac"]
+[ext_resource type="Script" uid="uid://cgyqt3cls0wwa" path="res://classes/items/itemComponentClasses/glowWhenHeldComponent.gd" id="3_fvcdh"]
+
+[sub_resource type="Resource" id="Resource_tugbq"]
+script = ExtResource("2_fvcdh")
+blockToPlace = "light"
+metadata/_custom_type_script = "uid://cgvdxqd2qhufe"
+
+[sub_resource type="Resource" id="Resource_u56xh"]
+script = ExtResource("3_fvcdh")
+blockID = "light"
+multiplier = 1.5
+metadata/_custom_type_script = "uid://cgyqt3cls0wwa"
+
+[resource]
+script = ExtResource("2_5xscd")
+itemStringID = "light"
+itemName = "Light"
+itemTexture = ExtResource("2_m3vac")
+components = Array[ExtResource("1_b82cm")]([SubResource("Resource_tugbq"), SubResource("Resource_u56xh")])
+metadata/_custom_type_script = "uid://dofuqynsbtvmf"

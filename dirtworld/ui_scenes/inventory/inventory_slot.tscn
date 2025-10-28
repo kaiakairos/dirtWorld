@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dnsd8ncuu7t6s" path="res://ui_scenes/inventory/inventory_slot.gd" id="1_2p1ab"]
 [ext_resource type="Texture2D" uid="uid://dt0ikfbbvhxr0" path="res://ui_scenes/inventory/slot.png" id="1_uk1vt"]
-[ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/blockResources/natural/dirt.png" id="2_5fwvw"]
+[ext_resource type="Texture2D" uid="uid://bkh6788shja16" path="res://data/items/test/testPickaxe.png" id="3_uk1vt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uk1vt"]
 font_size = 8
@@ -15,9 +15,10 @@ script = ExtResource("1_2p1ab")
 [node name="Slot" type="Sprite2D" parent="."]
 texture = ExtResource("1_uk1vt")
 hframes = 3
+frame = 1
 
 [node name="ItemSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_5fwvw")
+texture = ExtResource("3_uk1vt")
 
 [node name="amount" type="Label" parent="."]
 offset_left = -20.0
@@ -27,3 +28,13 @@ offset_bottom = 11.0
 text = "0"
 label_settings = SubResource("LabelSettings_uk1vt")
 horizontal_alignment = 2
+
+[node name="button" type="ColorRect" parent="."]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+mouse_filter = 1
+color = Color(1, 1, 1, 0)
+
+[connection signal="gui_input" from="button" to="." method="_on_button_gui_input"]

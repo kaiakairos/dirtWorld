@@ -7,6 +7,8 @@ var flyTarget :Node2D
 
 var offset :float = 0.0
 
+var data :Dictionary[String,Variant] = {}
+
 func onReady() -> void:
 	addState("idle")
 	addState("flyingIn")
@@ -16,11 +18,19 @@ func onReady() -> void:
 	$Sprite.texture = ItemManager.getItem(itemInstance.itemID).itemTexture
 	
 	offset = Time.get_ticks_msec()
+	
+	
+	data["entity"] = self
+	data["world"] = world
+	itemInstance.runFunctionOnComponents("onDrop",data)
 
 func onProcess(delta:float) -> void:
 	
 	$Sprite.scale.x = move_toward($Sprite.scale.x,0.75,delta * 10.0)
 	$Sprite.scale.y = move_toward($Sprite.scale.y,0.75,delta * 10.0)
+	
+	
+	itemInstance.runFunctionOnComponents("whileOnGround",data)
 	
 	match state:
 		states.idle:

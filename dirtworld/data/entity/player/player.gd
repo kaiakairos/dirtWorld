@@ -50,8 +50,11 @@ func onProcess(delta:float) -> void:
 		InventoryManager.updateSelectedSlot( (InventoryManager.selectedSlot + 9) % 10 )
 	
 	usingItemComponent.usingItem = Input.is_action_pressed("useItem")
+	if InventoryManager.tempPreventItemUsage: # and is client player (for multiplayer)
+		usingItemComponent.usingItem = false
 	
 	usingItemComponent.tick(delta)
+	
 
 func _on_using_item_component_item_changed() -> void:
 	toggleHeldItemVisibility(false)
@@ -228,7 +231,6 @@ func setItemAnimSpeed(animSpeed:float) -> void:
 
 func stopItemAnimation() -> void:
 	$ItemAnimation.stop(true)
-	print("stopped")
 
 enum armAimMode {NONE, MAIN, BACK, BOTH}
 var armAim:int = armAimMode.NONE
@@ -236,7 +238,6 @@ var armAllowFullRotation :bool = true
 func setItemAnimAimMode(aiming:int,allowFullRotation:bool=true) -> void:
 	armAim = aiming
 	armAllowFullRotation = allowFullRotation
-	print("set it")
 
 func setItemSpriteData(itemID:String,pos:Vector2=Vector2.ZERO,size:Vector2=Vector2(1,1),rot:float=0.0) -> void:
 	itemSprite.texture = ItemManager.getItemTexture(itemID)

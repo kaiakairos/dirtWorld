@@ -14,10 +14,27 @@ var renderDistance :Vector2i = Vector2i(8,5)
 
 @export var blockBreakContainer :Node2D
 
+var randomTickThread: Thread
+var threadEnabled:bool = false
+
+
+
 func _ready() -> void:
 	worldContainer.setBlockContainer(BlockManager.blockContainer)
-	worldContainer.initializeArray(128,1024)
-	worldContainer.debugWorldGen()
+	worldContainer.initializeArray(64,512)
+	worldContainer.debugWorldGen(16)
+	worldContainer.setBGAmbientOcclusionImage( load("res://world_scenes/world/chunk/backgroundAmbientOcclusion.png").get_image() )
+	worldContainer.setBGCutOutImage( load("res://world_scenes/world/chunk/backgroundCutout.png").get_image(),load("res://world_scenes/world/chunk/backgroundCutoutEdge.png").get_image() )
+	
+	
+	
+
+func _thread_function(userdata):
+	
+	pass
+
+func _exit_tree():
+	pass
 
 func _process(delta: float) -> void:
 	
@@ -26,18 +43,30 @@ func _process(delta: float) -> void:
 	if positionLastFrame != trackingPosition:
 		worldContainer.chunkLoadArea(trackingPosition.x,trackingPosition.y,renderDistance.x,renderDistance.y)
 		worldContainer.unloadChunks(trackingPosition.x,trackingPosition.y,renderDistance.x,renderDistance.y)
-		print(trackingPosition)
-		
 		positionLastFrame = trackingPosition
 		
 	# advance game tick
+	
 	tickTimer += delta
+	
+	parseLightQueue()
 	if tickTimer > 1.0 / float(TICKRATE):
 		tickTimer -= 1.0 / float(TICKRATE)
 		gameTick(delta)
+		parseLightQueue()
 	
 	drawLighting()
 	
+	queueLightChanges = {}
+
+var queueLightChanges :Dictionary[Vector2i,Color]
+func appendQueue(vec:Vector2i,r:float,g:float,b:float) -> void:
+	queueLightChanges[vec] = Color(r,g,b,1.0)
+
+func parseLightQueue() -> void:
+	for i in queueLightChanges.keys():
+		var c :Color = queueLightChanges[i]
+		worldContainer.setLightData(i.x,i.y,c.r,c.g,c.b)
 
 func drawLighting() -> void:
 	var l :Vector2i = (positionLastFrame * 8) - Vector2i(28,20)
@@ -59,6 +88,7 @@ func setLightPosition() -> void:
 
 func gameTick(_delta:float) -> void:
 	tick += 1
+	worldContainer.simulateRandomTick(tick,6000)
 	worldContainer.simulateLoadedChunks(tick)
 
 func getTargetPosition() -> Vector2:
@@ -92,3 +122,5 @@ func _on_worldcontainer_drop_ground_item(itemID: String, amount: int,tileX:int,t
 	groundItem.velocity = Vector2(randf_range(-20.0,20.0),-20.0)
 	$EntityContainer/GroundItems.add_child(groundItem)
 	
+func setCameraZoom(v:float) -> void:
+	camera.zoom = Vector2(v,v)

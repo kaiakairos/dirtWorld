@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Block" load_steps=8 format=3 uid="uid://msdk2uxsecj"]
+
+[ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_niefj"]
+[ext_resource type="Script" uid="uid://dn4l5fl4sq57s" path="res://classes/blocks/blockComponentSetter.gd" id="2_7ptrm"]
+[ext_resource type="Texture2D" uid="uid://ctrggg8bo6t0u" path="res://data/blocks/blockResources/test/testMultitile.png" id="3_7ptrm"]
+
+[sub_resource type="COMPONENTMULTITILETEXTURE" id="COMPONENTMULTITILETEXTURE_1a6ox"]
+
+[sub_resource type="Resource" id="Resource_q233m"]
+script = ExtResource("2_7ptrm")
+componentType = SubResource("COMPONENTMULTITILETEXTURE_1a6ox")
+setValues = Dictionary[StringName, Variant]({
+&"setHeightInTiles": 2,
+&"setShouldBreakItself": true,
+&"setWidthInTiles": 3
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
+[sub_resource type="COMPONENTDROPITEM" id="COMPONENTDROPITEM_7ptrm"]
+
+[sub_resource type="Resource" id="Resource_1a6ox"]
+script = ExtResource("2_7ptrm")
+componentType = SubResource("COMPONENTDROPITEM_7ptrm")
+setValues = Dictionary[StringName, Variant]({
+&"setAmountMax": 1,
+&"setAmountMin": 1,
+&"setItemID": "test"
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
+[resource]
+script = ExtResource("1_niefj")
+blockID = "testmultitile"
+texture = ExtResource("3_7ptrm")
+health = 0
+setComponents = Array[ExtResource("2_7ptrm")]([SubResource("Resource_q233m"), SubResource("Resource_1a6ox")])
+isTransparent = true
+metadata/_custom_type_script = "uid://bd7107brdous1"

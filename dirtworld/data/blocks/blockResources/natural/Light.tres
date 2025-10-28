@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Block" load_steps=6 format=3 uid="uid://cvwcuhx6qgicn"]
+
+[ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_4nu4b"]
+[ext_resource type="Script" uid="uid://dn4l5fl4sq57s" path="res://classes/blocks/blockComponentSetter.gd" id="2_iyse4"]
+[ext_resource type="Texture2D" uid="uid://bvrx3ghuge0j7" path="res://data/blocks/blockResources/natural/light.png" id="3_iyse4"]
+
+[sub_resource type="COMPONENTDROPITEM" id="COMPONENTDROPITEM_iyse4"]
+
+[sub_resource type="Resource" id="Resource_us671"]
+script = ExtResource("2_iyse4")
+componentType = SubResource("COMPONENTDROPITEM_iyse4")
+setValues = Dictionary[StringName, Variant]({
+&"setAmountMax": 1,
+&"setAmountMin": 1,
+&"setItemID": "light"
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
+[resource]
+script = ExtResource("1_4nu4b")
+blockID = "light"
+texture = ExtResource("3_iyse4")
+health = 5
+setComponents = Array[ExtResource("2_iyse4")]([SubResource("Resource_us671")])
+lightEmission = Color(2.6034334, 1.7785205, 0.9375729, 1)
+metadata/_custom_type_script = "uid://bd7107brdous1"

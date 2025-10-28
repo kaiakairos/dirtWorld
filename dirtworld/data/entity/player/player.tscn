@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c26ny1ldo3dsl" path="res://data/entity/player/spriteParts/legTopBack.png" id="7_1g3cu"]
 [ext_resource type="Texture2D" uid="uid://bud3opk5s32bb" path="res://data/entity/player/spriteParts/legBack.png" id="8_0sj50"]
 [ext_resource type="Texture2D" uid="uid://bmg2ofov7vyg8" path="res://data/entity/player/spriteParts/hand1.png" id="8_xghcs"]
-[ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/blockResources/natural/dirt.png" id="10_hj8aa"]
+[ext_resource type="Texture2D" uid="uid://ccv6xfwrd1ypu" path="res://data/blocks/blockResources/natural/grass.png" id="10_hj8aa"]
 [ext_resource type="Texture2D" uid="uid://bjg0omy15c8l1" path="res://data/entity/player/spriteParts/hand2.png" id="10_xghcs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64mvu"]

@@ -17,6 +17,11 @@ CHUNK::CHUNK() {
     tileSprite->set_centered(false);
     add_child(tileSprite);
 
+    bgSprite = memnew(Sprite2D);
+    bgSprite->set_centered(false);
+    bgSprite->set_z_index(-20);
+
+    add_child(bgSprite);
     
     staticBody = memnew(StaticBody2D);
     add_child(staticBody);
@@ -57,10 +62,20 @@ int CHUNK::getID4(){
 // DRAWING //
 
 void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
+
+    Ref<Image> occlude = worldContainer->getBGAmbientOcclusionImage();
+    Ref<Image> cutout = worldContainer->getBGCutOutImage();
+
     Ref<Image> img = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
 
     Ref<Image> colliderImg = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
     colliderImg->fill(Color::hex(0x00000000));
+
+    Ref<Image> bgImg = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
+
+    Ref<Image> bgShadow = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
+
+    Ref<Image> cutoutIMG = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
 
     for(int x = 0; x < 8; x++){
         for(int y = 0; y < 8; y++){
@@ -78,6 +93,23 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
 
             Vector2i imgPos = Vector2i(x * tileSize,y * tileSize);
             img->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,rectPos.y * tileSize,tileSize,tileSize), imgPos);
+
+            std::string bgID = worldContainer->getBGData(worldX,worldY);
+
+            if(blockOBJ->getIsTransparent() && bgID != "air"){ // draw bg
+
+                Ref<BLOCKOBJECT> bgOBJ = blockContainer->getObjectFromString(bgID);
+                Ref<Image> bgt = bgOBJ->getTextureImage();
+
+                bgImg->blend_rect(bgt, Rect2i(0,0,tileSize,tileSize), imgPos);
+
+                Vector2i urgh = worldContainer->getBorderPos(worldX,worldY);
+                Vector2i pooppass= worldContainer->getPoopPass(worldX,worldY);
+                bgShadow->blend_rect(occlude,Rect2i(urgh.x * tileSize,urgh.y * tileSize,tileSize,tileSize),imgPos );
+                cutoutIMG->blend_rect(cutout,Rect2i(pooppass.x * tileSize,pooppass.y * tileSize,tileSize,tileSize),imgPos );
+                bgImg->blend_rect(worldContainer->getBGCutOutEdgeImage(),Rect2i(pooppass.x * tileSize,pooppass.y * tileSize,tileSize,tileSize),imgPos );
+
+            }
 
             // debug collisions, remove later and replace with something better (collision types mayhaps??)
             if( blockID != "air" ) {
@@ -125,6 +157,15 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
 
     tileSprite->set_texture(ImageTexture::create_from_image(img));
 
+    bgImg->adjust_bcs(0.5,0.9,1.5);
+    bgImg->blend_rect_mask(bgShadow,bgImg,Rect2i(0,0,64,64),Vector2i(0,0));
+
+    Ref<Image> bg2 = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
+    //bg2->copy_from(bgImg);
+
+    bgImg->blit_rect_mask(bg2,cutoutIMG,Rect2i(0,0,64,64),Vector2i(0,0));
+    bgSprite->set_texture(ImageTexture::create_from_image(bgImg));
+
 }
 
 void CHUNK::clearColliders(){
@@ -166,14 +207,27 @@ void CHUNK::simulateLight(WORLDCONTAINER *worldContainer){
             std::string blockString = worldContainer->getTileData(worldX,worldY);
             Ref<BLOCKOBJECT> blockObj = blockContainer->getObjectFromString(blockString);
 
+            std::string bgString = worldContainer->getBGData(worldX,worldY);
+            Ref<BLOCKOBJECT> bgOBJ = blockContainer->getObjectFromString(bgString);
+
+            if(blockObj->getIsTransparent()){
+                blockString = "air";
+                blockObj = blockContainer->getObjectFromString(blockString);
+            }
+
             std::tuple<float,float,float> lightEmission = blockObj->lightEmission;
             //std::tuple<float,float,float> currentLight = worldContainer->getLightData(worldX,worldY);
+
+
 
             float r = 0.0;
             float g = 0.0;
             float b = 0.0;
 
             if (blockString == "air" && worldY > 40){ // don't illuminate air under a certain y value
+                lightEmission = std::make_tuple(r,g,b);
+            }
+            if (blockString == "air" && !bgOBJ->getIsTransparent()){
                 lightEmission = std::make_tuple(r,g,b);
             }
 

@@ -37,13 +37,13 @@ void COMPONENTCHANGE::setBlockToChangeInto(String newBlock){
 
 
 void COMPONENTCHANGE::onSimulationTick(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
-    if(std::rand() % chance == 0){
-        worldContainer->addBlockChangeToQueue(x,y,blockToChangeInto);
-    }
+
 }
 
 void COMPONENTCHANGE::onRandomTick(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
-    
+    if(std::rand() % chance == 0){
+        worldContainer->addBlockChangeToQueue(x,y,blockToChangeInto);
+    }
 }
 
 void COMPONENTCHANGE::onBreak(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){

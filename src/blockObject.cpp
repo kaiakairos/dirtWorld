@@ -72,6 +72,14 @@ void BLOCKOBJECT::simulateBreakComponents(int x, int y, std::string blockID, BLO
     }
 }
 
+void BLOCKOBJECT::simulateRandomComponents(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    for(int i = 0; i < componentCount; i ++){
+        Ref<BLOCKCOMPONENT> g = components[i];
+        //godot::UtilityFunctions::print(g);
+        g->onRandomTick(x,y,blockID,container,worldContainer);
+    }
+}
+
 Vector2i BLOCKOBJECT::getImageRect(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
     Vector2i vec = Vector2i(0,0);
     for(int i = 0; i < componentCount; i ++){

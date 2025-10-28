@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cotsxh8x7kbl"]
+[gd_scene load_steps=8 format=3 uid="uid://cotsxh8x7kbl"]
 
 [ext_resource type="Script" uid="uid://bc82c14ogih0k" path="res://ui_scenes/gameContainer/game_container.gd" id="1_3qesr"]
 [ext_resource type="PackedScene" uid="uid://bgoscy6mf6lsi" path="res://world_scenes/world/world.tscn" id="1_dxtl2"]
 [ext_resource type="PackedScene" uid="uid://bsqnrlhsi0qe3" path="res://ui_scenes/inventory/inventory.tscn" id="4_ehrtr"]
 [ext_resource type="Material" uid="uid://f1rdok6e656p" path="res://world_scenes/world/lighting/lightingDitherMaterial.tres" id="4_t5smv"]
+[ext_resource type="PackedScene" uid="uid://d26s06mnacm2" path="res://ui_scenes/chatbox/chat_box.tscn" id="5_ehrtr"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qe56b"]
 viewport_path = NodePath("ViewportContainer/Viewport")
@@ -52,3 +53,7 @@ label_settings = SubResource("LabelSettings_t5smv")
 [node name="UI" type="Node2D" parent="."]
 
 [node name="Inventory" parent="UI" instance=ExtResource("4_ehrtr")]
+
+[node name="ChatBox" parent="UI" instance=ExtResource("5_ehrtr")]
+visible = false
+position = Vector2(185, 281)
