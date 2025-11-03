@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var world :World
 var showing :bool = false
 
 func _process(delta: float) -> void:
@@ -33,4 +34,8 @@ func interpretChat() -> void:
 		"fullbright":
 			$"../../LightMask/LIGHTDRAWER".visible = !$"../../LightMask/LIGHTDRAWER".visible
 		"zoom":
-			$"../../ViewportContainer/Viewport/World".setCameraZoom(float(sliceArray[1]))
+			world.setCameraZoom(float(sliceArray[1]))
+		"save":
+			world.saveWorld()
+		"load":
+			world.loadWorld()

@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 BlockManager="*res://autoload/BlockManager.gd"
 ItemManager="*res://autoload/ItemManager.gd"
 InventoryManager="*res://autoload/InventoryManager.gd"
+Saving="*res://autoload/Saving.gd"
 
 [debug]
 

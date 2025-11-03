@@ -17,25 +17,36 @@ var renderDistance :Vector2i = Vector2i(8,5)
 var randomTickThread: Thread
 var threadEnabled:bool = false
 
+@export var worldWidth :int = 64
+@export var worldHeight :int = 512
 
+@export var worldSeed :int = 16
+
+var savedStrings :PackedStringArray
 
 func _ready() -> void:
 	worldContainer.setBlockContainer(BlockManager.blockContainer)
-	worldContainer.initializeArray(64,512)
-	worldContainer.debugWorldGen(16)
+	worldContainer.initializeArray(worldWidth,worldHeight)
+	worldContainer.debugWorldGen(worldSeed)
 	worldContainer.setBGAmbientOcclusionImage( load("res://world_scenes/world/chunk/backgroundAmbientOcclusion.png").get_image() )
 	worldContainer.setBGCutOutImage( load("res://world_scenes/world/chunk/backgroundCutout.png").get_image(),load("res://world_scenes/world/chunk/backgroundCutoutEdge.png").get_image() )
 	
-	
+	savedStrings = worldContainer.getWorldStrings()
 	
 
-func _thread_function(userdata):
+## debug
+func saveWorld() -> void:
+	savedStrings = worldContainer.getWorldStrings()
+	print("Saved world")
+	Saving.write_save("testSave",{"world":savedStrings})
+
+func loadWorld() -> void:
+	var data :Dictionary= Saving.read_save("testSave")
+	savedStrings = data["world"]
+	worldContainer.loadFromStrings(savedStrings[0],savedStrings[1],savedStrings[2])
+	worldContainer.forceAllChunksToDraw()
 	
-	pass
-
-func _exit_tree():
-	pass
-
+	
 func _process(delta: float) -> void:
 	
 	var trackingPosition = Vector2i(camera.global_position)
@@ -88,7 +99,7 @@ func setLightPosition() -> void:
 
 func gameTick(_delta:float) -> void:
 	tick += 1
-	worldContainer.simulateRandomTick(tick,6000)
+	worldContainer.simulateRandomTick(tick,(worldWidth * worldHeight)/8)
 	worldContainer.simulateLoadedChunks(tick)
 
 func getTargetPosition() -> Vector2:

@@ -100,7 +100,6 @@ func placeForReal(tile:Vector2i,worldContainer:WORLDCONTAINER) -> void:
 			worldContainer.editBlock(worldX,worldY,blockToPlace)
 		
 			var info :int = x + (y * tileWidth)
-			print(info)
 			worldContainer.setInfoData(worldX,worldY,info)
 	
 	worldContainer.applyManualChanges()

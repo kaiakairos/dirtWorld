@@ -9,6 +9,7 @@
 #include <godot_cpp/variant/dictionary.hpp>
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/classes/bit_map.hpp>
+#include <godot_cpp/variant/packed_string_array.hpp>
 #include <unordered_map>
 
 namespace godot {
@@ -40,6 +41,8 @@ public:
     Ref<BitMap> bitmap;
     Ref<Image> BGAmbientOcclusionImage;
 
+
+
     void setBGAmbientOcclusionImage(Ref<Image> newImage);
     Ref<Image> getBGAmbientOcclusionImage();
 
@@ -59,6 +62,12 @@ public:
     int heightInChunks;
     
     void initializeArray(int width, int height);
+
+    PackedStringArray getWorldStrings();
+    void loadFromStrings(String tileString, String infoString, String bgString);
+
+    void forceAllChunksToDraw();
+
    
     int convertCoord(int x, int y);
     Vector2i reverseCoordCoversion(int index);

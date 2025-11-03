@@ -11,6 +11,9 @@ void WORLDCONTAINER::_bind_methods() {
     ClassDB::bind_method(D_METHOD("setBlockContainer","container"), &WORLDCONTAINER::setBlockContainer);
     ClassDB::bind_method(D_METHOD("initializeArray","width","height"), &WORLDCONTAINER::initializeArray);
 
+    ClassDB::bind_method(D_METHOD("getWorldStrings"), &WORLDCONTAINER::getWorldStrings);
+    ClassDB::bind_method(D_METHOD("loadFromStrings","tileString","infoString","bgString"), &WORLDCONTAINER::loadFromStrings);
+
     ClassDB::bind_method(D_METHOD("debugWorldGen","seed"), &WORLDCONTAINER::debugWorldGen);
 
     ClassDB::bind_method(D_METHOD("chunkLoadArea","centerChunkX","centerChunkY","loadWidth","loadHeight"), &WORLDCONTAINER::chunkLoadArea);
@@ -34,6 +37,8 @@ void WORLDCONTAINER::_bind_methods() {
     ClassDB::bind_method(D_METHOD("setBGCutOutImage","image","otherimage"), &WORLDCONTAINER::setBGCutOutImage);
 
     ClassDB::bind_method(D_METHOD("setLightData","x","y","r","g","b"), &WORLDCONTAINER::setLightData);
+
+    ClassDB::bind_method(D_METHOD("forceAllChunksToDraw"), &WORLDCONTAINER::forceAllChunksToDraw);
 
     ADD_SIGNAL(MethodInfo("queue_delete_chunk", PropertyInfo(Variant::VECTOR2I, "delete_pos"))); // creates a signal for us
     ADD_SIGNAL(MethodInfo("dropGroundItem", PropertyInfo(Variant::STRING, "itemID"),PropertyInfo(Variant::INT, "amount"),PropertyInfo(Variant::INT, "tileX"),PropertyInfo(Variant::INT, "tileY")));
@@ -91,12 +96,131 @@ void WORLDCONTAINER::initializeArray(int width, int height){
         for(int y = 0; y < worldHeight; y++){
             setTileData(x,y,"air");
             setLightData(x,y,0.0,0.0,0.0);
-            setInfoData(x,y,std::rand() % 4);
+            setInfoData(x,y,0);
             setBGData(x,y,"air");
         }
     }
 
 }
+
+PackedStringArray WORLDCONTAINER::getWorldStrings(){
+
+    PackedStringArray stringArray;
+
+    String tileString = "";
+    String infoString = "";
+    String bgString = "";
+
+    std::string lastTile = tileData[0];
+    int numOfTile = 0;
+
+    int lastInfo = infoData[0];
+    int numOfInfo = 0;
+
+    std::string lastBG = bgData[0];
+    int numOfBG = 0;
+
+    for(int i = 0; i < totalTileCount; i++){
+
+        // blocks
+        std::string blockID = tileData[i];
+        if(blockID == lastTile && i != totalTileCount - 1){
+            numOfTile++;
+        }else{
+            if( i == totalTileCount - 1 ){ numOfTile++; }
+            String gulp = lastTile.c_str();
+            tileString +=  gulp + "*" + String::num_int64(numOfTile) + ";";
+            numOfTile = 1;
+            lastTile = blockID;
+        }
+
+        // bg
+        std::string bgID = bgData[i];
+        if(bgID == lastBG && i != totalTileCount - 1 ){
+            numOfBG++;
+        }else{
+            if( i == totalTileCount - 1 ){ numOfBG++; }
+            String gulp = lastBG.c_str();
+            bgString +=  gulp + "*" + String::num_int64(numOfBG) + ";";
+            numOfBG = 1;
+            lastBG = bgID;
+        }
+
+        // info
+        int info = infoData[i];
+        if(info == lastInfo && i != totalTileCount - 1){
+            numOfInfo++;
+        }else{
+            if( i == totalTileCount - 1 ){ numOfInfo++; }
+            infoString +=  String::num_int64(lastInfo) + "*" + String::num_int64(numOfInfo) + ";";
+            numOfInfo = 1;
+            lastInfo = info;
+        }
+
+    }
+
+    stringArray.append(tileString);
+    stringArray.append(infoString);
+    stringArray.append(bgString);
+
+    return stringArray;
+}
+
+void WORLDCONTAINER::loadFromStrings(String tileString, String infoString, String bgString){
+
+    int amountElapsed = 0;
+    PackedStringArray tiles = tileString.split(";");
+    for(int slice = 0; slice < tiles.size(); slice++){
+
+        String s = tiles[slice];
+
+        std::string tile = s.get_slice("*",0).ascii().get_data();
+        int amount = s.get_slice("*",1).to_int();
+
+        int covered = 0;
+        for(int i = 0; i < amount; i++){
+            tileData[i + amountElapsed] = tile;
+            covered++;
+        }
+        amountElapsed += covered;
+    }
+
+    amountElapsed = 0;
+    PackedStringArray bgs = bgString.split(";");
+    for(int slice = 0; slice < bgs.size(); slice++){
+
+        String s = bgs[slice];
+
+        std::string bgTile = s.get_slice("*",0).ascii().get_data();
+        int amount = s.get_slice("*",1).to_int();
+
+        int covered = 0;
+        for(int i = 0; i < amount; i++){
+            bgData[i + amountElapsed] = bgTile;
+            covered++;
+        }
+        amountElapsed += covered;
+    }
+
+    amountElapsed = 0;
+    PackedStringArray infos = infoString.split(";");
+    for(int slice = 0; slice < infos.size(); slice++){
+
+        String s = infos[slice];
+
+        int info = s.get_slice("*",0).to_int();
+        int amount = s.get_slice("*",1).to_int();
+
+        int covered = 0;
+        for(int i = 0; i < amount; i++){
+            infoData[i + amountElapsed] = info;
+            covered++;
+        }
+        amountElapsed += covered;
+    }
+
+}
+
 
 void WORLDCONTAINER::debugWorldGen(int seed){
 
@@ -379,6 +503,14 @@ void WORLDCONTAINER::updateChunks(std::unordered_map<int, bool> changedTiles){
     
 }
 
+void WORLDCONTAINER::forceAllChunksToDraw(){
+    Array chunks = get_children(); // array of all existing chunks
+    for( int i = 0; i < get_child_count(); i++ ){
+        CHUNK *chunkObj = Object::cast_to<CHUNK>(chunks[i]);
+        chunkObj->drawTiles(this,bitmap);
+    }
+}
+
 void WORLDCONTAINER::addBlockChangeToQueue(int changeX, int changeY, std::string blockID){
     // we could decide here whether or not to override existing changes
     blockChangeQueue[convertCoord(changeX,changeY)] = blockID;
@@ -405,6 +537,7 @@ void WORLDCONTAINER::breakBlock(int tileX, int tileY){
 void WORLDCONTAINER::spawnItem(String itemID, int amount, int x, int y){
     emit_signal("dropGroundItem", itemID, amount, x, y);
 }
+
 
 
 // GDScript Editing
