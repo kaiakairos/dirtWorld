@@ -24,6 +24,8 @@ private:
     int *infoData;
     std::string *bgData;
 
+    int *randomArray;
+
     int totalTileCount;
 
     // gulp
@@ -84,6 +86,8 @@ public:
 
     void setBGData(int x, int y, std::string newBG);
     std::string getBGData(int x, int y);
+
+    int getRandomArrayNumber(int x,int y);
 
     void createNewChunk(int chunkX, int chunkY);
 

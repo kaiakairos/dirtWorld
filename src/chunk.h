@@ -56,6 +56,8 @@ public:
     // sprites
     Sprite2D *tileSprite;
     Sprite2D *bgSprite;
+    Sprite2D *animSpriteSLOW; // animated sprites
+    Sprite2D *animSpriteFAST;
 
     // collider
     StaticBody2D *staticBody;
@@ -64,6 +66,8 @@ public:
     void clearColliders();
 
     void simulateLight(WORLDCONTAINER *worldContainer);
+
+    void animateSprites(int gameTick);
 
 };
 

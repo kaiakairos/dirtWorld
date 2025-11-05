@@ -22,11 +22,18 @@ void BLOCKOBJECT::_bind_methods() {
     ClassDB::bind_method(D_METHOD("setLightPassThrough","newValue"), &BLOCKOBJECT::setLightPassThrough);
     ClassDB::bind_method(D_METHOD("setLightEmission","r","g","b"), &BLOCKOBJECT::setLightEmission);
 
+    ClassDB::bind_method(D_METHOD("setAnimState","newState"), &BLOCKOBJECT::setAnimState);
+    ClassDB::bind_method(D_METHOD("setAnimSplit","newSplit"), &BLOCKOBJECT::setAnimSplit);
+    ClassDB::bind_method(D_METHOD("getAnimState"), &BLOCKOBJECT::getAnimState);
+    ClassDB::bind_method(D_METHOD("getAnimSplit"), &BLOCKOBJECT::getAnimSplit);
+
+    ClassDB::bind_method(D_METHOD("setCollisionType","newType"), &BLOCKOBJECT::setCollisionType);
+    ClassDB::bind_method(D_METHOD("getCollisionType"), &BLOCKOBJECT::getCollisionType);
+
     ClassDB::bind_method(D_METHOD("getImageRectGD","x","y","blockID","container","worldContainer"), &BLOCKOBJECT::getImageRectGD);
 }
 
 BLOCKOBJECT::BLOCKOBJECT() {
-	// Initialize any variables here.
 }
 
 BLOCKOBJECT::~BLOCKOBJECT() {
@@ -128,4 +135,32 @@ void BLOCKOBJECT::setLightEmission(float r, float g, float b){
 
 std::tuple<float,float,float> BLOCKOBJECT::getLightEmission(){
     return lightEmission;
+}
+
+
+
+
+//////////////// ANIMATION STUFF ////////////////////////////
+void BLOCKOBJECT::setAnimState(int newState){
+    animState = newState;
+}
+void BLOCKOBJECT::setAnimSplit(int newSplit){
+    animSplit = newSplit;
+}
+
+int BLOCKOBJECT::getAnimState(){
+    return animState;
+}
+int BLOCKOBJECT::getAnimSplit(){
+    return animSplit;
+}
+
+///////////////////// COLLISION STUFF /////////////////////////
+
+void BLOCKOBJECT::setCollisionType(int newType){
+    collisionType = newType;
+}
+
+int BLOCKOBJECT::getCollisionType(){
+    return collisionType;
 }

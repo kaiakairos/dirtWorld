@@ -30,3 +30,5 @@ world = NodePath("../../..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ltntx")
+
+[connection signal="dropGroundItem" from="WORLDCONTAINER" to="." method="_on_worldcontainer_drop_ground_item"]

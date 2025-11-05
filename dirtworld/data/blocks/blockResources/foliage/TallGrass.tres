@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Block" load_steps=6 format=3 uid="uid://ccp411w4m80lv"]
+
+[ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_malrr"]
+[ext_resource type="Script" uid="uid://dn4l5fl4sq57s" path="res://classes/blocks/blockComponentSetter.gd" id="2_tauad"]
+[ext_resource type="Texture2D" uid="uid://bmdqgeua75tbw" path="res://data/blocks/blockResources/foliage/tallGrass.png" id="3_tauad"]
+
+[sub_resource type="COMPONENTRANDOMIZEDTEXTURE" id="COMPONENTRANDOMIZEDTEXTURE_tauad"]
+
+[sub_resource type="Resource" id="Resource_evocs"]
+script = ExtResource("2_tauad")
+componentType = SubResource("COMPONENTRANDOMIZEDTEXTURE_tauad")
+setValues = Dictionary[StringName, Variant]({
+&"setRange": 4
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
+[resource]
+script = ExtResource("1_malrr")
+blockID = "tallgrass"
+texture = ExtResource("3_tauad")
+setComponents = Array[ExtResource("2_tauad")]([SubResource("Resource_evocs")])
+isReplaceable = true
+collisionType = 1
+isTransparent = true
+animState = 1
+metadata/_custom_type_script = "uid://bd7107brdous1"

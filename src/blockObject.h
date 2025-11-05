@@ -57,6 +57,21 @@ public:
     void setLightEmission(float r, float g, float b);
     std::tuple<float,float,float> getLightEmission();
 
+    // anim
+    int animState; // 0 = NO ANIM, 1 = SLOW ANIM, 2 = FAST ANIM
+    int animSplit; // the pixel gap for the chunk draw to grab image
+
+    void setAnimState(int newState);
+    void setAnimSplit(int newSplit);
+
+    int getAnimState();
+    int getAnimSplit();
+
+    // collision
+    int collisionType; // 0 = SOLID BLOCK, 1 = NONE, 2 = PLATFORM
+    void setCollisionType(int newType);
+    int getCollisionType();
+
 };
 
 }

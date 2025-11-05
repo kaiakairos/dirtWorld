@@ -54,7 +54,13 @@ label_settings = SubResource("LabelSettings_t5smv")
 
 [node name="Inventory" parent="UI" instance=ExtResource("4_ehrtr")]
 
-[node name="ChatBox" parent="UI" node_paths=PackedStringArray("world") instance=ExtResource("5_ehrtr")]
-visible = false
-position = Vector2(185, 281)
-world = NodePath("../../ViewportContainer/Viewport/World")
+[node name="RightSide" type="Node2D" parent="UI"]
+position = Vector2(400, 0)
+
+[node name="ChatBox" parent="UI/RightSide" node_paths=PackedStringArray("world", "messageContainer") instance=ExtResource("5_ehrtr")]
+position = Vector2(-215, 279)
+world = NodePath("../../../ViewportContainer/Viewport/World")
+messageContainer = NodePath("../Messages")
+
+[node name="Messages" type="Node2D" parent="UI/RightSide"]
+position = Vector2(-5, 273)

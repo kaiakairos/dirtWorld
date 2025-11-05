@@ -7,10 +7,9 @@ font_size = 13
 
 [node name="BlockComponentGenerators" type="Node"]
 script = ExtResource("1_0sd8s")
-componentName = "multi tile texture"
+componentName = "randomized texture"
 variables = Dictionary[String, String]({
-"heightInTiles": "int",
-"widthInTiles": "int"
+"range": "int"
 })
 
 [node name="Label" type="Label" parent="."]

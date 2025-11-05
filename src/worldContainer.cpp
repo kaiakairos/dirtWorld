@@ -92,12 +92,18 @@ void WORLDCONTAINER::initializeArray(int width, int height){
     lightData = new std::tuple<float,float,float>[totalTileCount];
     infoData = new int[totalTileCount];
     bgData = new std::string[totalTileCount];
+
+    randomArray = new int[totalTileCount];
+
     for(int x = 0; x < worldWidth; x++){
         for(int y = 0; y < worldHeight; y++){
             setTileData(x,y,"air");
             setLightData(x,y,0.0,0.0,0.0);
             setInfoData(x,y,0);
             setBGData(x,y,"air");
+
+            randomArray[convertCoord(x,y)] = std::rand();
+
         }
     }
 
@@ -320,6 +326,12 @@ std::string WORLDCONTAINER::getBGData(int x, int y){
     return bgData[convertCoord(x,y)];
 }
 
+// other
+
+int WORLDCONTAINER::getRandomArrayNumber(int x,int y){
+    return randomArray[convertCoord(x,y)];
+}
+
 ///////////////////
 // CHUNK LOADING //
 ///////////////////
@@ -407,6 +419,7 @@ void WORLDCONTAINER::simulateLoadedChunks(int gameTick){
 
         }
         chunkObj->simulateLight(this);
+        chunkObj->animateSprites(gameTick);
 
     }
 

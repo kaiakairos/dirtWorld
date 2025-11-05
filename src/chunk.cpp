@@ -22,6 +22,16 @@ CHUNK::CHUNK() {
     bgSprite->set_z_index(-20);
 
     add_child(bgSprite);
+
+    animSpriteSLOW = memnew(Sprite2D);
+    animSpriteSLOW->set_centered(false);
+    animSpriteSLOW->set_hframes(3);
+    add_child(animSpriteSLOW);
+
+    animSpriteFAST = memnew(Sprite2D);
+    animSpriteFAST->set_centered(false);
+    animSpriteFAST->set_hframes(3);
+    add_child(animSpriteFAST);
     
     staticBody = memnew(StaticBody2D);
     add_child(staticBody);
@@ -66,16 +76,21 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
     Ref<Image> occlude = worldContainer->getBGAmbientOcclusionImage();
     Ref<Image> cutout = worldContainer->getBGCutOutImage();
 
+    // base img
     Ref<Image> img = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
 
+    // collider
     Ref<Image> colliderImg = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
     colliderImg->fill(Color::hex(0x00000000));
 
+    // bg images
     Ref<Image> bgImg = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
-
     Ref<Image> bgShadow = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
-
     Ref<Image> cutoutIMG = Image::create(tileSize * 8, tileSize * 8, false, Image::FORMAT_RGBA8);
+
+    // anim images
+    Ref<Image> animSLOWImg = Image::create(tileSize * 8 * 3, tileSize * 8, false, Image::FORMAT_RGBA8);
+    Ref<Image> animFASTImg = Image::create(tileSize * 8 * 3, tileSize * 8, false, Image::FORMAT_RGBA8);
 
     for(int x = 0; x < 8; x++){
         for(int y = 0; y < 8; y++){
@@ -92,11 +107,28 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
             Vector2i rectPos = blockOBJ->getImageRect(worldX,worldY,blockID,blockContainer,worldContainer); // get position to sample from image
 
             Vector2i imgPos = Vector2i(x * tileSize,y * tileSize);
-            img->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,rectPos.y * tileSize,tileSize,tileSize), imgPos);
+            int animSplit = blockOBJ->getAnimSplit();
+            switch(blockOBJ->getAnimState()){
+                case 0: // no animation
+                    img->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,rectPos.y * tileSize,tileSize,tileSize), imgPos);
+                    break;
+                case 1: // anim slow
+                    animSLOWImg->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,rectPos.y * tileSize,tileSize,tileSize), imgPos);
+                    animSLOWImg->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,(rectPos.y * tileSize) + animSplit,tileSize,tileSize), imgPos + Vector2i(64,0));
+                    animSLOWImg->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,(rectPos.y * tileSize) + ( animSplit * 2),tileSize,tileSize), imgPos + Vector2i(128,0));
+                    break;
+                case 2: // anim fast
+                    animFASTImg->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,rectPos.y * tileSize,tileSize,tileSize), imgPos);
+                    animFASTImg->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,(rectPos.y * tileSize) + animSplit,tileSize,tileSize), imgPos + Vector2i(64,0));
+                    animFASTImg->blend_rect(blockImg, Rect2i(rectPos.x * tileSize,(rectPos.y * tileSize) + ( animSplit * 2),tileSize,tileSize), imgPos + Vector2i(128,0));
+                    break;
+
+            }
+            
 
             std::string bgID = worldContainer->getBGData(worldX,worldY);
 
-            if(blockOBJ->getIsTransparent() && bgID != "air"){ // draw bg
+            if(blockOBJ->getIsTransparent() && bgID != "air"){ // draw background tile
 
                 Ref<BLOCKOBJECT> bgOBJ = blockContainer->getObjectFromString(bgID);
                 Ref<Image> bgt = bgOBJ->getTextureImage();
@@ -112,7 +144,7 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
             }
 
             // debug collisions, remove later and replace with something better (collision types mayhaps??)
-            if( blockID != "air" ) {
+            if( blockOBJ->getCollisionType() == 0 ) {
                 colliderImg->fill_rect(Rect2i(x * tileSize,y * tileSize,tileSize,tileSize),Color::hex(0xFFFFFFFF));
             }
         }
@@ -157,6 +189,8 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
 
     tileSprite->set_texture(ImageTexture::create_from_image(img));
 
+
+    // bg image. for later: we should probably have 2 background sprites, one that gets darkened and one that does not !
     bgImg->adjust_bcs(0.5,0.9,1.5);
     bgImg->blend_rect_mask(bgShadow,bgImg,Rect2i(0,0,64,64),Vector2i(0,0));
 
@@ -165,6 +199,13 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
 
     bgImg->blit_rect_mask(bg2,cutoutIMG,Rect2i(0,0,64,64),Vector2i(0,0));
     bgSprite->set_texture(ImageTexture::create_from_image(bgImg));
+
+    // anim
+
+    animSpriteSLOW->set_texture(ImageTexture::create_from_image(animSLOWImg));
+    animSpriteFAST->set_texture(ImageTexture::create_from_image(animFASTImg));
+
+    
 
 }
 
@@ -259,6 +300,12 @@ void CHUNK::simulateLight(WORLDCONTAINER *worldContainer){
 
         }
     }
+}
+
+
+void CHUNK::animateSprites(int gameTick){
+    animSpriteSLOW->set_frame((gameTick % 15)/5);
+    animSpriteFAST->set_frame(gameTick % 3);
 }
 
 // MATH //

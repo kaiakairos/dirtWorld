@@ -47,6 +47,13 @@ func loadBlocksFromDirectory(dir:String) -> void:
 		blockObject.setLightEmission(c.r,c.g,c.b)
 		
 		allBlocks[blockID] = resource
+		
+		# animation
+		blockObject.setAnimState(resource.animState)
+		blockObject.setAnimSplit(resource.animSplit)
+		
+		# collision
+		blockObject.setCollisionType(resource.collisionType)
 
 func isBlockReplaceable(id:String) -> bool:
 	return getBlockOBJ(id).isReplaceable

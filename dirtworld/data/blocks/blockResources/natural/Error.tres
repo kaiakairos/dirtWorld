@@ -8,4 +8,6 @@
 script = ExtResource("1_bhwte")
 blockID = "error"
 texture = ExtResource("3_abejc")
+lightEmission = Color(1, 1, 1, 1)
+isTransparent = true
 metadata/_custom_type_script = "uid://bd7107brdous1"

@@ -32,8 +32,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		$UI/Inventory.toggleInventory()
 	
-	if Input.is_action_just_pressed("chatbox") and !$UI/ChatBox.showing:
-		$UI/ChatBox.enable()
+	
 	
 func changeWindowSize():
 	var rect :Rect2 = get_viewport_rect()
@@ -42,3 +41,4 @@ func changeWindowSize():
 	viewportContainer.position.x = ((width % 8)/2)  * -1
 	lightRenderSize = (width / 8) + 14
 	$LightMask.position.x = viewportContainer.position.x
+	$UI/RightSide.position.x = rect.size.x

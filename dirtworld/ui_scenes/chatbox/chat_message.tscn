@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cref6qk3cw4pc"]
+
+[ext_resource type="Script" uid="uid://m4yy87052nto" path="res://ui_scenes/chatbox/chat_message.gd" id="1_saa8d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ii1rh"]
+font_size = 11
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="ChatMessage" type="Node2D"]
+script = ExtResource("1_saa8d")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -279.0
+offset_top = -234.0
+offset_right = -5.0
+offset_bottom = -4.0
+text = "this is a chat message !!!!"
+label_settings = SubResource("LabelSettings_ii1rh")
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 2

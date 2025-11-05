@@ -26,3 +26,5 @@ func componentChanged(newComponent:BLOCKCOMPONENT) -> void:
 			setValues = {"setBlockToGrowOn":"dirt","setSpreadchance":1000,"setNeedsAir":true}
 		"COMPONENTMULTITILETEXTURE":
 			setValues = {"setHeightInTiles":2,"setWidthInTiles":2,"setShouldBreakItself":true}
+		"COMPONENTRANDOMIZEDTEXTURE":
+			setValues = {"setRange":3}
