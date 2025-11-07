@@ -26,7 +26,7 @@ shader_parameter/quantize_groups = 48
 shader_parameter/urgh = Vector2(0, 0)
 
 [sub_resource type="Gradient" id="Gradient_xy2fa"]
-colors = PackedColorArray(0.15169573, 0.2890542, 0.62612647, 1, 0.45972553, 0.4616045, 0.725314, 1)
+colors = PackedColorArray(0.07155291, 0.35320947, 0.42078716, 1, 0.45972553, 0.4616045, 0.725314, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_dg32h"]
 gradient = SubResource("Gradient_xy2fa")
