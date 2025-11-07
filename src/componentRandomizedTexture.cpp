@@ -7,6 +7,7 @@
 using namespace godot;
 void COMPONENTRANDOMIZEDTEXTURE::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("setRange","newRange"), &COMPONENTRANDOMIZEDTEXTURE::setRange);
+	ClassDB::bind_method(D_METHOD("setGap","newGap"), &COMPONENTRANDOMIZEDTEXTURE::setGap);
 }
 
 COMPONENTRANDOMIZEDTEXTURE::COMPONENTRANDOMIZEDTEXTURE() {
@@ -18,6 +19,9 @@ COMPONENTRANDOMIZEDTEXTURE::~COMPONENTRANDOMIZEDTEXTURE() { //cleanup
 void COMPONENTRANDOMIZEDTEXTURE::setRange(int newRange){
 	range = newRange;
 }
+void COMPONENTRANDOMIZEDTEXTURE::setGap(int newGap){
+	gap = newGap;
+}
 void COMPONENTRANDOMIZEDTEXTURE::onSimulationTick(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){}
 void COMPONENTRANDOMIZEDTEXTURE::onRandomTick(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){}
 void COMPONENTRANDOMIZEDTEXTURE::onBreak(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){}
@@ -27,6 +31,6 @@ void COMPONENTRANDOMIZEDTEXTURE::onBlockUpdate(int x, int y, std::string blockID
 Vector2i COMPONENTRANDOMIZEDTEXTURE::getImageRect(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
 	int value = worldContainer->getRandomArrayNumber(x,y) % range;
 
-    Vector2i v = Vector2i(value,0);
+    Vector2i v = Vector2i(value * gap,0);
     return v;
 }

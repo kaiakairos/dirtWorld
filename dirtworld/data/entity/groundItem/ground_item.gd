@@ -9,6 +9,8 @@ var offset :float = 0.0
 
 var data :Dictionary[String,Variant] = {}
 
+var rotSpeed :float = 8.0
+
 func onReady() -> void:
 	addState("idle")
 	addState("flyingIn")
@@ -34,11 +36,15 @@ func onProcess(delta:float) -> void:
 	
 	match state:
 		states.idle:
-			$Sprite.position.y = (sin((Time.get_ticks_msec() + offset) * 0.01) * 2.0) - 2.0
 			
 			velocity.y += gravity * delta
 			if is_on_floor():
 				velocity.x = move_toward(velocity.x,0.0,delta * 120.0)
+				$Sprite.position.y = (sin((Time.get_ticks_msec() + offset) * 0.01) * 2.0) - 2.0
+				$Sprite.rotation = lerp_angle($Sprite.rotation,0.0,0.2)
+			else:
+				velocity.x = move_toward(velocity.x,0.0,delta * 26.0)
+				$Sprite.rotate(rotSpeed * delta)
 			move_and_slide()
 		states.flyingIn:
 			if !is_instance_valid(flyTarget):

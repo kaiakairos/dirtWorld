@@ -20,7 +20,7 @@ radius = 11.045361
 collision_layer = 2
 script = ExtResource("1_d3bc4")
 itemInstance = SubResource("Resource_82bki")
-defaultGravity = 215
+defaultGravity = 800
 metadata/_custom_type_script = "uid://forevjacaa08"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

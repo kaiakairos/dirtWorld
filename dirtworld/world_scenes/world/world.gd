@@ -17,8 +17,8 @@ var renderDistance :Vector2i = Vector2i(8,5)
 var randomTickThread: Thread
 var threadEnabled:bool = false
 
-@export var worldWidth :int = 64
-@export var worldHeight :int = 512
+@export var worldWidth :int = 64 # 512 blocks
+@export var worldHeight :int = 2048 # 16384 blocks
 
 @export var worldSeed :int = 16
 
@@ -33,6 +33,7 @@ func _ready() -> void:
 	
 	savedStrings = worldContainer.getWorldStrings()
 	
+	gameContainer.camera = camera
 
 ## debug
 func saveWorld() -> void:
@@ -99,7 +100,7 @@ func setLightPosition() -> void:
 
 func gameTick(_delta:float) -> void:
 	tick += 1
-	worldContainer.simulateRandomTick(tick,(worldWidth * worldHeight)/8)
+	worldContainer.simulateRandomTick(tick,int((worldWidth * worldHeight)/20))
 	worldContainer.simulateLoadedChunks(tick)
 
 func getTargetPosition() -> Vector2:
@@ -130,7 +131,7 @@ func _on_worldcontainer_drop_ground_item(itemID: String, amount: int,tileX:int,t
 	groundItem.itemInstance = newItemInstance
 	groundItem.world = self
 	groundItem.position = Vector2(tileX * 8,tileY * 8) + Vector2(4,4)
-	groundItem.velocity = Vector2(randf_range(-20.0,20.0),-20.0)
+	groundItem.velocity = Vector2(randf_range(-40.0,40.0),-40.0)
 	$EntityContainer/GroundItems.add_child(groundItem)
 	
 func setCameraZoom(v:float) -> void:

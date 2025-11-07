@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Block" load_steps=6 format=3 uid="uid://bpf4x1d5vimpr"]
+[gd_resource type="Resource" script_class="Block" load_steps=8 format=3 uid="uid://bpf4x1d5vimpr"]
 
 [ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_g0tfj"]
 [ext_resource type="Script" uid="uid://dn4l5fl4sq57s" path="res://classes/blocks/blockComponentSetter.gd" id="2_gft15"]
@@ -16,9 +16,20 @@ setValues = Dictionary[StringName, Variant]({
 })
 metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
 
+[sub_resource type="COMPONENTRANDOMIZEDTEXTURE" id="COMPONENTRANDOMIZEDTEXTURE_g0tfj"]
+
+[sub_resource type="Resource" id="Resource_gft15"]
+script = ExtResource("2_gft15")
+componentType = SubResource("COMPONENTRANDOMIZEDTEXTURE_g0tfj")
+setValues = Dictionary[StringName, Variant]({
+&"setGap": 1,
+&"setRange": 4
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
 [resource]
 script = ExtResource("1_g0tfj")
 blockID = "stone"
 texture = ExtResource("3_v2d66")
-setComponents = Array[ExtResource("2_gft15")]([SubResource("Resource_028yh")])
+setComponents = Array[ExtResource("2_gft15")]([SubResource("Resource_028yh"), SubResource("Resource_gft15")])
 metadata/_custom_type_script = "uid://bd7107brdous1"

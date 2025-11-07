@@ -31,8 +31,10 @@ public:
 
 // values
 int range;
+int gap;
 
 void setRange(int newRange);
+void setGap(int newGap);
 
 
 

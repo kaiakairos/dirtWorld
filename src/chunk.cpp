@@ -132,8 +132,10 @@ void CHUNK::drawTiles(WORLDCONTAINER *worldContainer, Ref<BitMap> bitmap){
 
                 Ref<BLOCKOBJECT> bgOBJ = blockContainer->getObjectFromString(bgID);
                 Ref<Image> bgt = bgOBJ->getTextureImage();
+                
+                Vector2i rectPos = bgOBJ->getImageRect(worldX,worldY,bgID,blockContainer,worldContainer);
 
-                bgImg->blend_rect(bgt, Rect2i(0,0,tileSize,tileSize), imgPos);
+                bgImg->blend_rect(bgt, Rect2i(rectPos.x * tileSize,rectPos.y * tileSize,tileSize,tileSize), imgPos);
 
                 Vector2i urgh = worldContainer->getBorderPos(worldX,worldY);
                 Vector2i pooppass= worldContainer->getPoopPass(worldX,worldY);

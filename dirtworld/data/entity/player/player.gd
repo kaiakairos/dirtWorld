@@ -130,7 +130,7 @@ func normalAnimation(delta:float)->void: # absolute awful hack job of a script
 	
 	mousePos.x = abs(mousePos.x)
 	mousePos.y *= 0.4
-	var targetAngle :float = mousePos.angle()
+	var targetAngle :float = (mousePos + Vector2(0,4)).angle()
 	
 	$Sprite/Torso.rotation = lerp_angle($Sprite/Torso.rotation,clamp(targetAngle,0.0,PI/8),0.25)
 	$Sprite/Torso/Head.rotation =  lerp_angle($Sprite/Torso/Head.rotation,clamp(targetAngle,-PI/6,PI/8),0.25)
@@ -197,8 +197,8 @@ func setPlayerColor(color:Color) -> void:
 	
 var blinkTick :float = 0.0
 func eyeballAnimation(delta:float,mousePos:Vector2) -> void:
-	
-	var pupilTarget:Vector2 = (mousePos/200.0) * 3.0
+	var tru = mousePos + Vector2(0,12)
+	var pupilTarget:Vector2 = (tru/200.0) * 3.0
 	if pupilTarget.length() > 4.0:
 		pupilTarget = pupilTarget.normalized() * 4.0
 	elif pupilTarget.length() < 2.0:

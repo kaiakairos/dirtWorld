@@ -27,4 +27,4 @@ func componentChanged(newComponent:BLOCKCOMPONENT) -> void:
 		"COMPONENTMULTITILETEXTURE":
 			setValues = {"setHeightInTiles":2,"setWidthInTiles":2,"setShouldBreakItself":true}
 		"COMPONENTRANDOMIZEDTEXTURE":
-			setValues = {"setRange":3}
+			setValues = {"setRange":3,"setGap":1}

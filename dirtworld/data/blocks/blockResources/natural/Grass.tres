@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Block" load_steps=10 format=3 uid="uid://sy6fwmelitcs"]
+[gd_resource type="Resource" script_class="Block" load_steps=12 format=3 uid="uid://sy6fwmelitcs"]
 
 [ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_kc5yr"]
 [ext_resource type="Script" uid="uid://dn4l5fl4sq57s" path="res://classes/blocks/blockComponentSetter.gd" id="2_d7xwc"]
@@ -35,11 +35,22 @@ setValues = Dictionary[StringName, Variant]({
 })
 metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
 
+[sub_resource type="COMPONENTRANDOMIZEDTEXTURE" id="COMPONENTRANDOMIZEDTEXTURE_d7xwc"]
+
+[sub_resource type="Resource" id="Resource_8jicr"]
+script = ExtResource("2_d7xwc")
+componentType = SubResource("COMPONENTRANDOMIZEDTEXTURE_d7xwc")
+setValues = Dictionary[StringName, Variant]({
+&"setGap": 4,
+&"setRange": 3
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
 [resource]
 script = ExtResource("1_kc5yr")
 blockID = "grass"
 texture = ExtResource("3_d7xwc")
+setComponents = Array[ExtResource("2_d7xwc")]([SubResource("Resource_uv33w"), SubResource("Resource_qsvir"), SubResource("Resource_a551i"), SubResource("Resource_8jicr")])
 health = 4
-setComponents = Array[ExtResource("2_d7xwc")]([SubResource("Resource_uv33w"), SubResource("Resource_qsvir"), SubResource("Resource_a551i")])
 lightPassThrough = 0.96
 metadata/_custom_type_script = "uid://bd7107brdous1"

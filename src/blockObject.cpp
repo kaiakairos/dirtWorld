@@ -92,9 +92,7 @@ Vector2i BLOCKOBJECT::getImageRect(int x, int y, std::string blockID, BLOCKCONTA
     for(int i = 0; i < componentCount; i ++){
         Ref<BLOCKCOMPONENT> g = components[i];
         Vector2i newVec = g->getImageRect(x,y,blockID,container,worldContainer);
-        if (newVec != Vector2i(0,0)){
-            vec = newVec;
-        }
+        vec = vec + newVec;
     }
     return vec;
 }
@@ -105,9 +103,7 @@ Vector2i BLOCKOBJECT::getImageRectGD(int x, int y, String blockID, BLOCKCONTAINE
     for(int i = 0; i < componentCount; i ++){
         Ref<BLOCKCOMPONENT> g = components[i];
         Vector2i newVec = g->getImageRect(x,y,newID,container,worldContainer);
-        if (newVec != Vector2i(0,0)){
-            vec = newVec;
-        }
+        vec = vec + newVec;
     }
     return vec;
 }

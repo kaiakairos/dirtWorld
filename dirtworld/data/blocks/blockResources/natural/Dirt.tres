@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Block" load_steps=6 format=3 uid="uid://d31hipcps7eob"]
+[gd_resource type="Resource" script_class="Block" load_steps=8 format=3 uid="uid://d31hipcps7eob"]
 
 [ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_a1xvl"]
 [ext_resource type="Script" uid="uid://dn4l5fl4sq57s" path="res://classes/blocks/blockComponentSetter.gd" id="2_nwytr"]
@@ -16,10 +16,21 @@ setValues = Dictionary[StringName, Variant]({
 })
 metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
 
+[sub_resource type="COMPONENTRANDOMIZEDTEXTURE" id="COMPONENTRANDOMIZEDTEXTURE_a1xvl"]
+
+[sub_resource type="Resource" id="Resource_nwytr"]
+script = ExtResource("2_nwytr")
+componentType = SubResource("COMPONENTRANDOMIZEDTEXTURE_a1xvl")
+setValues = Dictionary[StringName, Variant]({
+&"setGap": 1,
+&"setRange": 5
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
 [resource]
 script = ExtResource("1_a1xvl")
 blockID = "dirt"
 texture = ExtResource("3_uwwnn")
-setComponents = Array[ExtResource("2_nwytr")]([SubResource("Resource_uncr8")])
+setComponents = Array[ExtResource("2_nwytr")]([SubResource("Resource_uncr8"), SubResource("Resource_nwytr")])
 lightPassThrough = 0.96
 metadata/_custom_type_script = "uid://bd7107brdous1"

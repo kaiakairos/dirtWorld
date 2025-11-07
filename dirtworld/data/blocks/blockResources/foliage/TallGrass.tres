@@ -10,7 +10,8 @@
 script = ExtResource("2_tauad")
 componentType = SubResource("COMPONENTRANDOMIZEDTEXTURE_tauad")
 setValues = Dictionary[StringName, Variant]({
-&"setRange": 4
+&"setGap": 1,
+&"setRange": 7
 })
 metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
 
@@ -19,6 +20,7 @@ script = ExtResource("1_malrr")
 blockID = "tallgrass"
 texture = ExtResource("3_tauad")
 setComponents = Array[ExtResource("2_tauad")]([SubResource("Resource_evocs")])
+health = 0
 isReplaceable = true
 collisionType = 1
 isTransparent = true

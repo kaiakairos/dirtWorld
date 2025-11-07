@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://cotsxh8x7kbl"]
+[gd_scene load_steps=18 format=3 uid="uid://cotsxh8x7kbl"]
 
 [ext_resource type="Script" uid="uid://bc82c14ogih0k" path="res://ui_scenes/gameContainer/game_container.gd" id="1_3qesr"]
 [ext_resource type="PackedScene" uid="uid://bgoscy6mf6lsi" path="res://world_scenes/world/world.tscn" id="1_dxtl2"]
 [ext_resource type="PackedScene" uid="uid://bsqnrlhsi0qe3" path="res://ui_scenes/inventory/inventory.tscn" id="4_ehrtr"]
 [ext_resource type="Material" uid="uid://f1rdok6e656p" path="res://world_scenes/world/lighting/lightingDitherMaterial.tres" id="4_t5smv"]
 [ext_resource type="PackedScene" uid="uid://d26s06mnacm2" path="res://ui_scenes/chatbox/chat_box.tscn" id="5_ehrtr"]
+[ext_resource type="Shader" uid="uid://dgl2nklcautxt" path="res://world_scenes/background/cover.gdshader" id="6_5byu3"]
+[ext_resource type="Texture2D" uid="uid://cwwt4jhhixss1" path="res://world_scenes/background/hills.png" id="6_dg32h"]
+[ext_resource type="Texture2D" uid="uid://ces8d11dycevs" path="res://data/items/blocks/grassItem.png" id="7_xy2fa"]
+[ext_resource type="Texture2D" uid="uid://cxwom5fpurduu" path="res://world_scenes/background/cover.png" id="8_ax8mr"]
+[ext_resource type="Texture2D" uid="uid://cuwdd4chd6urq" path="res://world_scenes/background/clouds.png" id="9_8le0m"]
+[ext_resource type="Material" uid="uid://b6fnnsvtrc2af" path="res://zeeg/material/outline/spriteOutlineMaterial.tres" id="10_hqlkk"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qe56b"]
 viewport_path = NodePath("ViewportContainer/Viewport")
@@ -13,6 +19,20 @@ viewport_path = NodePath("ViewportContainer/Viewport")
 font_size = 8
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xy2fa"]
+shader = ExtResource("6_5byu3")
+shader_parameter/quantize_groups = 48
+shader_parameter/urgh = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_xy2fa"]
+colors = PackedColorArray(0.15169573, 0.2890542, 0.62612647, 1, 0.45972553, 0.4616045, 0.725314, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dg32h"]
+gradient = SubResource("Gradient_xy2fa")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8le0m"]
+viewport_path = NodePath("ViewportContainer/Viewport")
 
 [node name="GameContainer" type="Node2D"]
 script = ExtResource("1_3qesr")
@@ -30,6 +50,10 @@ size = Vector2i(400, 300)
 render_target_update_mode = 4
 
 [node name="World" parent="ViewportContainer/Viewport" instance=ExtResource("1_dxtl2")]
+
+[node name="Icon" type="Sprite2D" parent="ViewportContainer/Viewport"]
+position = Vector2(159, 97)
+texture = ExtResource("7_xy2fa")
 
 [node name="LightMask" type="Sprite2D" parent="."]
 clip_children = 1
@@ -58,9 +82,65 @@ label_settings = SubResource("LabelSettings_t5smv")
 position = Vector2(400, 0)
 
 [node name="ChatBox" parent="UI/RightSide" node_paths=PackedStringArray("world", "messageContainer") instance=ExtResource("5_ehrtr")]
+visible = false
 position = Vector2(-215, 279)
 world = NodePath("../../../ViewportContainer/Viewport/World")
 messageContainer = NodePath("../Messages")
 
 [node name="Messages" type="Node2D" parent="UI/RightSide"]
 position = Vector2(-5, 273)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+z_index = -100
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(400, 300)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="BackgroundCover" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+z_index = 100
+material = SubResource("ShaderMaterial_xy2fa")
+position = Vector2(-19.999996, -23.000002)
+scale = Vector2(2.74, 0.8975)
+texture = ExtResource("8_ax8mr")
+centered = false
+
+[node name="Parallax2D2" type="Parallax2D" parent="SubViewportContainer/SubViewport"]
+repeat_size = Vector2(800, 0)
+autoscroll = Vector2(4.85, 0)
+repeat_times = 2
+
+[node name="clouds" type="Sprite2D" parent="SubViewportContainer/SubViewport/Parallax2D2"]
+self_modulate = Color(0.3019608, 1, 1, 0.10980392)
+position = Vector2(-177, -11)
+texture = ExtResource("9_8le0m")
+centered = false
+
+[node name="Parallax2D" type="Parallax2D" parent="SubViewportContainer/SubViewport"]
+repeat_size = Vector2(800, 0)
+
+[node name="Hills" type="Sprite2D" parent="SubViewportContainer/SubViewport/Parallax2D"]
+position = Vector2(-162, 186)
+texture = ExtResource("6_dg32h")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+modulate = Color(0.572128, 0.70907056, 0.9028648, 1)
+z_index = -100
+position = Vector2(512.9181, 150.13142)
+rotation = 1.5707964
+scale = Vector2(1.2054794, 1030.8687)
+texture = SubResource("GradientTexture1D_dg32h")
+
+[node name="DropShadow" type="Sprite2D" parent="."]
+z_index = -1
+material = ExtResource("10_hqlkk")
+position = Vector2(-12, 2)
+texture = SubResource("ViewportTexture_8le0m")
+centered = false

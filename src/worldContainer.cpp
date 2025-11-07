@@ -102,7 +102,7 @@ void WORLDCONTAINER::initializeArray(int width, int height){
             setInfoData(x,y,0);
             setBGData(x,y,"air");
 
-            randomArray[convertCoord(x,y)] = std::rand();
+            randomArray[convertCoord(x,y)] = 0;
 
         }
     }
@@ -230,6 +230,8 @@ void WORLDCONTAINER::loadFromStrings(String tileString, String infoString, Strin
 
 void WORLDCONTAINER::debugWorldGen(int seed){
 
+    std::srand(seed);
+
     Ref<FastNoiseLite> noise = memnew(FastNoiseLite);
     noise->set_seed(seed);
 
@@ -238,6 +240,10 @@ void WORLDCONTAINER::debugWorldGen(int seed){
         int surfaceHeight = 32 + (noise->get_noise_1d(x) * 12);
 
         for(int y = 0; y < worldHeight; y++){
+
+            if (y > surfaceHeight - 1){
+                setTileData(x,y,"tallgrass");
+            }
 
             if (y > surfaceHeight){
                 setTileData(x,y,"grass");
@@ -256,6 +262,9 @@ void WORLDCONTAINER::debugWorldGen(int seed){
                 setTileData(x,y,"air");
             }
             
+            int newRand = std::rand() * 1.152;
+            randomArray[convertCoord(x,y)] = newRand;
+
         }
     }
 
