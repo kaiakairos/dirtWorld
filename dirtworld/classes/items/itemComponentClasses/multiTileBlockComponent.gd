@@ -103,4 +103,10 @@ func placeForReal(tile:Vector2i,worldContainer:WORLDCONTAINER) -> void:
 			worldContainer.setInfoData(worldX,worldY,info)
 	
 	worldContainer.applyManualChanges()
+	for x in range(tileWidth):
+		for y in range(tileHeight):
+			var worldX :int = tile.x + x + offset.x
+			var worldY :int = tile.y + y + offset.y
+			worldContainer.placeBlock(worldX,worldY)
+	
 	timer = 0.15

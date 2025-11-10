@@ -28,3 +28,5 @@ func componentChanged(newComponent:BLOCKCOMPONENT) -> void:
 			setValues = {"setHeightInTiles":2,"setWidthInTiles":2,"setShouldBreakItself":true}
 		"COMPONENTRANDOMIZEDTEXTURE":
 			setValues = {"setRange":3,"setGap":1}
+		"COMPONENTSPAWNBLOCKENTITY":
+			setValues = {"setBlockEntityId":"someId","setRequiredInfo":-1}

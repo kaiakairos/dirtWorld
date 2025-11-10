@@ -29,6 +29,7 @@ void WORLDCONTAINER::_bind_methods() {
     ClassDB::bind_method(D_METHOD("getBG","x","y"), &WORLDCONTAINER::getBG);
 
     ClassDB::bind_method(D_METHOD("breakBlock","tileX","tileY"), &WORLDCONTAINER::breakBlock);
+    ClassDB::bind_method(D_METHOD("placeBlock","tileX","tileY"), &WORLDCONTAINER::placeBlock);
 
     ClassDB::bind_method(D_METHOD("setInfoData","tileX","tileY","newInfo"), &WORLDCONTAINER::setInfoData);
     ClassDB::bind_method(D_METHOD("getInfoData","tileX","tileY"), &WORLDCONTAINER::getInfoData);
@@ -40,8 +41,11 @@ void WORLDCONTAINER::_bind_methods() {
 
     ClassDB::bind_method(D_METHOD("forceAllChunksToDraw"), &WORLDCONTAINER::forceAllChunksToDraw);
 
+    ClassDB::bind_method(D_METHOD("isTileLoaded","x","y"), &WORLDCONTAINER::isTileLoaded);
+
     ADD_SIGNAL(MethodInfo("queue_delete_chunk", PropertyInfo(Variant::VECTOR2I, "delete_pos"))); // creates a signal for us
     ADD_SIGNAL(MethodInfo("dropGroundItem", PropertyInfo(Variant::STRING, "itemID"),PropertyInfo(Variant::INT, "amount"),PropertyInfo(Variant::INT, "tileX"),PropertyInfo(Variant::INT, "tileY")));
+    ADD_SIGNAL(MethodInfo("spawnBlockEntity", PropertyInfo(Variant::STRING, "blockEntityID"),PropertyInfo(Variant::INT, "tileX"),PropertyInfo(Variant::INT, "tileY")));
 }
 
 WORLDCONTAINER::WORLDCONTAINER() {
@@ -353,6 +357,8 @@ void WORLDCONTAINER::createNewChunk(int chunkX, int chunkY){
     newChunk->drawTiles(this,bitmap); // other chunk initialization
     
     add_child(newChunk);
+    
+    newChunk->runOnLoaded(this);
 
     loadedChunks[Vector2i(chunkX,chunkY)] = newChunk;
 
@@ -555,11 +561,20 @@ void WORLDCONTAINER::breakBlock(int tileX, int tileY){
     blockObj->simulateBreakComponents(tileX,tileY,blockID,blockContainer,this);
 }
 
+void WORLDCONTAINER::placeBlock(int tileX, int tileY){
+    std::string blockID = getTileData(tileX,tileY);
+    Ref<BLOCKOBJECT> blockObj = blockContainer->getObjectFromString(blockID);
+    blockObj->simulateLoadedComponents(tileX,tileY,blockID,blockContainer,this);
+    blockObj->simulatePlaceComponents(tileX,tileY,blockID,blockContainer,this);
+}
 
 void WORLDCONTAINER::spawnItem(String itemID, int amount, int x, int y){
     emit_signal("dropGroundItem", itemID, amount, x, y);
 }
 
+void WORLDCONTAINER::spawnBlockEntity(String blockEntityID, int x, int y){
+    emit_signal("spawnBlockEntity", blockEntityID, x, y);
+}
 
 
 // GDScript Editing
@@ -639,6 +654,12 @@ Vector2i WORLDCONTAINER::getPoopPass(int x, int y){ // function for wall border 
     return vecPos;
 }
 
+bool WORLDCONTAINER::isTileLoaded(int x, int y){
+    int chunkX = x / 8; // gets chunk position
+    int chunkY = y / 8;
+
+    return loadedChunks.has( Vector2i(chunkX,chunkY) );
+}
 
 
 

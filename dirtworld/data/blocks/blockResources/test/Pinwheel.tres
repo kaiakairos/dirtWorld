@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Block" load_steps=8 format=3 uid="uid://bhy2dtpug3yox"]
+
+[ext_resource type="Script" uid="uid://bd7107brdous1" path="res://classes/blocks/block.gd" id="1_lw4t3"]
+[ext_resource type="Script" uid="uid://dn4l5fl4sq57s" path="res://classes/blocks/blockComponentSetter.gd" id="2_wb18f"]
+[ext_resource type="Texture2D" uid="uid://bmjjf4aonhn2y" path="res://data/blocks/blockResources/natural/air.png" id="3_wb18f"]
+
+[sub_resource type="COMPONENTSPAWNBLOCKENTITY" id="COMPONENTSPAWNBLOCKENTITY_bkxut"]
+
+[sub_resource type="Resource" id="Resource_ecq14"]
+script = ExtResource("2_wb18f")
+componentType = SubResource("COMPONENTSPAWNBLOCKENTITY_bkxut")
+setValues = Dictionary[StringName, Variant]({
+&"setBlockEntityId": "pinwheel",
+&"setRequiredInfo": -1
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
+[sub_resource type="COMPONENTDROPITEM" id="COMPONENTDROPITEM_wb18f"]
+
+[sub_resource type="Resource" id="Resource_bkxut"]
+script = ExtResource("2_wb18f")
+componentType = SubResource("COMPONENTDROPITEM_wb18f")
+setValues = Dictionary[StringName, Variant]({
+&"setAmountMax": 1,
+&"setAmountMin": 1,
+&"setItemID": "pinwheel"
+})
+metadata/_custom_type_script = "uid://dn4l5fl4sq57s"
+
+[resource]
+script = ExtResource("1_lw4t3")
+blockID = "pinwheel"
+texture = ExtResource("3_wb18f")
+setComponents = Array[ExtResource("2_wb18f")]([SubResource("Resource_ecq14"), SubResource("Resource_bkxut")])
+health = 1
+collisionType = 1
+isTransparent = true
+metadata/_custom_type_script = "uid://bd7107brdous1"

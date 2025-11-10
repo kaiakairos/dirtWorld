@@ -1,15 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgoscy6mf6lsi"]
+[gd_scene load_steps=5 format=3 uid="uid://bgoscy6mf6lsi"]
 
 [ext_resource type="Script" uid="uid://bb1kn2q0cql7a" path="res://world_scenes/world/world.gd" id="1_rskwr"]
 [ext_resource type="PackedScene" uid="uid://dvs68a7cxeyit" path="res://data/entity/player/player.tscn" id="2_ltntx"]
+[ext_resource type="Script" uid="uid://dh15mwj4m2e8k" path="res://world_scenes/world/block_entity_container.gd" id="3_qoanb"]
 
 [sub_resource type="Environment" id="Environment_ltntx"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("worldContainer", "camera", "blockBreakContainer")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("worldContainer", "camera", "blockBreakContainer", "blockEntityContainer")]
 script = ExtResource("1_rskwr")
 worldContainer = NodePath("WORLDCONTAINER")
 camera = NodePath("camera")
 blockBreakContainer = NodePath("EntityContainer/BlockBreak")
+blockEntityContainer = NodePath("EntityContainer/BlockEntityContainer")
 
 [node name="WORLDCONTAINER" type="WORLDCONTAINER" parent="."]
 
@@ -17,6 +19,10 @@ blockBreakContainer = NodePath("EntityContainer/BlockBreak")
 z_index = 3
 
 [node name="BlockBreak" type="Node2D" parent="EntityContainer"]
+
+[node name="BlockEntityContainer" type="Node2D" parent="EntityContainer"]
+z_index = -2
+script = ExtResource("3_qoanb")
 
 [node name="Creatures" type="Node2D" parent="EntityContainer"]
 
@@ -32,3 +38,4 @@ world = NodePath("../../..")
 environment = SubResource("Environment_ltntx")
 
 [connection signal="dropGroundItem" from="WORLDCONTAINER" to="." method="_on_worldcontainer_drop_ground_item"]
+[connection signal="spawnBlockEntity" from="WORLDCONTAINER" to="EntityContainer/BlockEntityContainer" method="_on_worldcontainer_spawn_block_entity"]

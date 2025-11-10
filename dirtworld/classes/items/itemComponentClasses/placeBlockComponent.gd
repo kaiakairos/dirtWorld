@@ -78,4 +78,5 @@ func checkIfPlace(data:Dictionary[String,Variant]) -> bool:
 func placeForReal(tile:Vector2i,worldContainer:WORLDCONTAINER) -> void:
 	worldContainer.editBlock(tile.x,tile.y,blockToPlace)
 	worldContainer.applyManualChanges()
+	worldContainer.placeBlock(tile.x,tile.y)
 	timer = 0.15

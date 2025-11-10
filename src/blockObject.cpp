@@ -87,6 +87,30 @@ void BLOCKOBJECT::simulateRandomComponents(int x, int y, std::string blockID, BL
     }
 }
 
+void BLOCKOBJECT::simulatePlaceComponents(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    for(int i = 0; i < componentCount; i ++){
+        Ref<BLOCKCOMPONENT> g = components[i];
+        //godot::UtilityFunctions::print(g);
+        g->onPlace(x,y,blockID,container,worldContainer);
+    }
+}
+
+void BLOCKOBJECT::simulateBlockUpdateComponents(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    for(int i = 0; i < componentCount; i ++){
+        Ref<BLOCKCOMPONENT> g = components[i];
+        //godot::UtilityFunctions::print(g);
+        g->onBlockUpdate(x,y,blockID,container,worldContainer);
+    }
+}
+
+void BLOCKOBJECT::simulateLoadedComponents(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
+    for(int i = 0; i < componentCount; i ++){
+        Ref<BLOCKCOMPONENT> g = components[i];
+        //godot::UtilityFunctions::print(g);
+        g->onLoaded(x,y,blockID,container,worldContainer);
+    }
+}
+
 Vector2i BLOCKOBJECT::getImageRect(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){
     Vector2i vec = Vector2i(0,0);
     for(int i = 0; i < componentCount; i ++){

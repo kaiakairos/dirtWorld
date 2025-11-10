@@ -63,6 +63,7 @@ public:
     StaticBody2D *staticBody;
 
     void simulateTick(WORLDCONTAINER *worldContainer);
+    void runOnLoaded(WORLDCONTAINER *worldContainer);
     void clearColliders();
 
     void simulateLight(WORLDCONTAINER *worldContainer);

@@ -14,6 +14,7 @@
 #include "componentGrowGrass.h"
 #include "componentMultiTileTexture.h"
 #include "componentRandomizedTexture.h"
+#include "componentSpawnBlockEntity.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -40,6 +41,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(COMPONENTGROWGRASS);
 	GDREGISTER_RUNTIME_CLASS(COMPONENTMULTITILETEXTURE);
 	GDREGISTER_RUNTIME_CLASS(COMPONENTRANDOMIZEDTEXTURE);
+	GDREGISTER_RUNTIME_CLASS(COMPONENTSPAWNBLOCKENTITY);
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

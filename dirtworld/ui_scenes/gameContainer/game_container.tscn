@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cotsxh8x7kbl"]
+[gd_scene load_steps=17 format=3 uid="uid://cotsxh8x7kbl"]
 
 [ext_resource type="Script" uid="uid://bc82c14ogih0k" path="res://ui_scenes/gameContainer/game_container.gd" id="1_3qesr"]
 [ext_resource type="PackedScene" uid="uid://bgoscy6mf6lsi" path="res://world_scenes/world/world.tscn" id="1_dxtl2"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://d26s06mnacm2" path="res://ui_scenes/chatbox/chat_box.tscn" id="5_ehrtr"]
 [ext_resource type="Shader" uid="uid://dgl2nklcautxt" path="res://world_scenes/background/cover.gdshader" id="6_5byu3"]
 [ext_resource type="Texture2D" uid="uid://cwwt4jhhixss1" path="res://world_scenes/background/hills.png" id="6_dg32h"]
-[ext_resource type="Texture2D" uid="uid://ces8d11dycevs" path="res://data/items/blocks/grassItem.png" id="7_xy2fa"]
 [ext_resource type="Texture2D" uid="uid://cxwom5fpurduu" path="res://world_scenes/background/cover.png" id="8_ax8mr"]
 [ext_resource type="Texture2D" uid="uid://cuwdd4chd6urq" path="res://world_scenes/background/clouds.png" id="9_8le0m"]
 [ext_resource type="Material" uid="uid://b6fnnsvtrc2af" path="res://zeeg/material/outline/spriteOutlineMaterial.tres" id="10_hqlkk"]
@@ -50,10 +49,6 @@ size = Vector2i(400, 300)
 render_target_update_mode = 4
 
 [node name="World" parent="ViewportContainer/Viewport" instance=ExtResource("1_dxtl2")]
-
-[node name="Icon" type="Sprite2D" parent="ViewportContainer/Viewport"]
-position = Vector2(159, 97)
-texture = ExtResource("7_xy2fa")
 
 [node name="LightMask" type="Sprite2D" parent="."]
 clip_children = 1
@@ -141,6 +136,6 @@ texture = SubResource("GradientTexture1D_dg32h")
 [node name="DropShadow" type="Sprite2D" parent="."]
 z_index = -1
 material = ExtResource("10_hqlkk")
-position = Vector2(-12, 2)
+position = Vector2(1, 1)
 texture = SubResource("ViewportTexture_8le0m")
 centered = false

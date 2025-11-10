@@ -24,6 +24,10 @@ var threadEnabled:bool = false
 
 var savedStrings :PackedStringArray
 
+signal loadedAreaChanged
+
+@export var blockEntityContainer :Node2D
+
 func _ready() -> void:
 	worldContainer.setBlockContainer(BlockManager.blockContainer)
 	worldContainer.initializeArray(worldWidth,worldHeight)
@@ -55,6 +59,7 @@ func _process(delta: float) -> void:
 	if positionLastFrame != trackingPosition:
 		worldContainer.chunkLoadArea(trackingPosition.x,trackingPosition.y,renderDistance.x,renderDistance.y)
 		worldContainer.unloadChunks(trackingPosition.x,trackingPosition.y,renderDistance.x,renderDistance.y)
+		emit_signal("loadedAreaChanged")
 		positionLastFrame = trackingPosition
 		
 	# advance game tick

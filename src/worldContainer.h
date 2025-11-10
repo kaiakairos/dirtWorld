@@ -112,8 +112,10 @@ public:
     // simulation one timers
 
     void breakBlock(int tileX, int tileY);
+    void placeBlock(int tileX, int tileY);
 
     void spawnItem(String itemID, int amount, int x, int y);
+    void spawnBlockEntity(String blockEntityID, int x, int y);
 
     // GDScript Access
     
@@ -130,6 +132,8 @@ public:
     Vector2i getBorderPos(int x, int y);
 
     Vector2i getPoopPass(int x, int y);
+
+    bool isTileLoaded(int x, int y);
 
 };
 

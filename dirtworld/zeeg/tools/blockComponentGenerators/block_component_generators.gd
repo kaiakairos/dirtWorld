@@ -30,6 +30,7 @@ func generateHFile() -> void:
 	file.store_string("    void onBreak(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);\n")
 	file.store_string("    void onPlace(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);\n")
 	file.store_string("    void onBlockUpdate(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);\n")
+	file.store_string("    void onLoaded(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer);\n")
 	
 	file.store_string("\n\n// values\n")
 	
@@ -80,4 +81,5 @@ func generateCPPFile() -> void:
 	file.store_string('void ' + componentNameALLCAPS + '::onBreak(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){}\n')
 	file.store_string('void ' + componentNameALLCAPS + '::onPlace(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){}\n')
 	file.store_string('void ' + componentNameALLCAPS + '::onBlockUpdate(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){}\n')
+	file.store_string('void ' + componentNameALLCAPS + '::onLoaded(int x, int y, std::string blockID, BLOCKCONTAINER *container, WORLDCONTAINER *worldContainer){}\n')
 	

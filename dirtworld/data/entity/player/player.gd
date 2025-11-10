@@ -25,13 +25,16 @@ func onProcess(delta:float) -> void:
 		states.normalMovement:
 			normalMovement(delta)
 	
-	# all debug shit
+	# debug camera test
 	var dir :Vector2 = Vector2.ZERO
 	dir.x =Input.get_axis("ui_left","ui_right")
 	dir.y = Input.get_axis("ui_up","ui_down")
 	camOffset += dir * 120 * delta
+	if Input.is_action_just_pressed("jump"):
+		camOffset = Vector2.ZERO
+	#
 	
-	world.camera.global_position = global_position + Vector2(0,-12) + camOffset
+	world.camera.global_position = global_position + Vector2(0,-14) + camOffset
 	world.setLightPosition()
 	focusPosition = get_local_mouse_position() # change later for controller support
 	normalAnimation(delta)

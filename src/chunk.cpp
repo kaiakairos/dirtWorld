@@ -304,6 +304,24 @@ void CHUNK::simulateLight(WORLDCONTAINER *worldContainer){
     }
 }
 
+void CHUNK::runOnLoaded(WORLDCONTAINER *worldContainer){
+    
+    for(int x = 0; x < 8; x++){
+        for(int y = 0; y < 8; y++){
+
+            std::pair<int,int> worldCoord = localCoordToWorld(x,y);
+            int worldX = worldCoord.first;
+            int worldY = worldCoord.second;
+
+            std::string blockString = worldContainer->getTileData(worldX,worldY);
+            Ref<BLOCKOBJECT> blockObj = blockContainer->getObjectFromString(blockString);
+            blockObj->simulateLoadedComponents(worldX,worldY,blockString,blockContainer,worldContainer);
+
+
+        }
+    }
+
+}
 
 void CHUNK::animateSprites(int gameTick){
     animSpriteSLOW->set_frame((gameTick % 15)/5);

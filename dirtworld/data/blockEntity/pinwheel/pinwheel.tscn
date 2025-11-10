@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0sotk8fcutbu"]
+
+[ext_resource type="Script" uid="uid://2wo15gchgshh" path="res://data/blockEntity/pinwheel/pinwheel.gd" id="1_6segp"]
+[ext_resource type="Texture2D" uid="uid://c1q454jgb8rd3" path="res://data/items/blocks/dirtItem.png" id="2_yhmyr"]
+[ext_resource type="Texture2D" uid="uid://by7cl5yhgrbba" path="res://data/blockEntity/pinwheel/pinwheelTop.png" id="3_yhmyr"]
+
+[node name="Pinwheel" type="Node2D"]
+script = ExtResource("1_6segp")
+
+[node name="DirtItem2" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.2, 1)
+texture = ExtResource("2_yhmyr")
+
+[node name="DirtItem" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("3_yhmyr")

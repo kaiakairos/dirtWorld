@@ -7,9 +7,10 @@ font_size = 13
 
 [node name="BlockComponentGenerators" type="Node"]
 script = ExtResource("1_0sd8s")
-componentName = "randomized texture"
+componentName = "spawn block entity"
 variables = Dictionary[String, String]({
-"range": "int"
+"blockEntityID": "String",
+"requiredInfo": "int"
 })
 
 [node name="Label" type="Label" parent="."]
